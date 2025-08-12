@@ -1,0 +1,15 @@
+{
+    "name": "asus/alibot-api",
+    "autoload": {
+        "psr-4": {
+            "Asus\\AlibotApi\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Jonathan",
+            "email": "jonathan@gmail.com"
+        }
+    ],
+    "require": {}
+}
