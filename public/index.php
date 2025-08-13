@@ -9,7 +9,7 @@
 </head>
 <body class="p-4">
 <div class="container">
-  <h2>Alibot - Demo (API REST PHP)</h2>
+  <h2> Demo (API REST PHP)</h2>
 
   <form id="formCotizar" class="row g-3 mb-3">
     <div class="col-md-3">
@@ -56,6 +56,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script>
+  
 const API_BASE = '/alibot-api/api';
 
 

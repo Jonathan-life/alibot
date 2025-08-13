@@ -13,7 +13,7 @@ Estructura mínima para correr un prototipo local de **Alibot** (asistente conta
 2. Importa `sql/alibot.sql` en tu MySQL para crear base y tablas.
 3. Ajusta credenciales en `db/conexion.php` o exporta variables de entorno `DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASS`.
 4. Asegúrate de que la carpeta `bot/` y `api/` tengan permisos de ejecución para el usuario web si vas a usar `procesar_solicitud.php` por CLI.
-5. Abre el navegador en `http://localhost/alibot-api/public/index.html` (o ajusta según tu servidor).
+5. Abre el navegador en `http://localhost/alibot-api/public/index.php` (o ajusta según tu servidor).
 
 ## Notas importantes
 - Los endpoints usan respuestas JSON y están pensados para usarse con un frontend dinámico.
