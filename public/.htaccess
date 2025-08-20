@@ -1,11 +1,16 @@
 RewriteEngine On
 RewriteBase /alibot-api/public/
+# Activar mod_rewrite
+RewriteEngine On
+RewriteBase /
 
-# Quitar index.php de la URL
-RewriteCond %{THE_REQUEST} /index\.php [NC]
-RewriteRule ^index\.php(.*)$ $1 [R=301,L]
-
-# Redirigir todo a index.php si no es un archivo real
+# Si el archivo o directorio no existe, reescribir
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^ index.php [QSA,L]
+
+# Reescribe "pagina" → "pagina.php"
+RewriteRule ^([^/]+)/?$ $1.php [L]
+
+# Opcional: redirige URL con .php a la versión limpia
+RewriteCond %{THE_REQUEST} \s/([^.]+)\.php[\s?]
+RewriteRule ^ %1 [R=301,L]

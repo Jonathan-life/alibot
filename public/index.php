@@ -1,123 +1,609 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Alibot - Demo</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Empresas</title>
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: white;
+    color: #222;
+  }
+
+
+  /* Sección con fondo */
+  .header-section {
+    background: url('img/fondytoali.png') no-repeat center center;
+    background-size: cover;
+    color: white;
+    padding-bottom: 40px;
+  }
+
+  /* Navbar */
+  .navbar-custom {
+    background: transparent !important; 
+    padding-top: 25px;   /* baja más el menú */
+    padding-bottom: 15px;
+  }
+
+/* Menú centrado en la navbar */
+/* Menú centrado con fondo azul */
+.navbar-nav {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  font-size: 15px;
+  margin-left: 80px;
+  align-items: center;
+  gap: 35px;
+  padding: 1px 30px;
+  width: auto; /* 👈 solo lo que ocupa el menú */
+  
+  background: #3966EC;   /* 👈 azul */
+  border-radius: 10px;    /* 👈 bordes redondeados */
+}
+
+
+
+/* Links de la navbar */
+.navbar-custom .nav-link,
+.navbar-custom .navbar-brand {
+  color: white !important;
+  font-weight: bold;
+}
+
+.navbar-custom .nav-link:hover {
+  color: #e5e5e5 !important;
+}
+
+/* Dropdown horizontal + animación centrada */
+.dropdown-menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;       /* 👈 opciones centradas en fila */
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255, 255, 255, 0.85);
+  pointer-events: none;
+
+  /* 👇 truco para centrar el bloque bajo el botón */
+  transform: translateX(-50%) translateY(10px);
+  right: auto !important;
+  text-align: center;
+}
+
+.dropdown:hover .dropdown-menu,
+.dropdown-menu:hover {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+/* Estilos de los ítems */
+.dropdown-menu .dropdown-item {
+  color: #000000;      /* negro normal */
+  font-weight: 500;
+  white-space: nowrap;
+  transition: all 0.2s ease; /* animación suave */
+}
+
+/* Hover con fondo azul */
+.dropdown-menu .dropdown-item:hover {
+  background: #000000ff; /* 👈 azul */
+  color: #ffffff;      /* 👈 letra blanca */
+  border-radius: 4px;  /* esquinas redondeadas al resaltar */
+}
+
+.dropdown-menu .dropdown-item:hover {
+  background: #3966EC;
+  color: #000000ff; /* color dorado al pasar */
+}
+
+  /* Botón Agregar nuevo */
+  .header-section .btn {
+    font-weight: bold;
+    background: rgba(255,255,255,0.9);
+    color: #333;
+    border: none;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    transition: 0.3s ease;
+  }
+  .header-section .btn:hover {
+    background: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  }
+
+  /* Caja de búsqueda */
+  .search-box-wrapper {
+    background: #ffffffff;
+    padding: 15px 0;
+  }
+  .navbar-brand{
+    padding-left: 49px;
+  }
+  /* Contenedor de iconos */
+.iconos-navbar {
+  display: flex;
+  align-items: center;
+  margin-right: 40px;
+  gap: 20px; /* espacio entre íconos */
+  font-size: 25px; /* tamaño de íconos */
+}
+
+/* Estilo de los enlaces de íconos */
+.iconos-navbar .icon-link {
+  color: #8A8C8F;            /* color normal */
+  text-decoration: none;   /* sin subrayado */
+  transition: 0.3s ease;
+}
+
+/* Hover en íconos */
+.iconos-navbar .icon-link:hover {
+  color: #3966EC;          /* dorado al pasar */
+  transform: scale(1.2);   /* efecto zoom */
+}
+
+
+
+
+
+/* Contenedor principal */
+.empresas-header {
+  max-width: 1200px;
+}
+
+/* Flexbox para título y botón */
+.empresas-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Título */
+.empresas-title {
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: #ffffffff;
+}
+
+/* Fecha y hora */
+.empresas-fecha {
+  color: #ffffffff;
+  font-size: 0.9rem;
+  margin-top: 5px;
+  
+}
+
+/* Botón personalizado */
+.btn-agregar {
+  font-weight: 600;
+  background: #ffffff;
+  color: #ffffffff;
+  border: 2px solid #ddd;
+  border-radius: 50px;
+  padding: 8px 24px;
+  transition: all 0.3s ease;
+
+  cursor: pointer;
+}
+
+.btn-agregar:hover {
+  background: #f8f9fa;
+  color: #ffffffff;
+  border-color: #bbb;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .empresas-flex {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .btn-agregar {
+    align-self: stretch;
+    text-align: center;
+  }
+}
+
+
+
+/* Submenú dentro del dropdown */
+.dropdown-submenu {
+  position: relative;
+}
+
+/* Oculto por defecto */
+.dropdown-submenu .dropdown-menu {
+  display: none;               /* oculto al inicio */
+  position: absolute;
+  top: 105%;                   /* aparece debajo del padre */
+  left: 60px;                     /* alineado al borde izquierdo */
+  margin: 0;
+  padding: 10px;
+  background: #ffffffff;
+  list-style: none;
+
+  flex-direction: row;         
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Mostrar al pasar el mouse */
+.dropdown-submenu:hover > .dropdown-menu {
+  display: flex;   /* 👈 ahora sí aparece como fila */
+}
+
+/* Contenedor general */
+.contenedorbtn {
+  display: flex;
+  justify-content: center;   /* Centrado horizontal */
+  align-items: center;       /* Centrado vertical */
+  border-radius: 8px;        /* Bordes opcionales */
+  box-sizing: border-box;
+}
+
+/* Botón */
+.btn-agregar {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  margin-right: 30px;
+  padding: .4rem 1rem;
+  border: 1px solid #ffffffff;
+  background: #3966EC;
+  color: #ffffffff;
+  font: 600 14px/1.1 system-ui, sans-serif;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: transform .08s ease, box-shadow .15s ease, background .15s ease;
+}
+
+.btn-agregar:hover {
+  background: #3458c4ff;
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 1);
+}
+
+.btn-agregar:active {
+  transform: translateY(1px);
+}
+
+.icono {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+
+
+
+
+
+
+
+.container-table {
+  max-width: 1140px;
+  margin: 10px auto;
+  border-radius: 12px;
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.tabla thead {
+  background: #000000ff;
+}
+
+.tabla th {
+  text-align: left;
+  padding: 12px 15px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffffff;
+}
+
+.tabla td {
+  padding: 12px 15px;
+  font-size: 14px;
+  border-top: 1px solid #eee;
+  color: #444;
+}
+
+/* Badge de estado */
+.badge-activo {
+  background: #000;
+  color: #fff;
+  font-weight: 600;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+/* Acciones */
+.acciones {
+  display: flex;
+  gap: 8px;
+  position: relative; /* 👈 ahora el menú se posiciona respecto a este div */
+}
+
+.acciones button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.menu-opciones {
+  display: none;
+  position: absolute;
+  right: 0;
+  bottom: 70%; /* 👈 ahora se abre hacia arriba */
+  left: 50px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  min-width: 150px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.25);
+
+  /* Siempre encima */
+  z-index: 9999;
+}
+
+.menu-opciones a {
+  display: block;
+  padding: 8px 12px;
+  text-decoration: none;
+  font-size: 14px;
+  color: #333;
+}
+
+.menu-opciones a:hover {
+  background: #f5f5f5;
+}
+
+
+
+
+</style>
 </head>
-<body class="p-4">
-<div class="container">
-  <h2> Demo (API REST PHP)</h2>
+<body>
 
-  <form id="formCotizar" class="row g-3 mb-3">
-    <div class="col-md-3">
-      <label class="form-label">RUC</label>
-      <input id="ruc" class="form-control" placeholder="20123456789" value="20123456789">
-    </div>
-    <div class="col-md-3">
-      <label class="form-label">Servicio</label>
-      <select id="servicio" class="form-select">
-        <option value="buzon_sunat">Buzón electrónico SUNAT</option>
-        <option value="compras_sire">Compras SIRE</option>
-        <option value="ventas_sire">Ventas SIRE</option>
-        <option value="casilla_sunafil">Casilla electrónica SUNAFIL</option>
-      </select>
-    </div>
-    <div class="col-md-2">
-      <label class="form-label">Desde</label>
-      <input id="desde" type="date" class="form-control">
-    </div>
-    <div class="col-md-2">
-      <label class="form-label">Hasta</label>
-      <input id="hasta" type="date" class="form-control">
-    </div>
-    <div class="col-md-2 d-flex align-items-end">
-      <button id="btnCotizar" class="btn btn-primary me-2" type="button">Cotizar</button>
-      <button id="btnRegistrar" class="btn btn-success" type="button">Registrar</button>
-    </div>
-  </form>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom px-4 py-3">
+    <!-- LOGO (movido un poco a la derecha con ms-4) -->
+    <a class="navbar-brand fw-bold ms-4" href="#">
+      <img src="img/logcounting.png" alt="Logo" style="height:55px; ">
+    </a>
 
-  <div class="mb-3">
-    <strong>Cantidad:</strong> <span id="cantidad">0</span> — <strong>Precio S/.</strong> <span id="precio">0.00</span>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+   <ul class="navbar-nav">
+  <li class="nav-item"><a class="nav-link active" href="index.php">Inicio</a></li>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button">Mantenimiento</a>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="mantenimiento/usuario.php">Usuarios</a></li>
+      <li><a class="dropdown-item" href="mantenimiento/empresa.php">Empresas</a></li>
+        <!-- Submenú Detracciones -->
+      <li class="dropdown-submenu">
+        <a class="dropdown-item" href="#">Permisos</a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="permisos/usuario.php">Usuarios</a></li>
+          <li><a class="dropdown-item" href="permisos/empresa.php">Empresas</a></li>
+        </ul>
+      </li>
+      <li><a class="dropdown-item" href="mantenimiento/notificacion.php">Notificación</a></li>
+    </ul>
+  </li>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#">Reportes</a>
+<ul class="dropdown-menu">
+  <li><a class="dropdown-item" href="#">Buzón Electrónico</a></li>
+  <li><a class="dropdown-item" href="#">Casilla Electrónica</a></li>
+  <li><a class="dropdown-item" href="#">SUNAFIL</a></li>
+  <li><a class="dropdown-item" href="#">Compras SIRE</a></li>
+  <li><a class="dropdown-item" href="#">Ventas SIRE</a></li>
+
+  <!-- Submenú Detracciones -->
+  <li class="dropdown-submenu">
+    <a class="dropdown-item" href="#">Detracciones ▸</a>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="#">Compras</a></li>
+      <li><a class="dropdown-item" href="#">Pagos por detracción</a></li>
+      <li><a class="dropdown-item" href="#">Cruce Detracción</a></li>
+    </ul>
+  </li>
+
+  <!-- Submenú Recibo por Honorarios -->
+  <li class="dropdown-submenu">
+    <a class="dropdown-item" href="#">Recibo por Honorarios ▸</a>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="#">Recibos por honorarios</a></li>
+      <li><a class="dropdown-item" href="#">Reportes por meses</a></li>
+      <li><a class="dropdown-item" href="#">Reportes por cantidad</a></li>
+    </ul>
+  </li>
+
+  <li><a class="dropdown-item" href="#">Compras XML</a></li>
+  <li><a class="dropdown-item" href="#">Ventas XML</a></li>
+</ul>
+
+
+  </li>
+  <li class="nav-item"><a class="nav-link" href="#">Requerimientos</a></li>
+</ul>
+
+
+<!-- Iconos (a la derecha) -->
+<div class="iconos-navbar d-flex gap-3 ms-auto">
+  <a href="#" class="icon-link" title="Cerrar sesión">
+    <i class="fas fa-power-off"></i>
+  </a>
+  <a href="#" class="icon-link" title="Mi perfil">
+    <i class="fas fa-user-circle"></i>
+  </a>
+</div>
+
+  </nav>
+
+<!-- Sección con fondo -->
+<div class="header-section">
+  <!-- Contenedor general -->
+  <div class="container py-5">
+    <!-- Header de empresas -->
+    <div class="empresas-header">
+      <div class="empresas-flex">
+        <div>
+          <h2 class="empresas-title mb-0">Empresas Registradas</h2>
+          <div class="empresas-fecha small" id="fecha-hora"></div>
+        </div>
+
+        <div class="contenedorbtn">
+          <button class="btn-agregar">
+            <img src="img/phplusfgfdfill.png" alt="Agregar" class="icono">
+            Agregar nuevo
+          </button>
+        </div>
+
+      </div>
+    </div>
   </div>
+</div>
 
-  <h5>Solicitudes</h5>
-  <table id="tablaSolicitudes" class="display table table-striped" style="width:100%">
+
+
+<!-- Caja de búsqueda -->
+<div class="container-search">
+  <div class="search-box-wrapper py-3">
+    <div class="input-group rounded-pill border p-1 mx-auto" style="max-width: 1137px;">
+      <span class="input-group-text border-0 bg-transparent">
+        <i class="fas fa-search text-muted"></i>
+      </span>
+      <input type="text" class="form-control border-0" placeholder="Buscar por Nº de RUC">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<div class="container-table">
+  <table class="tabla">
     <thead>
-      <tr><th>N°</th><th>RUC</th><th>Razón Social</th><th>Servicio</th><th>Fecha Solicitud</th><th>Costo S/.</th><th>Estado</th></tr>
+      <tr>
+        <th>N°</th>
+        <th>RUC</th>
+        <th>RAZÓN SOCIAL</th>
+        <th>ESTADO</th>
+        <th>COMENTARIOS</th>
+        <th>ACCIÓN</th>
+      </tr>
     </thead>
-    <tbody></tbody>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>20458951458</td>
+        <td>SERVICES S.A.C.</td>
+        <td><span class="badge-activo">ACTIVO</span></td>
+        <td>Ninguno</td>
+       <td>
+        <div class="acciones">
+          <button class="btn-accionar btn-borrar" title="Eliminar">
+            <img src="img/basurero.png" alt="Eliminar" class="icono-btn">
+          </button>
+
+          <!-- Botón de opciones -->
+          <button class="btn-accionar btn-menu" title="Más opciones">
+            <img src="img/opcciones.png" alt="Opciones" class="icono-btn">
+          </button>
+
+          <!-- Menú justo después del botón -->
+          <div class="menu-opciones">
+            <a href="#">Editar</a>
+            <a href="#">Ver detalles</a>
+            <a href="#">Descargar</a>
+          </div>
+        </div>
+      </td>
+
+      </tr>
+    </tbody>
   </table>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+
+
+
 <script>
-  
-const API_BASE = '/alibot-api/api';
+  function actualizarFechaHora() {
+    const ahora = new Date();
+    const opciones = {
+      day: '2-digit', month: '2-digit', year: 'numeric',
+      hour: '2-digit', minute: '2-digit'
+    };
+    document.getElementById("fecha-hora").textContent =
+      ahora.toLocaleString('es-PE', opciones);
+  }
 
+  actualizarFechaHora();          // primera ejecución
+  setInterval(actualizarFechaHora, 60000); // actualizar cada minuto
+</script>
 
-$(function(){
-  const tabla = $('#tablaSolicitudes').DataTable({
-    ajax: API_BASE + '/listar_solicitudes.php',
-    columns: [
-      { data: 'id' },
-      { data: 'ruc' },
-      { data: 'razon_social' },
-      { data: 'servicio' },
-      { data: 'creado_en' },
-      { data: 'precio' },
-      { data: 'estado' }
-    ]
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".btn-menu").forEach(btn => {
+    btn.addEventListener("click", function (e) {
+      e.stopPropagation();
+
+      const acciones = this.closest(".acciones"); // 👈 ahora busca .acciones
+      const menu = acciones.querySelector(".menu-opciones");
+
+      // Cerrar otros menús
+      document.querySelectorAll(".menu-opciones").forEach(m => {
+        if (m !== menu) m.style.display = "none";
+      });
+
+      // Toggle
+      menu.style.display = (menu.style.display === "block") ? "none" : "block";
+    });
   });
 
-  $('#btnCotizar').on('click', async ()=>{
-    const payload = {
-      servicio: $('#servicio').val(),
-      desde: $('#desde').val(),
-      hasta: $('#hasta').val()
-    };
-    const resp = await fetch(API_BASE + '/cotizar.php', {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify(payload)
+  // Cerrar si clic fuera
+  window.addEventListener("click", () => {
+    document.querySelectorAll(".menu-opciones").forEach(menu => {
+      menu.style.display = "none";
     });
-    const js = await resp.json();
-    if (js.status === 'success') {
-      $('#cantidad').text(js.data.cantidad);
-      $('#precio').text(js.data.precio);
-    } else {
-      alert(js.message || 'Error en cotización');
-    }
-  });
-
-  $('#btnRegistrar').on('click', async ()=>{
-    const payload = {
-      ruc: $('#ruc').val(),
-      razon_social: $('#ruc').val(),
-      servicio: $('#servicio').val(),
-      desde: $('#desde').val(),
-      hasta: $('#hasta').val(),
-      cantidad: parseInt($('#cantidad').text()) || 0,
-      precio: parseFloat($('#precio').text()) || 0.00
-    };
-    const resp = await fetch(API_BASE + '/registrar_solicitud.php', {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify(payload)
-    });
-    const js = await resp.json();
-    if (js.status === 'success') {
-      alert('Registrado correctamente (id: ' + js.id + ')');
-      tabla.ajax.reload();
-    } else {
-      alert(js.message || 'Error al registrar');
-    }
   });
 });
 </script>
+
+
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+

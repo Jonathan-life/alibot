@@ -1,0 +1,114 @@
+<div class="container">
+  <h2> Demo (API REST PHP)</h2>
+
+  <form id="formCotizar" class="row g-3 mb-3">
+    <div class="col-md-3">
+      <label class="form-label">RUC</label>
+      <input id="ruc" class="form-control" placeholder="20123456789" value="20123456789">
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">Servicio</label>
+      <select id="servicio" class="form-select">
+        <option value="buzon_sunat">Buzón electrónico SUNAT</option>
+        <option value="compras_sire">Compras SIRE</option>
+        <option value="ventas_sire">Ventas SIRE</option>
+        <option value="casilla_sunafil">Casilla electrónica SUNAFIL</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <label class="form-label">Desde</label>
+      <input id="desde" type="date" class="form-control">
+    </div>
+    <div class="col-md-2">
+      <label class="form-label">Hasta</label>
+      <input id="hasta" type="date" class="form-control">
+    </div>
+    <div class="col-md-2 d-flex align-items-end">
+      <button id="btnCotizar" class="btn btn-primary me-2" type="button">Cotizar</button>
+      <button id="btnRegistrar" class="btn btn-success" type="button">Registrar</button>
+    </div>
+  </form>
+
+  <div class="mb-3">
+    <strong>Cantidad:</strong> <span id="cantidad">0</span> — <strong>Precio S/.</strong> <span id="precio">0.00</span>
+  </div>
+
+  <h5>Solicitudes</h5>
+  <table id="tablaSolicitudes" class="display table table-striped" style="width:100%">
+    <thead>
+      <tr><th>N°</th><th>RUC</th><th>Razón Social</th><th>Servicio</th><th>Fecha Solicitud</th><th>Costo S/.</th><th>Estado</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script>
+  
+const API_BASE = '/alibot-api/api';
+
+
+$(function(){
+  const tabla = $('#tablaSolicitudes').DataTable({
+    ajax: API_BASE + '/listar_solicitudes.php',
+    columns: [
+      { data: 'id' },
+      { data: 'ruc' },
+      { data: 'razon_social' },
+      { data: 'servicio' },
+      { data: 'creado_en' },
+      { data: 'precio' },
+      { data: 'estado' }
+    ]
+  });
+
+  $('#btnCotizar').on('click', async ()=>{
+    const payload = {
+      servicio: $('#servicio').val(),
+      desde: $('#desde').val(),
+      hasta: $('#hasta').val()
+    };
+    const resp = await fetch(API_BASE + '/cotizar.php', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(payload)
+    });
+    const js = await resp.json();
+    if (js.status === 'success') {
+      $('#cantidad').text(js.data.cantidad);
+      $('#precio').text(js.data.precio);
+    } else {
+      alert(js.message || 'Error en cotización');
+    }
+  });
+
+  $('#btnRegistrar').on('click', async ()=>{
+    const payload = {
+      ruc: $('#ruc').val(),
+      razon_social: $('#ruc').val(),
+      servicio: $('#servicio').val(),
+      desde: $('#desde').val(),
+      hasta: $('#hasta').val(),
+      cantidad: parseInt($('#cantidad').text()) || 0,
+      precio: parseFloat($('#precio').text()) || 0.00
+    };
+    const resp = await fetch(API_BASE + '/registrar_solicitud.php', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(payload)
+    });
+    const js = await resp.json();
+    if (js.status === 'success') {
+      alert('Registrado correctamente (id: ' + js.id + ')');
+      tabla.ajax.reload();
+    } else {
+      alert(js.message || 'Error al registrar');
+    }
+  });
+});
+
+
+
+</script>
