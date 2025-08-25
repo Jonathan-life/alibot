@@ -1,6 +1,6 @@
 <?php
 // Configuración conexión
-$host = '127.0.0.1'; // o 'localhost'
+$host = 'localhost'; // o 'localhost'
 $port = 3306;        // puerto MySQL
 $db   = 'alibot';
 $user = 'root';      // usuario MySQL

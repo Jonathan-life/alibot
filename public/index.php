@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Panel Empresas</title>
+  <link rel="stylesheet" href="index.css">
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Iconos -->
@@ -23,7 +24,7 @@
     background: url('img/fondytoali.png') no-repeat center center;
     background-size: cover;
     color: white;
-    padding-bottom: 40px;
+    padding-bottom: 50px;
   }
 
   /* Navbar */
@@ -39,11 +40,11 @@
   display: flex !important;
   flex-direction: row !important;
   justify-content: center !important;
-  font-size: 15px;
-  margin-left: 80px;
+  font-size: 18px;
   align-items: center;
   gap: 35px;
-  padding: 1px 30px;
+  margin-right: 200px;
+  padding: 5px 50px;
   width: auto; /* 👈 solo lo que ocupa el menú */
   
   background: #3966EC;   /* 👈 azul */
@@ -95,7 +96,7 @@
   color: #000000;      /* negro normal */
   font-weight: 500;
   white-space: nowrap;
-  transition: all 0.2s ease; /* animación suave */
+  transition: all 0.2s ease; 
 }
 
 /* Hover con fondo azul */
@@ -160,7 +161,8 @@
 
 /* Contenedor principal */
 .empresas-header {
-  max-width: 1200px;
+  max-width: 1300px;
+  margin-top: 50px;
 }
 
 /* Flexbox para título y botón */
@@ -173,7 +175,7 @@
 /* Título */
 .empresas-title {
   font-weight: 700;
-  font-size: 1.8rem;
+  font-size: 1.9rem;
   color: #ffffffff;
 }
 
@@ -230,12 +232,10 @@
   display: none;               /* oculto al inicio */
   position: absolute;
   top: 105%;                   /* aparece debajo del padre */
-  left: 60px;                     /* alineado al borde izquierdo */
   margin: 0;
   padding: 10px;
   background: #ffffffff;
   list-style: none;
-
   flex-direction: row;         
   justify-content: center;
   gap: 10px;
@@ -255,21 +255,24 @@
   box-sizing: border-box;
 }
 
-/* Botón */
+/* Botón estilo enlace */
 .btn-agregar {
   display: inline-flex;
   align-items: center;
-  gap: .6rem;
+  gap: .8rem;
   margin-right: 30px;
-  padding: .4rem 1rem;
+  padding: .5rem 1rem;
   border: 1px solid #ffffffff;
   background: #3966EC;
   color: #ffffffff;
-  font: 600 14px/1.1 system-ui, sans-serif;
+  margin-top: 25px;
+  font: 600 17px/1.1 system-ui, sans-serif;
   border-radius: 15px;
   cursor: pointer;
+  text-decoration: none; /* 🔹 Aquí quitas el subrayado */
   transition: transform .08s ease, box-shadow .15s ease, background .15s ease;
 }
+
 
 .btn-agregar:hover {
   background: #3458c4ff;
@@ -294,7 +297,7 @@
 
 
 .container-table {
-  max-width: 1140px;
+  max-width: 1240px;
   margin: 10px auto;
   border-radius: 12px;
 }
@@ -379,91 +382,109 @@
 }
 
 
+/* Contenedor del menú */
+.navbar-menu-container {
+  flex-grow: 1;                     /* Ocupa el espacio disponible entre logo e iconos */
+  display: flex;
+  justify-content: center;         /* Centra el menú horizontalmente */
+  align-items: center;
+  margin-right: 25px;
+}
 
+.navbar-icons-container .icon-link i {
+  font-size: 1.8rem;  /* Puedes ajustar el valor según lo grande que los quieras */
+}
 
 </style>
 </head>
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom px-4 py-3">
-    <!-- LOGO (movido un poco a la derecha con ms-4) -->
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom px-4 py-3">
+
+  <!-- Contenedor del LOGO -->
+  <div class="navbar-logo-container">
     <a class="navbar-brand fw-bold ms-4" href="#">
-      <img src="img/logcounting.png" alt="Logo" style="height:55px; ">
+      <img src="img/logcounting.png" alt="Logo" style="height:60px;">
     </a>
+  </div>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <!-- Botón hamburguesa para responsive -->
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-   <ul class="navbar-nav">
-  <li class="nav-item"><a class="nav-link active" href="index.php">Inicio</a></li>
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" role="button">Mantenimiento</a>
-    <ul class="dropdown-menu">
-      <li><a class="dropdown-item" href="mantenimiento/usuario.php">Usuarios</a></li>
-      <li><a class="dropdown-item" href="mantenimiento/empresa.php">Empresas</a></li>
-        <!-- Submenú Detracciones -->
-      <li class="dropdown-submenu">
-        <a class="dropdown-item" href="#">Permisos</a>
+  <!-- Contenedor del MENÚ -->
+  <div class="navbar-menu-container">
+    <ul class="navbar-nav" id="menuNav">
+      <li class="nav-item"><a class="nav-link active" href="index.php">Inicio</a></li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button">Mantenimiento</a>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="permisos/usuario.php">Usuarios</a></li>
-          <li><a class="dropdown-item" href="permisos/empresa.php">Empresas</a></li>
+          <li><a class="dropdown-item" href="mantenimiento/usuario.php">Usuarios</a></li>
+          <li><a class="dropdown-item" href="mantenimiento/empresa.php">Empresas</a></li>
+          <!-- Submenú Permisos -->
+          <li class="dropdown-submenu">
+            <a class="dropdown-item" href="#">Permisos</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="permisos/usuario.php">Usuarios</a></li>
+              <li><a class="dropdown-item" href="permisos/empresa.php">Empresas</a></li>
+            </ul>
+          </li>
+          <li><a class="dropdown-item" href="mantenimiento/notificacion.php">Notificación</a></li>
         </ul>
       </li>
-      <li><a class="dropdown-item" href="mantenimiento/notificacion.php">Notificación</a></li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#">Reportes</a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Buzón Electrónico</a></li>
+          <li><a class="dropdown-item" href="#">Casilla Electrónica</a></li>
+          <li><a class="dropdown-item" href="#">SUNAFIL</a></li>
+          <li><a class="dropdown-item" href="#">Compras SIRE</a></li>
+          <li><a class="dropdown-item" href="#">Ventas SIRE</a></li>
+
+          <!-- Submenú Detracciones -->
+          <li class="dropdown-submenu">
+            <a class="dropdown-item" href="#">Detracciones ▸</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Compras</a></li>
+              <li><a class="dropdown-item" href="#">Pagos por detracción</a></li>
+              <li><a class="dropdown-item" href="#">Cruce Detracción</a></li>
+            </ul>
+          </li>
+
+          <!-- Submenú Recibo por Honorarios -->
+          <li class="dropdown-submenu">
+            <a class="dropdown-item" href="#">Recibo por Honorarios ▸</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Recibos por honorarios</a></li>
+              <li><a class="dropdown-item" href="#">Reportes por meses</a></li>
+              <li><a class="dropdown-item" href="#">Reportes por cantidad</a></li>
+            </ul>
+          </li>
+
+          <li><a class="dropdown-item" href="#">Compras XML</a></li>
+          <li><a class="dropdown-item" href="#">Ventas XML</a></li>
+        </ul>
+      </li>
+
+      <li class="nav-item"><a class="nav-link" href="#">Requerimientos</a></li>
     </ul>
-  </li>
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#">Reportes</a>
-<ul class="dropdown-menu">
-  <li><a class="dropdown-item" href="#">Buzón Electrónico</a></li>
-  <li><a class="dropdown-item" href="#">Casilla Electrónica</a></li>
-  <li><a class="dropdown-item" href="#">SUNAFIL</a></li>
-  <li><a class="dropdown-item" href="#">Compras SIRE</a></li>
-  <li><a class="dropdown-item" href="#">Ventas SIRE</a></li>
+  </div>
 
-  <!-- Submenú Detracciones -->
-  <li class="dropdown-submenu">
-    <a class="dropdown-item" href="#">Detracciones ▸</a>
-    <ul class="dropdown-menu">
-      <li><a class="dropdown-item" href="#">Compras</a></li>
-      <li><a class="dropdown-item" href="#">Pagos por detracción</a></li>
-      <li><a class="dropdown-item" href="#">Cruce Detracción</a></li>
-    </ul>
-  </li>
+  <!-- Contenedor de ICONOS -->
+  <div class="navbar-icons-container iconos-navbar d-flex gap-3 ms-auto">
+    <a href="#" class="icon-link" title="Cerrar sesión">
+      <i class="fas fa-power-off"></i>
+    </a>
+    <a href="#" class="icon-link" title="Mi perfil">
+      <i class="fas fa-user-circle"></i>
+    </a>
+  </div>
 
-  <!-- Submenú Recibo por Honorarios -->
-  <li class="dropdown-submenu">
-    <a class="dropdown-item" href="#">Recibo por Honorarios ▸</a>
-    <ul class="dropdown-menu">
-      <li><a class="dropdown-item" href="#">Recibos por honorarios</a></li>
-      <li><a class="dropdown-item" href="#">Reportes por meses</a></li>
-      <li><a class="dropdown-item" href="#">Reportes por cantidad</a></li>
-    </ul>
-  </li>
-
-  <li><a class="dropdown-item" href="#">Compras XML</a></li>
-  <li><a class="dropdown-item" href="#">Ventas XML</a></li>
-</ul>
-
-
-  </li>
-  <li class="nav-item"><a class="nav-link" href="#">Requerimientos</a></li>
-</ul>
-
-
-<!-- Iconos (a la derecha) -->
-<div class="iconos-navbar d-flex gap-3 ms-auto">
-  <a href="#" class="icon-link" title="Cerrar sesión">
-    <i class="fas fa-power-off"></i>
-  </a>
-  <a href="#" class="icon-link" title="Mi perfil">
-    <i class="fas fa-user-circle"></i>
-  </a>
-</div>
-
-  </nav>
+</nav>
 
 <!-- Sección con fondo -->
 <div class="header-section">
@@ -478,10 +499,10 @@
         </div>
 
         <div class="contenedorbtn">
-          <button class="btn-agregar">
+          <a href="empresa/registro.php" class="btn-agregar">
             <img src="img/phplusfgfdfill.png" alt="Agregar" class="icono">
             Agregar nuevo
-          </button>
+          </a>
         </div>
 
       </div>
@@ -494,7 +515,7 @@
 <!-- Caja de búsqueda -->
 <div class="container-search">
   <div class="search-box-wrapper py-3">
-    <div class="input-group rounded-pill border p-1 mx-auto" style="max-width: 1137px;">
+    <div class="input-group rounded-pill border p-1 mx-auto" style="max-width: 1237px;">
       <span class="input-group-text border-0 bg-transparent">
         <i class="fas fa-search text-muted"></i>
       </span>
@@ -502,9 +523,6 @@
     </div>
   </div>
 </div>
-
-
-
 
 
 
