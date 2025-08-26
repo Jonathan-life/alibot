@@ -442,7 +442,7 @@
           <li><a class="dropdown-item" href="#">Buzón Electrónico</a></li>
           <li><a class="dropdown-item" href="#">Casilla Electrónica</a></li>
           <li><a class="dropdown-item" href="#">SUNAFIL</a></li>
-          <li><a class="dropdown-item" href="#">Compras SIRE</a></li>
+          <li><a class="dropdown-item" href="reportes/compras_sire.php">Compras SIRE</a></li>
           <li><a class="dropdown-item" href="#">Ventas SIRE</a></li>
 
           <!-- Submenú Detracciones -->
