@@ -24,7 +24,7 @@
     background: url('img/fondytoali.png') no-repeat center center;
     background-size: cover;
     color: white;
-    padding-bottom: 50px;
+    padding-bottom: 60px;
   }
 
   /* Navbar */
@@ -34,82 +34,8 @@
     padding-bottom: 15px;
   }
 
-/* Menú centrado en la navbar */
-/* Menú centrado con fondo azul */
-.navbar-nav {
-  display: flex !important;
-  flex-direction: row !important;
-  justify-content: center !important;
-  font-size: 18px;
-  align-items: center;
-  gap: 35px;
-  margin-right: 200px;
-  padding: 5px 50px;
-  width: auto; /* 👈 solo lo que ocupa el menú */
-  
-  background: #3966EC;   /* 👈 azul */
-  border-radius: 10px;    /* 👈 bordes redondeados */
-}
 
 
-
-/* Links de la navbar */
-.navbar-custom .nav-link,
-.navbar-custom .navbar-brand {
-  color: white !important;
-  font-weight: bold;
-}
-
-.navbar-custom .nav-link:hover {
-  color: #e5e5e5 !important;
-}
-
-/* Dropdown horizontal + animación centrada */
-.dropdown-menu {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;       /* 👈 opciones centradas en fila */
-  opacity: 0;
-  transform: translateY(10px);
-  transition: all 0.3s ease;
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
-  background: #FFFFFF;
-  pointer-events: none;
-
-  /* 👇 truco para centrar el bloque bajo el botón */
-  transform: translateX(-50%) translateY(10px);
-  right: auto !important;
-  text-align: center;
-}
-
-.dropdown:hover .dropdown-menu,
-.dropdown-menu:hover {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-  pointer-events: auto;
-}
-
-/* Estilos de los ítems */
-.dropdown-menu .dropdown-item {
-  color: #000000;      /* negro normal */
-  font-weight: 500;
-  white-space: nowrap;
-  transition: all 0.2s ease; 
-}
-
-/* Hover con fondo azul */
-.dropdown-menu .dropdown-item:hover {
-  background: #000000ff; /* 👈 azul */
-  color: #ffffff;      /* 👈 letra blanca */
-  border-radius: 4px;  /* esquinas redondeadas al resaltar */
-}
-
-.dropdown-menu .dropdown-item:hover {
-  background: #3966EC;
-  color: #000000ff; /* color dorado al pasar */
-}
 
   /* Botón Agregar nuevo */
   .header-section .btn {
@@ -220,31 +146,134 @@
   }
 }
 
+/* Navbar */
+.navbar-custom {
+  background: transparent !important; 
+  padding-top: 25px;
+  padding-bottom: 15px;
+}
 
+/* Menú centrado en la navbar con fondo azul */
+.navbar-nav {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: center;
+  gap: 35px;
+  margin-right: 200px;
+  padding: 5px 50px;
+  width: auto;
+  
+  font-size: 18px;
+  background: #3966EC;   /* azul */
+  border-radius: 10px;
+}
 
-/* Submenú dentro del dropdown */
+/* Links */
+.navbar-custom .nav-link,
+.navbar-custom .navbar-brand {
+  color: white !important;
+  font-weight: bold;
+}
+
+.navbar-custom .nav-link:hover {
+  color: #e5e5e5 !important;
+}
+
+/* 🔹 Dropdown PRIMER NIVEL (ej: Reportes → SUNAT, SUNAFIL en columna vertical) */
+.dropdown > .dropdown-menu {
+  display: flex;
+  flex-direction: column;   /* 👈 vertical */
+  justify-content: flex-start;
+  padding: 8px 0;
+  border-radius: 8px;
+  border: none;
+  background: #fff;
+  opacity: 0;
+  margin-top: 3px;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+  position: absolute;
+  left: 60%;
+  transform: translateX(-50%) translateY(10px);
+  min-width: 220px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.dropdown:hover > .dropdown-menu {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+/* Estilos de ítems */
+.dropdown-menu .dropdown-item {
+  color: #000;
+  font-weight: 500;
+  white-space: nowrap;
+  padding: 8px 15px;
+  transition: all 0.2s ease; 
+}
+
+.dropdown-menu .dropdown-item:hover {
+  background: #3966EC;
+  color: #FFFFFF;
+  border-radius: 4px;
+}
+
+/* 🔹 SUBMENÚS internos (ej: SUNAT → Buzón, Casilla a la derecha) */
 .dropdown-submenu {
   position: relative;
 }
 
-/* Oculto por defecto */
-.dropdown-submenu .dropdown-menu {
-  display: none;               /* oculto al inicio */
+.dropdown-submenu > .dropdown-menu {
+  display: flex;
+  flex-direction: column;   /* vertical */
   position: absolute;
-  top: 105%;                   /* aparece debajo del padre */
-  margin: 0;
-  padding: 10px;
-  background: #ffffffff;
-  list-style: none;
-  flex-direction: row;         
-  justify-content: center;
-  gap: 10px;
+  top: 0;
+  left: 100%;              /* 👈 aparece al lado derecho */
+  min-width: 200px;
+  padding: 8px 0;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  opacity: 0;
+  transform: translateX(10px);
+  transition: all 0.3s ease;
+  pointer-events: none;
 }
 
-/* Mostrar al pasar el mouse */
 .dropdown-submenu:hover > .dropdown-menu {
-  display: flex;   /* 👈 ahora sí aparece como fila */
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
 }
+
+/* Botón Agregar nuevo */
+.header-section .btn {
+  font-weight: bold;
+  background: rgba(255,255,255,0.9);
+  color: #333;
+  border: none;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  transition: 0.3s ease;
+}
+.header-section .btn:hover {
+  background: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+/* Caja de búsqueda */
+.search-box-wrapper {
+  background: #fff;
+  padding: 15px 0;
+}
+
+.navbar-brand {
+  padding-left: 49px;
+}
+
 
 /* Contenedor general */
 .contenedorbtn {
@@ -357,15 +386,15 @@
   display: none;
   position: absolute;
   right: 0;
-  bottom: 70%; /* 👈 ahora se abre hacia arriba */
-  left: 50px;
+  bottom: 70%;
+  left: auto;        /* mejor que 50px, evita cortar el menú */
   background: #fff;
   border: 1px solid #ccc;
   border-radius: 8px;
   min-width: 150px;
   box-shadow: 0px 4px 8px rgba(0,0,0,0.25);
-
-  /* Siempre encima */
+  max-height: 300px; /* permite scroll si hay muchas opciones */
+  overflow-y: auto;  /* activa scroll vertical */
   z-index: 9999;
 }
 
@@ -382,7 +411,7 @@
 }
 
 
-/* Contenedor del menú */
+/* Contenedor dl menú */
 .navbar-menu-container {
   flex-grow: 1;                     /* Ocupa el espacio disponible entre logo e iconos */
   display: flex;
@@ -437,38 +466,48 @@
       </li>
 
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#">Reportes</a>
+  <a class="nav-link dropdown-toggle" href="#">Reportes</a>
+  <ul class="dropdown-menu">
+    <!-- Opciones en fila -->
+<li class="dropdown-submenu">
+  <a class="dropdown-item" href="#">SUNAT</a>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#">Buzón Electrónico</a></li>
+    <li><a class="dropdown-item" href="#">Casilla Electrónica</a></li>
+
+    <!-- Submenú Compras -->
+    <li class="dropdown-submenu">
+      <a class="dropdown-item" href="#">Compras SIRE ▸</a>
+      <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">PDF</a></li>
+          <li><a class="dropdown-item" href="#">XML</a></li>
+      </ul>
+    </li>
+
+    <!-- Submenú Ventas -->
+      <li class="dropdown-submenu">
+        <a class="dropdown-item" href="#">Ventas SIRE ▸</a>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Buzón Electrónico</a></li>
-          <li><a class="dropdown-item" href="#">Casilla Electrónica</a></li>
-          <li><a class="dropdown-item" href="#">SUNAFIL</a></li>
-          <li><a class="dropdown-item" href="reportes/compras_sire.php">Compras SIRE</a></li>
-          <li><a class="dropdown-item" href="#">Ventas SIRE</a></li>
-
-          <!-- Submenú Detracciones -->
-          <li class="dropdown-submenu">
-            <a class="dropdown-item" href="#">Detracciones ▸</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Compras</a></li>
-              <li><a class="dropdown-item" href="#">Pagos por detracción</a></li>
-              <li><a class="dropdown-item" href="#">Cruce Detracción</a></li>
-            </ul>
-          </li>
-
-          <!-- Submenú Recibo por Honorarios -->
-          <li class="dropdown-submenu">
-            <a class="dropdown-item" href="#">Recibo por Honorarios ▸</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Recibos por honorarios</a></li>
-              <li><a class="dropdown-item" href="#">Reportes por meses</a></li>
-              <li><a class="dropdown-item" href="#">Reportes por cantidad</a></li>
-            </ul>
-          </li>
-
-          <li><a class="dropdown-item" href="#">Compras XML</a></li>
-          <li><a class="dropdown-item" href="#">Ventas XML</a></li>
+          <li><a class="dropdown-item" href="#">PDF</a></li>
+          <li><a class="dropdown-item" href="#">XML</a></li>
         </ul>
       </li>
+
+      <li><a class="dropdown-item" href="#">Detracciones</a></li>
+      <li><a class="dropdown-item" href="#">Recibos por honorario</a></li>
+    </ul>
+  </li>
+
+    <li class="dropdown-submenu">
+      <a class="dropdown-item" href="#">SUNAFIL</a>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Inspecciones</a></li>
+        <li><a class="dropdown-item" href="#">Multas</a></li>
+      </ul>
+    </li>
+  </ul>
+</li>
+
 
       <li class="nav-item"><a class="nav-link" href="#">Requerimientos</a></li>
     </ul>
@@ -525,52 +564,61 @@
 </div>
 
 
-
 <div class="container-table">
-  <table class="tabla">
+  <table class="tabla" id="tablaEmpresas">
     <thead>
       <tr>
         <th>N°</th>
         <th>RUC</th>
         <th>RAZÓN SOCIAL</th>
         <th>ESTADO</th>
-        <th>COMENTARIOS</th>
         <th>ACCIÓN</th>
       </tr>
     </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>20458951458</td>
-        <td>SERVICES S.A.C.</td>
-        <td><span class="badge-activo">ACTIVO</span></td>
-        <td>Ninguno</td>
-       <td>
-        <div class="acciones">
-          <button class="btn-accionar btn-borrar" title="Eliminar">
-            <img src="img/basurero.png" alt="Eliminar" class="icono-btn">
-          </button>
-
-          <!-- Botón de opciones -->
-          <button class="btn-accionar btn-menu" title="Más opciones">
-            <img src="img/opcciones.png" alt="Opciones" class="icono-btn">
-          </button>
-
-          <!-- Menú justo después del botón -->
-          <div class="menu-opciones">
-            <a href="#">Editar</a>
-            <a href="#">Ver detalles</a>
-            <a href="#">Descargar</a>
-          </div>
-        </div>
-      </td>
-
-      </tr>
-    </tbody>
+    <tbody></tbody>
   </table>
 </div>
 
+<script>
+const tbody = document.querySelector(".tabla tbody");
 
+fetch("/alibot-api/api/listar_empresas.php")
+  .then(res => res.json())
+  .then(res => {
+    if (res.success) {
+      tbody.innerHTML = ""; // limpiar tabla
+      res.data.forEach((empresa, index) => {
+        tbody.innerHTML += `
+          <tr>
+            <td>${index + 1}</td>
+            <td>${empresa.ruc}</td>
+            <td>${empresa.razon_social}</td>
+            <td><span class="badge-${empresa.estado.toLowerCase()}">${empresa.estado}</span></td>
+            <td>
+              <div class="acciones">
+                <button class="btn-accionar btn-borrar" title="Eliminar">
+                  <img src="img/basurero.png" alt="Eliminar" class="icono-btn">
+                </button>
+                <button class="btn-accionar btn-menu" title="Más opciones">
+                  <img src="img/opcciones.png" alt="Opciones" class="icono-btn">
+                </button>
+                <div class="menu-opciones">
+                  <a href="#">Editar</a>
+                  <a href="#">Ver detalles</a>
+                  <a href="#">Descargar</a>
+                </div>
+              </div>
+            </td>
+          </tr>
+        `;
+      });
+    } else {
+      console.error(res.error);
+    }
+  })
+  .catch(err => console.error(err));
+
+</script>
 
 
 
