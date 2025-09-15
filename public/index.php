@@ -486,9 +486,9 @@
 
     <!-- Submenú Ventas -->
       <li class="dropdown-submenu">
-        <a class="dropdown-item" href="#">Ventas SIRE ▸</a>
+        <a class="dropdown-item" href="">Ventas SIRE ▸</a>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">PDF</a></li>
+          <li><a class="dropdown-item" href="reportes/venta_sire.php">PDF</a></li>
           <li><a class="dropdown-item" href="#">XML</a></li>
         </ul>
       </li>
