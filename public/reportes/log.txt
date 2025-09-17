@@ -1,0 +1,2 @@
+2025-09-16 18:15:47,977 [INFO]  Iniciando descarga para empresa 20494384273 entre 12/06/2024 y 16/06/2024
+2025-09-16 18:18:22,854 [INFO]  Proceso finalizado

@@ -14,8 +14,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $fecha_inicio = $_POST["fecha_inicio"];
     $fecha_fin = $_POST["fecha_fin"];
 
-    // Obtener credenciales de la empresa
-    $stmt = $mysqli->prepare("SELECT ruc, usuario_sol, clave_sol, razon_social 
+    // ✅ Incluir id_empresa en la consulta
+    $stmt = $mysqli->prepare("SELECT id_empresa, ruc, usuario_sol, clave_sol, razon_social 
                               FROM empresas 
                               WHERE id_empresa=? AND estado='ACTIVO'");
     $stmt->bind_param("i", $id_empresa);
@@ -37,7 +37,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
 
         // Ejecutar script Python en background (Windows)
-        // start /B permite ejecutar en segundo plano
         $cmd = "start /B \"\" \"$python\" \"$script\" \"$json_file\" > \"$log\" 2>&1";
         exec($cmd);
 
@@ -80,7 +79,39 @@ $empresas = $result->fetch_all(MYSQLI_ASSOC);
         <input type="text" name="fecha_inicio" placeholder="dd/mm/yyyy" required>
         <label>Fecha fin:</label>
         <input type="text" name="fecha_fin" placeholder="dd/mm/yyyy" required>
-        <button type="submit">Descargar</button>
+        <button type="submit" id="btn-descargar">Descargar</button>
     </form>
+
+    <script>
+    document.querySelector("form").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const form = e.target;
+        const data = new FormData(form);
+
+        const btn = document.getElementById("btn-descargar");
+        btn.disabled = true;
+        btn.innerText = "Procesando...";
+
+        fetch(form.action || window.location.href, {
+            method: "POST",
+            body: data
+        })
+        .then(res => res.text())
+        .then(html => {
+            const div = document.createElement("div");
+            div.innerHTML = html;
+            document.body.appendChild(div);
+
+            btn.disabled = false;
+            btn.innerText = "Descargar";
+        })
+        .catch(err => {
+            alert("❌ Error al enviar la solicitud: " + err);
+            btn.disabled = false;
+            btn.innerText = "Descargar";
+        });
+    });
+    </script>
 </body>
 </html>

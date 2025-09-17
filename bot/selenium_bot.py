@@ -1,7 +1,7 @@
 import os
 import sys, json
-
 import time
+import mysql.connector
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -10,29 +10,27 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import TimeoutException
 
+# ============================
+# CONFIG
+# ============================
 DOWNLOAD_DIR = os.path.abspath("descargas_sunat")
 os.makedirs(DOWNLOAD_DIR, exist_ok=True)
 
+
 # ============================
-# FUNCIONES
+# FUNCIONES SELENIUM
 # ============================
 def cerrar_popups(driver):
-    """
-    Cierra el modal 'Informativo' y el panel 'divPanelIU02' de forma rápida.
-    Retorna True si cerró algún popup, False si no encontró nada.
-    """
     driver.switch_to.default_content()
     popup_cerrado = False
 
-    # --- 1️⃣ Cerrar modal 'modalInformativoValidacionDatos' ---
+    # --- 1️⃣ Modal
     def cerrar_modal():
-        # Revisar default_content
         modals = driver.find_elements(By.ID, "modalInformativoValidacionDatos")
         if modals and modals[0].is_displayed():
             btn = driver.find_element(By.ID, "btnFinalizarValidacionDatos")
             driver.execute_script("arguments[0].click();", btn)
             return True
-        # Revisar iframes
         for frame in driver.find_elements(By.TAG_NAME, "iframe"):
             driver.switch_to.default_content()
             driver.switch_to.frame(frame)
@@ -46,7 +44,7 @@ def cerrar_popups(driver):
 
     popup_cerrado = cerrar_modal()
 
-    # --- 2️⃣ Cerrar panel 'divPanelIU02' ---
+    # --- 2️⃣ Panel
     def cerrar_panel():
         driver.switch_to.default_content()
         try:
@@ -61,7 +59,6 @@ def cerrar_popups(driver):
                 )
                 return True
         except TimeoutException:
-            # Revisar iframes
             for frame in driver.find_elements(By.TAG_NAME, "iframe"):
                 driver.switch_to.default_content()
                 driver.switch_to.frame(frame)
@@ -84,10 +81,12 @@ def cerrar_popups(driver):
     panel_cerrado = cerrar_panel()
     return popup_cerrado or panel_cerrado
 
+
 def descargar_documentos(empresa, fecha_inicio, fecha_fin):
     RUC = empresa['ruc']
     USUARIO = empresa['usuario_sol']
     CLAVE = empresa['clave_sol']
+    ID_EMPRESA = empresa['id_empresa']
 
     chrome_options = Options()
     chrome_options.add_experimental_option("prefs", {
@@ -102,6 +101,7 @@ def descargar_documentos(empresa, fecha_inicio, fecha_fin):
     wait = WebDriverWait(driver, 30)
 
     try:
+        # LOGIN
         driver.get("https://e-menu.sunat.gob.pe/cl-ti-itmenu/MenuInternet.htm?exe=11.5.3.1.2")
         wait.until(EC.presence_of_element_located((By.ID, "txtRuc"))).send_keys(RUC)
         driver.find_element(By.ID, "txtUsuario").send_keys(USUARIO)
@@ -110,7 +110,7 @@ def descargar_documentos(empresa, fecha_inicio, fecha_fin):
 
         cerrar_popups(driver)
 
-        # Ubicar iframe con fechas
+        # Buscar iframe
         iframes = driver.find_elements(By.TAG_NAME, "iframe")
         iframe_index = None
         for i, iframe in enumerate(iframes):
@@ -129,7 +129,7 @@ def descargar_documentos(empresa, fecha_inicio, fecha_fin):
         driver.switch_to.default_content()
         driver.switch_to.frame(iframes[iframe_index])
 
-        # Llenar fechas
+        # Fechas
         inicio = wait.until(EC.element_to_be_clickable((By.ID, "criterio.fec_desde")))
         inicio.clear()
         inicio.send_keys(fecha_inicio)
@@ -140,13 +140,13 @@ def descargar_documentos(empresa, fecha_inicio, fecha_fin):
         fin.send_keys(fecha_fin)
         fin.send_keys(Keys.TAB)
 
-        # Seleccionar FE Recibidas
+        # Tipo
         tipo = wait.until(EC.presence_of_element_located((By.ID, "criterio.tipoConsulta")))
         tipo.clear()
         tipo.send_keys("FE Recibidas")
         time.sleep(1)
 
-        # Clic en Aceptar
+        # Aceptar
         aceptar_label = wait.until(EC.element_to_be_clickable((By.ID, "criterio.btnContinuar_label")))
         padre_aceptar = aceptar_label.find_element(By.XPATH, "..")
         padre_aceptar.click()
@@ -156,7 +156,7 @@ def descargar_documentos(empresa, fecha_inicio, fecha_fin):
         wait.until(EC.presence_of_element_located((By.ID, "listadoFacturas")))
         wait.until(EC.presence_of_element_located((By.ID, "dojox_grid__View_1")))
 
-        # Descargar archivos
+        # Descargar
         divs_con_tablas = driver.find_elements(By.XPATH, '//*[@id="dojox_grid__View_1"]/div/div/div')
         descargados_xml = set()
         descargados_pdf = set()
@@ -174,7 +174,7 @@ def descargar_documentos(empresa, fecha_inicio, fecha_fin):
                             continue
                         filas_vistas.add(fila_id)
 
-                        # Descargar XML
+                        # XML
                         try:
                             enlace_xml = fila.find_element(By.XPATH, './td[8]/a')
                             onclick_xml = enlace_xml.get_attribute('onclick')
@@ -185,7 +185,7 @@ def descargar_documentos(empresa, fecha_inicio, fecha_fin):
                         except:
                             pass
 
-                        # Descargar PDF
+                        # PDF
                         try:
                             enlace_pdf = fila.find_element(By.XPATH, './td[9]/a')
                             onclick_pdf = enlace_pdf.get_attribute('onclick')
@@ -203,11 +203,6 @@ def descargar_documentos(empresa, fecha_inicio, fecha_fin):
                     break
                 ultima_altura = altura_actual
 
-        # Mostrar lista de archivos descargados
-        archivos = os.listdir(DOWNLOAD_DIR)
-        print(f"\n📂 Archivos descargados: {len(archivos)}")
-        for archivo in archivos:
-            print(" -", archivo)
 
 
     finally:
@@ -226,7 +221,6 @@ if __name__ == "__main__":
         fecha_inicio = data["fecha_inicio"]
         fecha_fin = data["fecha_fin"]
 
-        # Llamar al bot
         descargar_documentos(empresa, fecha_inicio, fecha_fin)
     else:
-        print("⚠ No se recibió archivo JSON")
+        print(" No se recibió archivo JSON")
