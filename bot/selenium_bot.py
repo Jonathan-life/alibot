@@ -13,8 +13,9 @@ from selenium.common.exceptions import TimeoutException
 # ============================
 # CONFIG
 # ============================
-DOWNLOAD_DIR = os.path.abspath("descargas_sunat")
-os.makedirs(DOWNLOAD_DIR, exist_ok=True)
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+DOWNLOAD_DIR = os.path.join(SCRIPT_DIR, "..", "descargas_sunat")
+DOWNLOAD_DIR = os.path.abspath(DOWNLOAD_DIR)
 
 
 # ============================
