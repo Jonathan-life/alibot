@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     // Ejecutable de Python, sin ruta fija, para que use el que esté en PATH
-    $python = "C:\\Users\\SENATI\\AppData\\Local\\Programs\\Python\\Python313\\python.exe";
+    $python = "C:\\Users\\Jonathan\\AppData\\Local\\Programs\\Python\\Python313\\python.exe";
 
     // Base del proyecto, dos niveles arriba de este archivo
     $base_dir = realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..');
@@ -152,5 +152,86 @@ $empresas = $result->fetch_all(MYSQLI_ASSOC);
         });
     });
     </script>
+    <?php
+// 🔹 Conexión a la base de datos
+$conexion = new mysqli("localhost", "root", "", "sistema_contable");
+if ($conexion->connect_error) {
+    die("Error de conexión: " . $conexion->connect_error);
+}
+
+// 🔹 Consulta con JOIN facturas + archivos_factura
+$sql = "SELECT 
+            f.id_factura,
+            f.nro_cpe,
+            f.emisor_ruc,
+            f.emisor_nombre,
+            f.receptor_ruc,
+            f.receptor_nombre,
+            f.importe_total,
+            f.moneda,
+            f.fecha_emision,
+            f.estado,
+            a.id_archivo,
+            a.nombre_archivo
+        FROM facturas f
+        INNER JOIN archivos_factura a ON f.id_factura = a.id_factura
+        ORDER BY f.id_factura";
+
+$resultado = $conexion->query($sql);
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reporte de Facturas</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-4">
+
+    <h2 class="mb-3">Listado de Facturas con Archivos</h2>
+
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Nro CPE</th>
+                <th>Emisor</th>
+                <th>Receptor</th>
+                <th>Importe Total</th>
+                <th>Moneda</th>
+                <th>Fecha Emisión</th>
+                <th>Estado</th>
+                <th>Archivo</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php while ($fila = $resultado->fetch_assoc()) { ?>
+            <tr>
+                <td><?= $fila['id_factura'] ?></td>
+                <td><?= $fila['nro_cpe'] ?></td>
+                <td><?= $fila['emisor_nombre'] ?> (<?= $fila['emisor_ruc'] ?>)</td>
+                <td><?= $fila['receptor_nombre'] ?? "-" ?> (<?= $fila['receptor_ruc'] ?? "-" ?>)</td>
+                <td><?= number_format($fila['importe_total'], 2) ?></td>
+                <td><?= $fila['moneda'] ?? "-" ?></td>
+                <td><?= $fila['fecha_emision'] ?></td>
+                <td><?= $fila['estado'] ?></td>
+                <td>
+                    <a href="descargar.php?id=<?= $fila['id_archivo'] ?>" 
+                       class="btn btn-sm btn-primary">
+                       Descargar ZIP
+                    </a>
+                </td>
+            </tr>
+        <?php } ?>
+        </tbody>
+    </table>
+
+</body>
+</html>
+
+<?php $conexion->close(); ?>
+
 </body>
 </html>
