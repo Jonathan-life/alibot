@@ -1,0 +1,96 @@
+=== selenium_bot.py output ===
+
+
+=== procesar_archivos.py output ===
+Filtro fechas: 2024-06-25 - 2024-06-26
+ Iniciando procesamiento para empresa ID 1
+ZIPs encontrados: 5
+ Extraído ZIP: FACTURAE001-2010619429040.zip
+ Procesando XML dentro del ZIP: FACTURAE001-2010619429040.XML
+Procesando factura: E001-20 - Fecha: 2024-06-25 - Monto: 920.0
+ Factura guardada: E001-20 - TITO YATACO XIOMARA VALERIA
+ Guardando ZIP en BD vinculado a factura ID 191
+Guardado en BD (BLOB): FACTURAE001-2010619429040.zip (ZIP)
+ Extraído ZIP: FACTURAE001-39120534496380.zip
+ Procesando XML dentro del ZIP: FACTURAE001-39120534496380.XML
+Procesando factura: E001-391 - Fecha: 2024-06-25 - Monto: 24.0
+ Factura guardada: E001-391 - INVERSIONES Y SERVICIOS LUBRISUR EIRL
+ Guardando ZIP en BD vinculado a factura ID 192
+Guardado en BD (BLOB): FACTURAE001-39120534496380.zip (ZIP)
+ Extraído ZIP: FACTURAE001-407420601975000.zip
+ Procesando XML dentro del ZIP: FACTURAE001-407420601975000.XML
+Procesando factura: E001-4074 - Fecha: 2024-06-26 - Monto: 190.0
+ Factura guardada: E001-4074 - DISTRIBUIDORA FERRETERA AZNAILA S.R.L.
+ Guardando ZIP en BD vinculado a factura ID 193
+Guardado en BD (BLOB): FACTURAE001-407420601975000.zip (ZIP)
+ Extraído ZIP: FACTURAE001-84720549620532.zip
+ Procesando XML dentro del ZIP: FACTURAE001-84720549620532.XML
+Procesando factura: E001-847 - Fecha: 2024-06-25 - Monto: 950.0
+ Factura guardada: E001-847 - VIDRIOS Y ALUMINIOS ALVIAMY SAC
+ Guardando ZIP en BD vinculado a factura ID 194
+Guardado en BD (BLOB): FACTURAE001-84720549620532.zip (ZIP)
+ Extraído ZIP: FACTURAE001-9010430978298.zip
+ Procesando XML dentro del ZIP: FACTURAE001-9010430978298.XML
+Procesando factura: E001-90 - Fecha: 2024-06-25 - Monto: 177.59
+ Factura guardada: E001-90 - AMORETTI HERRERA ELIAS
+ Guardando ZIP en BD vinculado a factura ID 195
+Guardado en BD (BLOB): FACTURAE001-9010430978298.zip (ZIP)
+Archivos PDF encontrados: 10
+Iniciando lectura y mapeo de XML para 5 archivos
+ Leyendo XML: FACTURAE001-2010619429040.XML
+ Buscando factura en BD para nro_cpe: E001-20
+ Mapeado nro_cpe E00120 a factura ID 191
+ Leyendo XML: FACTURAE001-39120534496380.XML
+ Buscando factura en BD para nro_cpe: E001-391
+ Mapeado nro_cpe E001391 a factura ID 192
+ Leyendo XML: FACTURAE001-407420601975000.XML
+ Buscando factura en BD para nro_cpe: E001-4074
+ Mapeado nro_cpe E0014074 a factura ID 193
+ Leyendo XML: FACTURAE001-84720549620532.XML
+ Buscando factura en BD para nro_cpe: E001-847
+ Mapeado nro_cpe E001847 a factura ID 194
+ Leyendo XML: FACTURAE001-9010430978298.XML
+ Buscando factura en BD para nro_cpe: E001-90
+ Mapeado nro_cpe E00190 a factura ID 195
+ PDF PDF-DOC-E0012010619429040.PDF no asociado a factura
+ PDF PDF-DOC-E00139120534496380.PDF no asociado a factura
+ PDF PDF-DOC-E001407420601975000.PDF no asociado a factura
+ PDF PDF-DOC-E00184720549620532.PDF no asociado a factura
+ PDF PDF-DOC-E0019010430978298.PDF no asociado a factura
+ PDF PDF-DOC-E0012010619429040.PDF no asociado a factura
+ PDF PDF-DOC-E00139120534496380.PDF no asociado a factura
+ PDF PDF-DOC-E001407420601975000.PDF no asociado a factura
+ PDF PDF-DOC-E00184720549620532.PDF no asociado a factura
+ PDF PDF-DOC-E0019010430978298.PDF no asociado a factura
+ Eliminado de carpeta: FACTURAE001-2010619429040.XML
+ Eliminado de carpeta: FACTURAE001-39120534496380.XML
+ Eliminado de carpeta: FACTURAE001-407420601975000.XML
+ Eliminado de carpeta: FACTURAE001-84720549620532.XML
+ Eliminado de carpeta: FACTURAE001-9010430978298.XML
+ Eliminado de carpeta: PDF-DOC-E0012010619429040.pdf
+ Eliminado de carpeta: PDF-DOC-E00139120534496380.pdf
+ Eliminado de carpeta: PDF-DOC-E001407420601975000.pdf
+ Eliminado de carpeta: PDF-DOC-E00184720549620532.pdf
+ Eliminado de carpeta: PDF-DOC-E0019010430978298.pdf
+Error eliminando archivo C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0012010619429040.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0012010619429040.pdf'
+Error eliminando archivo C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00139120534496380.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00139120534496380.pdf'
+Error eliminando archivo C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E001407420601975000.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E001407420601975000.pdf'
+Error eliminando archivo C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00184720549620532.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00184720549620532.pdf'
+Error eliminando archivo C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0019010430978298.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0019010430978298.pdf'
+Error eliminando archivo C:\wamp64\www\alibot\descargas_sunat\FACTURAE001-2010619429040.XML: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\FACTURAE001-2010619429040.XML'
+Error eliminando archivo C:\wamp64\www\alibot\descargas_sunat\FACTURAE001-39120534496380.XML: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\FACTURAE001-39120534496380.XML'
+Error eliminando archivo C:\wamp64\www\alibot\descargas_sunat\FACTURAE001-407420601975000.XML: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\FACTURAE001-407420601975000.XML'
+Error eliminando archivo C:\wamp64\www\alibot\descargas_sunat\FACTURAE001-84720549620532.XML: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\FACTURAE001-84720549620532.XML'
+Error eliminando archivo C:\wamp64\www\alibot\descargas_sunat\FACTURAE001-9010430978298.XML: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\FACTURAE001-9010430978298.XML'
+Error eliminando archivo C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0012010619429040.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0012010619429040.pdf'
+Error eliminando archivo C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00139120534496380.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00139120534496380.pdf'
+Error eliminando archivo C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E001407420601975000.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E001407420601975000.pdf'
+Error eliminando archivo C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00184720549620532.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00184720549620532.pdf'
+Error eliminando archivo C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0019010430978298.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0019010430978298.pdf'
+Error eliminando archivo C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0012010619429040.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0012010619429040.pdf'
+Error eliminando archivo C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00139120534496380.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00139120534496380.pdf'
+Error eliminando archivo C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E001407420601975000.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E001407420601975000.pdf'
+Error eliminando archivo C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00184720549620532.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00184720549620532.pdf'
+Error eliminando archivo C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0019010430978298.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0019010430978298.pdf'
+ Proceso finalizado correctamente
+

@@ -368,6 +368,21 @@
   display: inline-block;
 }
 
+
+
+/* Contenedor dl menú */
+.navbar-menu-container {
+  flex-grow: 1;                     /* Ocupa el espacio disponible entre logo e iconos */
+  display: flex;
+  justify-content: center;         /* Centra el menú horizontalmente */
+  align-items: center;
+  margin-right: 25px;
+}
+
+.navbar-icons-container .icon-link i {
+  font-size: 1.8rem;  /* Puedes ajustar el valor según lo grande que los quieras */
+}
+
 /* Acciones */
 .acciones {
   display: flex;
@@ -411,19 +426,6 @@
 }
 
 
-/* Contenedor dl menú */
-.navbar-menu-container {
-  flex-grow: 1;                     /* Ocupa el espacio disponible entre logo e iconos */
-  display: flex;
-  justify-content: center;         /* Centra el menú horizontalmente */
-  align-items: center;
-  margin-right: 25px;
-}
-
-.navbar-icons-container .icon-link i {
-  font-size: 1.8rem;  /* Puedes ajustar el valor según lo grande que los quieras */
-}
-
 </style>
 </head>
 <body>
@@ -453,6 +455,7 @@
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="mantenimiento/usuario.php">Usuarios</a></li>
           <li><a class="dropdown-item" href="mantenimiento/empresa.php">Empresas</a></li>
+          <li><a class="dropdown-item" href="mantenimiento/sunat-og.php">Descargar</a></li>
           <!-- Submenú Permisos -->
           <li class="dropdown-submenu">
             <a class="dropdown-item" href="#">Permisos</a>
@@ -578,11 +581,29 @@
     <tbody></tbody>
   </table>
 </div>
+<!-- Modal de Confirmación -->
+<div class="modal fade" id="modalConfirmarEliminacion" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title" id="modalLabel">Confirmar eliminación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        ¿Estás seguro de que deseas eliminar esta empresa?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger" id="btnConfirmarEliminar">Sí, eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 const tbody = document.querySelector(".tabla tbody");
 
-fetch("/alibot-api/api/listar_empresas.php")
+fetch("/alibot/api/listar_empresas.php")
   .then(res => res.json())
   .then(res => {
     if (res.success) {
@@ -595,20 +616,20 @@ fetch("/alibot-api/api/listar_empresas.php")
             <td>${empresa.razon_social}</td>
             <td><span class="badge-${empresa.estado.toLowerCase()}">${empresa.estado}</span></td>
             <td>
-              <div class="acciones">
-                <button class="btn-accionar btn-borrar" title="Eliminar">
-                  <img src="img/basurero.png" alt="Eliminar" class="icono-btn">
-                </button>
+              <div class="acciones" style="position: relative;">
+              <button class="btn-accionar btn-borrar" data-id="${empresa.id_empresa}" title="Eliminar">
+                <img src="img/basurero.png" alt="Eliminar" class="icono-btn">
+              </button>
                 <button class="btn-accionar btn-menu" title="Más opciones">
                   <img src="img/opcciones.png" alt="Opciones" class="icono-btn">
                 </button>
                 <div class="menu-opciones">
-                  <a href="#">Editar</a>
-                  <a href="#">Ver detalles</a>
+                  <a href="#">Desactivar</a>
                   <a href="#">Descargar</a>
                 </div>
               </div>
             </td>
+
           </tr>
         `;
       });
@@ -639,28 +660,70 @@ fetch("/alibot-api/api/listar_empresas.php")
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".btn-menu").forEach(btn => {
-    btn.addEventListener("click", function (e) {
-      e.stopPropagation();
+  const tabla = document.querySelector(".tabla");
 
-      const acciones = this.closest(".acciones"); // 👈 ahora busca .acciones
+  // Escucha todos los clics en la tabla
+  tabla.addEventListener("click", function (e) {
+    // Si se hizo clic en un botón .btn-menu
+    if (e.target.closest(".btn-menu")) {
+      e.stopPropagation();
+      const btn = e.target.closest(".btn-menu");
+      const acciones = btn.closest(".acciones");
       const menu = acciones.querySelector(".menu-opciones");
 
-      // Cerrar otros menús
+      // Cerrar todos los otros menús
       document.querySelectorAll(".menu-opciones").forEach(m => {
         if (m !== menu) m.style.display = "none";
       });
 
-      // Toggle
+      // Mostrar/ocultar el menú actual
       menu.style.display = (menu.style.display === "block") ? "none" : "block";
-    });
+    }
   });
 
-  // Cerrar si clic fuera
+  // Cerrar el menú si se hace clic fuera
   window.addEventListener("click", () => {
     document.querySelectorAll(".menu-opciones").forEach(menu => {
       menu.style.display = "none";
     });
+  });
+});
+</script>
+<script>
+let empresaIdParaEliminar = null;
+
+document.addEventListener("click", function (e) {
+  if (e.target.closest(".btn-borrar")) {
+    const btn = e.target.closest(".btn-borrar");
+    empresaIdParaEliminar = btn.getAttribute("data-id");
+
+    const modal = new bootstrap.Modal(document.getElementById('modalConfirmarEliminacion'));
+    modal.show();
+  }
+});
+
+document.getElementById("btnConfirmarEliminar").addEventListener("click", function () {
+  if (!empresaIdParaEliminar) return;
+
+  fetch("/alibot/api/eliminar_empresa.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ id_empresa: empresaIdParaEliminar })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      // Refrescar tabla o quitar fila
+      location.reload(); // O puedes eliminar solo la fila desde JS
+    } else {
+      alert("Error al eliminar: " + data.error);
+    }
+  })
+  .catch(err => {
+    console.error("Error al eliminar:", err);
+    alert("Ocurrió un error al intentar eliminar.");
   });
 });
 </script>
