@@ -6,6 +6,7 @@ import logging
 import zipfile
 import re
 import sys
+import fitz  # PyMuPDF (pip install pymupdf)
 import json
 from datetime import datetime
 
@@ -39,7 +40,6 @@ def get_connection():
         database="sistema_contable"
     )
 
-
 def guardar_archivo_binario(id_factura, archivo, tipo):
     if id_factura is None:
         log(f" No se puede guardar {archivo} porque no hay ID de factura", "error")
@@ -51,11 +51,25 @@ def guardar_archivo_binario(id_factura, archivo, tipo):
         return
 
     try:
+        conn = get_connection()
+        cursor = conn.cursor()
+
+        # Verificar si ya existe
+        cursor.execute("""
+            SELECT COUNT(*) FROM archivos_factura
+            WHERE id_factura = %s AND nombre_archivo = %s
+        """, (id_factura, archivo))
+        existe = cursor.fetchone()[0]
+
+        if existe > 0:
+            log(f"⚠️ Ya existe en BD: {archivo} (ID factura {id_factura}), no se guarda duplicado")
+            cursor.close()
+            conn.close()
+            return
+
         with open(ruta, "rb") as f:
             contenido = f.read()
 
-        conn = get_connection()
-        cursor = conn.cursor()
         cursor.execute("""
             INSERT INTO archivos_factura (id_factura, tipo, nombre_archivo, ruta, archivo_binario)
             VALUES (%s, %s, %s, %s, %s)
@@ -67,6 +81,7 @@ def guardar_archivo_binario(id_factura, archivo, tipo):
         log(f"Guardado en BD (BLOB): {archivo} ({tipo.upper()})")
     except Exception as e:
         log(f" Error al guardar archivo {archivo} en BD: {e}", "error")
+
 
 def procesar_xml(archivo, id_empresa, fecha_inicio=None, fecha_fin=None):
     """
@@ -126,6 +141,30 @@ def procesar_xml(archivo, id_empresa, fecha_inicio=None, fecha_fin=None):
         log(f" Error procesando XML {archivo}: {e}", "error")
         return None, None
 
+def procesar_pdf(pdf_path):
+    """
+    Extrae el nro_cpe del contenido del PDF.
+    Retorna nro_cpe o None si no se encuentra.
+    """
+    try:
+        doc = fitz.open(pdf_path)
+        texto = ""
+        for pagina in doc:
+            texto += pagina.get_text("text")
+        doc.close()
+
+        # Buscar el patrón E###-correlativo (ejemplo: E001-12345)
+        match = re.search(r'(E\d{3})-?(\d+)', texto)
+        if match:
+            serie = match.group(1)
+            correlativo = match.group(2)
+            return f"{serie}{correlativo}"
+        return None
+    except Exception as e:
+        log(f" Error leyendo PDF {os.path.basename(pdf_path)}: {e}", "error")
+        return None
+
+
 def procesar_archivos_descargados(id_empresa, fecha_inicio=None, fecha_fin=None):
     """
     Extrae ZIPs, procesa XML y PDF para guardar en BD y elimina archivos luego de procesar.
@@ -134,6 +173,7 @@ def procesar_archivos_descargados(id_empresa, fecha_inicio=None, fecha_fin=None)
     log(f"ZIPs encontrados: {len(zip_files)}")
 
     xml_files = []
+    xml_map = {}  # nro_cpe normalizado → (id_factura, zip_name)
 
     for zip_file in zip_files:
         zip_name = os.path.basename(zip_file)
@@ -152,110 +192,66 @@ def procesar_archivos_descargados(id_empresa, fecha_inicio=None, fecha_fin=None)
 
                 id_factura, nro_cpe = procesar_xml(xml_in_zip[0], id_empresa, fecha_inicio, fecha_fin)
 
-                if id_factura:
+                if id_factura and nro_cpe:
                     log(f" Guardando ZIP en BD vinculado a factura ID {id_factura}")
                     guardar_archivo_binario(id_factura, zip_name, "ZIP")
                     xml_files.append(xml_path)
+
+                    key = nro_cpe.replace("-", "").upper()
+                    xml_map[key] = (id_factura, zip_name)
+                    log(f" Mapeado nro_cpe {key} → factura ID {id_factura} desde {zip_name}")
                 else:
                     log(f" No se pudo procesar factura para XML {xml_in_zip[0]}", "error")
 
         except Exception as e:
             log(f" Error extrayendo {zip_name}: {e}", "error")
 
+    # --- Procesar PDFs ---
     pdf_files = glob.glob(os.path.join(DOWNLOAD_DIR, "*.pdf")) + glob.glob(os.path.join(DOWNLOAD_DIR, "*.PDF"))
     log(f"Archivos PDF encontrados: {len(pdf_files)}")
 
     if len(pdf_files) == 0:
         log(" No hay archivos PDF para procesar")
 
-    xml_map = {}
-
-    # Abrir conexión y cursor buffered para evitar errores Unread result found
-    try:
-        conn = get_connection()
-        cursor = conn.cursor(buffered=True)
-        log(f"Iniciando lectura y mapeo de XML para {len(xml_files)} archivos")
-        for xml_path in xml_files:
-            xml_name = os.path.basename(xml_path)
-            try:
-                log(f" Leyendo XML: {xml_name}")
-                tree = ET.parse(xml_path)
-                root = tree.getroot()
-                ns = {
-                    "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-                    "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-                }
-                nro_cpe_elem = root.find(".//cbc:ID", ns)
-                nro_cpe = nro_cpe_elem.text.strip() if nro_cpe_elem is not None else ""
-                if not nro_cpe:
-                    log(f" No se encontró nro_cpe en XML {xml_name}", "error")
-                    continue
-
-                log(f" Buscando factura en BD para nro_cpe: {nro_cpe}")
-                cursor.execute("SELECT id_factura FROM facturas WHERE nro_cpe = %s", (nro_cpe,))
-                row = cursor.fetchone()
-                if row:
-                    id_factura = row[0]
-                    key = nro_cpe.replace("-", "").upper()
-                    xml_map[key] = id_factura
-                    log(f" Mapeado nro_cpe {key} a factura ID {id_factura}")
-                else:
-                    log(f" No se encontró factura para nro_cpe {nro_cpe}", "error")
-
-            except Exception as e:
-                log(f" Error leyendo XML {xml_name}: {e}", "error")
-
-    except Exception as e:
-        log(f" Error con la conexión o cursor de BD: {e}", "error")
-    finally:
-        try:
-            cursor.close()
-            conn.close()
-        except Exception:
-            pass
-
-    # Procesar PDFs
     for pdf_path in pdf_files:
         pdf_name = os.path.basename(pdf_path).upper()
-        pdf_base = os.path.splitext(pdf_name)[0]
 
-        match = re.search(r'(E\d{3})-?(\d+)', pdf_base)
-        if match:
-            serie = match.group(1)
-            correlativo = match.group(2)
-            nro_cpe_pdf = f"{serie}{correlativo}"  # sin guion para mapear
+        # 1. Intentar extraer nro_cpe desde el contenido del PDF
+        nro_cpe_pdf = procesar_pdf(pdf_path)
 
-            id_factura = xml_map.get(nro_cpe_pdf)
-            if id_factura:
-                log(f" Asociando PDF {pdf_name} a factura ID {id_factura}")
+        # 2. Si no se pudo, intentar desde el nombre del archivo
+        if not nro_cpe_pdf:
+            pdf_base = os.path.splitext(pdf_name)[0]
+            match = re.search(r'(E\d{3})-?(\d+)', pdf_base)
+            if match:
+                serie = match.group(1)
+                correlativo = match.group(2)
+                nro_cpe_pdf = f"{serie}{correlativo}"
+
+        if nro_cpe_pdf:
+            if nro_cpe_pdf in xml_map:
+                id_factura, zip_name = xml_map[nro_cpe_pdf]
+                log(f" Asociando PDF {pdf_name} con factura nro_cpe {nro_cpe_pdf} (desde {zip_name}) -> factura ID {id_factura}")
                 guardar_archivo_binario(id_factura, pdf_name, "PDF")
             else:
-                posibles_keys = [k for k in xml_map.keys() if k.startswith(serie) and correlativo in k]
+                posibles_keys = [k for k in xml_map.keys() if nro_cpe_pdf in k or k in nro_cpe_pdf]
                 if posibles_keys:
-                    id_factura = xml_map[posibles_keys[0]]
-                    log(f" Asociando PDF {pdf_name} a factura ID {id_factura} por coincidencia aproximada")
+                    id_factura, zip_name = xml_map[posibles_keys[0]]
+                    log(f" Asociando PDF {pdf_name} con factura nro_cpe {nro_cpe_pdf} (aprox desde {zip_name}) -> factura ID {id_factura}")
                     guardar_archivo_binario(id_factura, pdf_name, "PDF")
                 else:
-                    log(f" PDF {pdf_name} no asociado a factura", "error")
+                    log(f" PDF {pdf_name} no asociado a ninguna factura", "error")
         else:
-            log(f"No se pudo asociar PDF: {pdf_name}", "error")
+            log(f"No se pudo extraer nro_cpe en PDF: {pdf_name}", "error")
 
-    # Eliminar XML y PDF procesados
-    for file_path in xml_files + pdf_files:
+
+    # --- Eliminar archivos procesados ---
+    for file_path in xml_files + pdf_files + zip_files:
         try:
             os.remove(file_path)
             log(f" Eliminado de carpeta: {os.path.basename(file_path)}")
         except Exception as e:
             log(f"Error eliminando archivo {file_path}: {e}", "error")
-
-    # Eliminar archivos XML y PDF procesados
-    for file_path in xml_files + pdf_files:
-        try:
-            os.remove(file_path)
-            log(f" Eliminado de carpeta: {os.path.basename(file_path)}")
-        except Exception as e:
-            log(f"Error eliminando archivo {file_path}: {e}", "error")
-
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
