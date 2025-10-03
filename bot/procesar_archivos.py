@@ -84,10 +84,6 @@ def guardar_archivo_binario(id_factura, archivo, tipo):
 
 
 def procesar_xml(archivo, id_empresa, fecha_inicio=None, fecha_fin=None):
-    """
-    Procesa el archivo XML, extrae datos y guarda la factura en la BD.
-    Retorna id_factura y nro_cpe para asociar PDFs después.
-    """
     ruta = os.path.join(DOWNLOAD_DIR, archivo)
     if not os.path.exists(ruta):
         log(f" No existe el archivo XML: {ruta}", "error")
@@ -101,17 +97,19 @@ def procesar_xml(archivo, id_empresa, fecha_inicio=None, fecha_fin=None):
             "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
         }
 
+        # Serie y correlativo
         nro_cpe = root.find(".//cbc:ID", ns)
         nro_cpe = nro_cpe.text.strip() if nro_cpe is not None else ""
+        serie, correlativo = ("", "")
+        if "-" in nro_cpe:
+            serie, correlativo = nro_cpe.split("-", 1)
 
-        emisor_ruc = root.find(".//cac:AccountingSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID", ns)
-        emisor_ruc = emisor_ruc.text.strip() if emisor_ruc is not None else ""
-
-        emisor_nombre = root.find(".//cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName", ns)
-        emisor_nombre = emisor_nombre.text.strip() if emisor_nombre is not None else ""
-
+        # Fechas
         fecha_emision = root.find(".//cbc:IssueDate", ns)
         fecha_emision = fecha_emision.text.strip() if fecha_emision is not None else ""
+
+        fecha_vencimiento = root.find(".//cbc:DueDate", ns)
+        fecha_vencimiento = fecha_vencimiento.text.strip() if fecha_vencimiento is not None else None
 
         if fecha_inicio and fecha_fin:
             fecha_emision_dt = datetime.strptime(fecha_emision, "%Y-%m-%d")
@@ -119,24 +117,84 @@ def procesar_xml(archivo, id_empresa, fecha_inicio=None, fecha_fin=None):
                 log(f"Factura {nro_cpe} fecha {fecha_emision} fuera del rango {fecha_inicio.strftime('%Y-%m-%d')} - {fecha_fin.strftime('%Y-%m-%d')}")
                 return None, None
 
-        monto = root.find(".//cac:LegalMonetaryTotal/cbc:PayableAmount", ns)
-        monto = float(monto.text.strip()) if monto is not None else 0.0
+        # Emisor
+        ruc_emisor = root.find(".//cac:AccountingSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID", ns)
+        ruc_emisor = ruc_emisor.text.strip() if ruc_emisor is not None else ""
 
-        log(f"Procesando factura: {nro_cpe} - Fecha: {fecha_emision} - Monto: {monto}")
+        nombre_emisor = root.find(".//cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName", ns)
+        nombre_emisor = nombre_emisor.text.strip() if nombre_emisor is not None else ""
 
+        # Receptor
+        ruc_receptor = root.find(".//cac:AccountingCustomerParty/cac:Party/cac:PartyIdentification/cbc:ID", ns)
+        ruc_receptor = ruc_receptor.text.strip() if ruc_receptor is not None else ""
+
+        nombre_receptor = root.find(".//cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName", ns)
+        nombre_receptor = nombre_receptor.text.strip() if nombre_receptor is not None else ""
+
+        # Descripción (primera línea de detalle)
+        descripcion = root.find(".//cac:InvoiceLine/cac:Item/cbc:Description", ns)
+        descripcion = descripcion.text.strip() if descripcion is not None else ""
+
+        # Montos
+        base_imponible = root.find(".//cac:LegalMonetaryTotal/cbc:LineExtensionAmount", ns)
+        base_imponible = float(base_imponible.text.strip()) if base_imponible is not None else 0.0
+
+        igv = root.find(".//cac:TaxTotal/cbc:TaxAmount", ns)
+        igv = float(igv.text.strip()) if igv is not None else 0.0
+
+        importe_total = root.find(".//cac:LegalMonetaryTotal/cbc:PayableAmount", ns)
+        importe_total = float(importe_total.text.strip()) if importe_total is not None else 0.0
+
+        moneda = root.find(".//cbc:DocumentCurrencyCode", ns)
+        moneda = moneda.text.strip() if moneda is not None else "PEN"
+
+        # Tipo documento
+        tipo_doc_code = root.find(".//cbc:InvoiceTypeCode", ns)
+        tipo_doc_code = tipo_doc_code.text.strip() if tipo_doc_code is not None else "01"
+        tipo_doc = {
+            "01": "FACTURA",
+            "03": "BOLETA",
+            "07": "NC",
+            "08": "ND"
+        }.get(tipo_doc_code, "OTROS")
+
+        # Origen -> depende de si el RUC emisor es el de la empresa
+        origen = "COMPRA"
+        if ruc_emisor == str(id_empresa):  # OJO: aquí deberías validar con el RUC real de tu empresa
+            origen = "VENTA"
+
+        estado_sunat = "ACEPTADO"
+
+        # Guardar en BD
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute("""
-            INSERT INTO facturas (id_empresa, nro_cpe, emisor_ruc, emisor_nombre, fecha_emision, importe_total, estado, fecha_registro)
-            VALUES (%s, %s, %s, %s, %s, %s, 'VIGENTE', NOW())
-        """, (id_empresa, nro_cpe, emisor_ruc, emisor_nombre, fecha_emision, monto))
+            INSERT INTO facturas (
+                id_empresa, tipo_doc, serie, correlativo, nro_cpe,
+                fecha_emision, fecha_vencimiento, ruc_emisor, nombre_emisor,
+                ruc_receptor, nombre_receptor, descripcion, base_imponible,
+                igv, importe_total, moneda, origen, estado_sunat, fecha_registro
+            )
+            VALUES (
+                %s, %s, %s, %s, %s,
+                %s, %s, %s, %s,
+                %s, %s, %s, %s,
+                %s, %s, %s, %s, %s, NOW()
+            )
+        """, (
+            id_empresa, tipo_doc, serie, correlativo, nro_cpe,
+            fecha_emision, fecha_vencimiento, ruc_emisor, nombre_emisor,
+            ruc_receptor, nombre_receptor, descripcion, base_imponible,
+            igv, importe_total, moneda, origen, estado_sunat
+        ))
         conn.commit()
         id_factura = cursor.lastrowid
         cursor.close()
         conn.close()
 
-        log(f" Factura guardada: {nro_cpe} - {emisor_nombre}")
+        log(f" Factura guardada: {nro_cpe} - {nombre_emisor}")
         return id_factura, nro_cpe
+
     except Exception as e:
         log(f" Error procesando XML {archivo}: {e}", "error")
         return None, None

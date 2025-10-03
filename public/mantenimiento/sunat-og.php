@@ -28,12 +28,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     // Ejecutable de Python, sin ruta fija, para que use el que esté en PATH
-    $python = "C:\\Users\\SENATI\\AppData\\Local\\Programs\\Python\\Python313\\python.exe";
+    $python = "C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\python.exe";
 
     // Base del proyecto, dos niveles arriba de este archivo
     $base_dir = realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..');
 
-    // Rutas relativas desde base_dir
+    // Rutas relativas 
     $selenium_script = $base_dir . DIRECTORY_SEPARATOR . "bot" . DIRECTORY_SEPARATOR . "selenium_bot.py";
     $procesador_script = $base_dir . DIRECTORY_SEPARATOR . "bot" . DIRECTORY_SEPARATOR . "procesar_archivos.py";
     $json_file = $base_dir . DIRECTORY_SEPARATOR . "bot" . DIRECTORY_SEPARATOR . "data.json";
@@ -46,9 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     echo "JSON file: $json_file\n";
     echo "Log file: $log_file\n";
 
-    // Ejemplo para ejecutar selenium_bot.py
-    // $command = escapeshellcmd("$python $selenium_script");
-    // exec($command, $output, $return_var);
+
 
     // Crear JSON
     $json_data = [
@@ -94,19 +92,21 @@ $empresas = $result->fetch_all(MYSQLI_ASSOC);
 <head>
     <meta charset="UTF-8" />
     <title>Descargar documentos SUNAT</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <style>
-        body { font-family: Arial, sans-serif; margin: 40px; }
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f4f6f9; }
         h2 { color: #333; }
-        form { background: #f9f9f9; padding: 20px; border-radius: 8px; width: 400px; }
-        label { display: block; margin-top: 10px; }
-        input, select { width: 100%; padding: 8px; margin-top: 5px; border-radius: 4px; border: 1px solid #ccc; }
-        button { margin-top: 20px; padding: 10px 15px; border: none; border-radius: 4px; background: #28a745; color: white; cursor: pointer; }
-        button:hover { background: #218838; }
-        pre { background: #eee; padding: 10px; border-radius: 6px; margin-top: 20px; white-space: pre-wrap; word-wrap: break-word; }
+        form { background: #fff; padding: 20px; border-radius: 10px; width: 420px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        label { display: block; margin-top: 15px; font-weight: bold; }
+        input, select { width: 100%; padding: 10px; margin-top: 8px; border-radius: 6px; border: 1px solid #ccc; font-size: 14px; transition: border .2s; }
+        input:focus, select:focus { border-color: #007bff; outline: none; box-shadow: 0 0 5px rgba(0,123,255,.3); }
+        button { margin-top: 20px; padding: 12px; border: none; border-radius: 6px; background: linear-gradient(135deg, #28a745, #218838); color: white; font-weight: bold; cursor: pointer; transition: background .3s; width: 100%; }
+        button:hover { background: linear-gradient(135deg, #218838, #1e7e34); }
+        button:disabled { opacity: .7; cursor: not-allowed; }
     </style>
 </head>
 <body>
-    <h2>Descargar documentos SUNAT</h2>
+    <h2>📂 Descargar documentos SUNAT</h2>
     <form method="POST">
         <label>Empresa:</label>
         <select name="id_empresa" required>
@@ -115,13 +115,24 @@ $empresas = $result->fetch_all(MYSQLI_ASSOC);
             <?php endforeach; ?>
         </select>
         <label>Fecha inicio:</label>
-        <input type="text" name="fecha_inicio" placeholder="dd/mm/yyyy" required />
+        <input type="text" name="fecha_inicio" id="fecha_inicio" placeholder="dd/mm/yyyy" required />
         <label>Fecha fin:</label>
-        <input type="text" name="fecha_fin" placeholder="dd/mm/yyyy" required />
-        <button type="submit" id="btn-descargar">Descargar</button>
+        <input type="text" name="fecha_fin" id="fecha_fin" placeholder="dd/mm/yyyy" required />
+        <button type="submit" id="btn-descargar">⬇ Descargar</button>
     </form>
 
-    <script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+    // Configuración del calendario con opción de escribir manualmente
+    flatpickr("#fecha_inicio", { 
+        dateFormat: "d/m/Y", 
+        allowInput: true 
+    });
+    flatpickr("#fecha_fin", { 
+        dateFormat: "d/m/Y", 
+        allowInput: true 
+    });
+
     document.querySelector("form").addEventListener("submit", function(e) {
         e.preventDefault();
 
@@ -130,7 +141,7 @@ $empresas = $result->fetch_all(MYSQLI_ASSOC);
 
         const btn = document.getElementById("btn-descargar");
         btn.disabled = true;
-        btn.innerText = "Procesando...";
+        btn.innerText = "⏳ Procesando...";
 
         fetch(form.action || window.location.href, {
             method: "POST",
@@ -143,12 +154,15 @@ $empresas = $result->fetch_all(MYSQLI_ASSOC);
             document.body.appendChild(div);
 
             btn.disabled = false;
-            btn.innerText = "Descargar";
+            btn.innerText = "⬇ Descargar";
         })
         .catch(err => {
             alert("❌ Error al enviar la solicitud: " + err);
             btn.disabled = false;
-            btn.innerText = "Descargar";
+            btn.innerText = "⬇ Descargar";
         });
     });
-    </script>
+</script>
+
+</body>
+</html>
