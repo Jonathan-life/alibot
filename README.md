@@ -1,4 +1,4 @@
-# Alibot - Prototipo API REST (PHP)
+# Alibot - (PHP)
 
 Estructura mínima para correr un prototipo local de **Alibot** (asistente contable).
 
