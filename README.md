@@ -4,7 +4,7 @@ Estructura mínima para correr un prototipo local de **Alibot** (asistente conta
 
 ## Requisitos
 - Python 3 (para el bot demo)
-- Servidor local (XAMPP, Laragon, o `php -S`)
+- Servidor local (XAMPP, Laragon, o `Wampserver`)
 
 ## Instalación rápida
 
