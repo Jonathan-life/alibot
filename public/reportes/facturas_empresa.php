@@ -1,97 +1,112 @@
-<?php 
-// 🔹 Conexión a la base de datos
-$conexion = new mysqli("localhost", "root", "", "sistema_contable");
-if ($conexion->connect_error) {
-    die("Error de conexión: " . $conexion->connect_error);
-}
+<?php
+require_once __DIR__ . '/../../Controllers/FacturasController.php';
 
-// 🔹 Verificar si se ha especificado la empresa
-if (!isset($_GET['id_empresa'])) {
-    die("Empresa no especificada.");
-}
 
-$idEmpresa = intval($_GET['id_empresa']);
+$controller = new FacturasController();
+$data = $controller->listarFacturas();
 
-// 🔹 Obtener la empresa y las facturas asociadas
-$sql_empresa = "SELECT * FROM empresas WHERE id_empresa = $idEmpresa";
-$result_empresa = $conexion->query($sql_empresa);
 
-if (!$result_empresa || $result_empresa->num_rows == 0) {
-    die("Empresa no encontrada.");
-}
-
-$empresa = $result_empresa->fetch_assoc();
-
-// 🔹 Traer las facturas asociadas a esta empresa
-$sql_facturas = "SELECT * FROM facturas WHERE id_empresa = $idEmpresa ORDER BY id_factura";
-$result_facturas = $conexion->query($sql_facturas);
+$empresa = $data['empresa'];
+$facturas = $data['facturas'];
+$fecha_inicio = $data['fecha_inicio'];
+$fecha_fin = $data['fecha_fin'];
+$idEmpresa = $data['idEmpresa'];
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Facturas de <?= htmlspecialchars($empresa['razon_social']) ?> (<?= $empresa['ruc'] ?>)</title>
+    <title>Facturas - <?= htmlspecialchars($empresa['razon_social']) ?> (<?= htmlspecialchars($empresa['ruc']) ?>)</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .container { padding-top: 40px; }
+        .table th, .table td { vertical-align: middle; }
+    </style>
 </head>
-<body class="container mt-4">
+<body>
+<div class="container">
+    <h3 class="mb-4">📄 Facturas de <strong><?= htmlspecialchars($empresa['razon_social']) ?></strong> (<?= htmlspecialchars($empresa['ruc']) ?>)</h3>
 
-    <h3>Facturas de <?= htmlspecialchars($empresa['razon_social']) ?> (<?= $empresa['ruc'] ?>)</h3>
+    <form method="GET" class="row g-3 mb-4 align-items-end">
+        <input type="hidden" name="id_empresa" value="<?= $idEmpresa ?>">
+        <div class="col-auto">
+            <label for="fecha_inicio" class="form-label">Fecha inicio</label>
+            <input type="date" id="fecha_inicio" name="fecha_inicio" class="form-control" value="<?= htmlspecialchars($fecha_inicio) ?>">
+        </div>
+        <div class="col-auto">
+            <label for="fecha_fin" class="form-label">Fecha fin</label>
+            <input type="date" id="fecha_fin" name="fecha_fin" class="form-control" value="<?= htmlspecialchars($fecha_fin) ?>">
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Filtrar</button>
+            <a href="?id_empresa=<?= $idEmpresa ?>" class="btn btn-secondary">Limpiar</a>
+        </div>
+    </form>
 
-    <?php if ($result_facturas->num_rows > 0): ?>
-        <table class="table table-bordered table-sm table-hover mt-3">
+    <?php if (!empty($facturas)): ?>
+        <table class="table table-bordered table-hover table-sm">
             <thead class="table-light">
                 <tr>
                     <th>ID</th>
                     <th>Nro CPE</th>
-                    <th>Emisor</th> 
+                    <th>Emisor</th>
                     <th>Importe</th>
                     <th>Moneda</th>
                     <th>Fecha Emisión</th>
-                    <th>Estado</th>
-                    <th>Archivo</th>
+                    <th>Estado SUNAT</th>
+                    <th>Archivo(s)</th>
                 </tr>
             </thead>
             <tbody>
-            <?php while ($factura = $result_facturas->fetch_assoc()): ?>
-                <tr>
-                    <td><?= $factura['id_factura'] ?></td>
-                    <td><?= htmlspecialchars($factura['nro_cpe']) ?></td>
-                    <td>
-                        <!-- Mostrar el nombre y RUC del emisor -->
-                        <?= htmlspecialchars($factura['emisor_nombre']) ?> (<?= htmlspecialchars($factura['emisor_ruc']) ?>)
-                    </td>
-                    <td><?= number_format($factura['importe_total'], 2) ?></td>
-                    <td><?= htmlspecialchars($factura['moneda'] ?? '-') ?></td>
-                    <td><?= htmlspecialchars($factura['fecha_emision']) ?></td>
-                    <td><?= htmlspecialchars($factura['estado']) ?></td>
-                    <td>
-                        <?php
-                        // 🔹 Archivos asociados a esta factura
-                        $id_factura = $factura['id_factura'];
-                        $sql_archivos = "SELECT * FROM archivos_factura WHERE id_factura = $id_factura ORDER BY tipo";
-                        $res_archivos = $conexion->query($sql_archivos);
-
-                        while ($archivo = $res_archivos->fetch_assoc()) {
-                            $etiqueta = strtoupper($archivo['tipo']); // ZIP o PDF
-                            echo "<a href='descargar.php?id={$archivo['id_archivo']}' 
-                                    class='btn btn-sm btn-outline-primary me-1'>
-                                    Descargar $etiqueta
-                                  </a>";
-                        }
-                        ?>
-                    </td>
-                </tr>
-            <?php endwhile; ?>
+                <?php foreach ($facturas as $factura): ?>
+                    <tr>
+                        <td><?= $factura['id_factura'] ?></td>
+                        <td><?= htmlspecialchars($factura['nro_cpe'] ?? '-') ?></td>
+                        <td>
+                            <?= htmlspecialchars($factura['nombre_emisor'] ?? '-') ?><br>
+                            <small class="text-muted"><?= htmlspecialchars($factura['ruc_emisor'] ?? '-') ?></small>
+                        </td>
+                        <td><?= number_format((float)$factura['importe_total'], 2) ?></td>
+                        <td><?= htmlspecialchars($factura['moneda'] ?? '-') ?></td>
+                        <td><?= htmlspecialchars($factura['fecha_emision'] ?? '-') ?></td>
+                        <td>
+                            <?php
+                            $estado = htmlspecialchars($factura['estado_sunat'] ?? 'Desconocido');
+                            $badge_class = match ($estado) {
+                                'ACEPTADO' => 'success',
+                                'RECHAZADO' => 'danger',
+                                'OBSERVADO' => 'warning',
+                                default => 'secondary'
+                            };
+                            ?>
+                            <span class="badge bg-<?= $badge_class ?>"><?= $estado ?></span>
+                        </td>
+                        <td>
+                            <?php
+                            $archivos = $controller->obtenerArchivos($factura['id_factura']);
+                            if (!empty($archivos)) {
+                                foreach ($archivos as $archivo) {
+                                    $etiqueta = strtoupper($archivo['tipo']);
+                                    echo "<a href='descargar.php?id={$archivo['id_archivo']}' class='btn btn-sm btn-outline-primary me-1 mb-1'>Descargar $etiqueta</a>";
+                                }
+                            } else {
+                                echo "<span class='text-muted'>Sin archivos</span>";
+                            }
+                            ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
     <?php else: ?>
-        <div class="alert alert-warning">No hay facturas para esta empresa.</div>
+        <div class="alert alert-warning">⚠ No hay facturas registradas para esta empresa en el rango de fechas seleccionado.</div>
     <?php endif; ?>
 
     <a href="venta_sire.php" class="btn btn-secondary mt-3">← Volver al listado de empresas</a>
-
+</div>
 </body>
 </html>
 
-<?php $conexion->close(); ?>
+<?php $controller->cerrarConexion(); ?>
