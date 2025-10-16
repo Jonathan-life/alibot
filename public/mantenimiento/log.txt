@@ -1,0 +1,102 @@
+2025-10-15 17:33:07,281 [INFO] Filtro fechas: 2024-07-15 - 2024-07-17
+2025-10-15 17:33:07,282 [INFO]  Iniciando procesamiento para empresa ID 1
+2025-10-15 17:33:07,283 [INFO] ZIPs encontrados: 4
+2025-10-15 17:33:07,290 [INFO]  Extraído ZIP: FACTURAE001-6320508522291.zip
+2025-10-15 17:33:07,291 [INFO]  Procesando XML dentro del ZIP: FACTURAE001-6320508522291.XML
+2025-10-15 17:33:07,486 [INFO]  Factura guardada: E001-63 - CORPORACION LAVAL SAC
+2025-10-15 17:33:07,487 [INFO]  Guardando ZIP en BD vinculado a factura ID 39
+2025-10-15 17:33:07,511 [INFO] Guardado en BD (BLOB): FACTURAE001-6320508522291.zip (ZIP)
+2025-10-15 17:33:07,512 [ERROR]  Error extrayendo FACTURAE001-6320508522291.zip: 'charmap' codec can't encode character '\u2192' in position 24: character maps to <undefined>
+2025-10-15 17:33:07,514 [INFO]  Extraído ZIP: FACTURAE001-6420508522291.zip
+2025-10-15 17:33:07,514 [INFO]  Procesando XML dentro del ZIP: FACTURAE001-6420508522291.XML
+2025-10-15 17:33:07,533 [INFO]  Factura guardada: E001-64 - CORPORACION LAVAL SAC
+2025-10-15 17:33:07,533 [INFO]  Guardando ZIP en BD vinculado a factura ID 40
+2025-10-15 17:33:07,552 [INFO] Guardado en BD (BLOB): FACTURAE001-6420508522291.zip (ZIP)
+2025-10-15 17:33:07,552 [ERROR]  Error extrayendo FACTURAE001-6420508522291.zip: 'charmap' codec can't encode character '\u2192' in position 24: character maps to <undefined>
+2025-10-15 17:33:07,557 [INFO]  Extraído ZIP: FACTURAE001-6520508522291.zip
+2025-10-15 17:33:07,557 [INFO]  Procesando XML dentro del ZIP: FACTURAE001-6520508522291.XML
+2025-10-15 17:33:07,575 [INFO]  Factura guardada: E001-65 - CORPORACION LAVAL SAC
+2025-10-15 17:33:07,576 [INFO]  Guardando ZIP en BD vinculado a factura ID 41
+2025-10-15 17:33:07,597 [INFO] Guardado en BD (BLOB): FACTURAE001-6520508522291.zip (ZIP)
+2025-10-15 17:33:07,597 [ERROR]  Error extrayendo FACTURAE001-6520508522291.zip: 'charmap' codec can't encode character '\u2192' in position 24: character maps to <undefined>
+2025-10-15 17:33:07,601 [INFO]  Extraído ZIP: FACTURAE001-75820607062111.zip
+2025-10-15 17:33:07,601 [INFO]  Procesando XML dentro del ZIP: FACTURAE001-75820607062111.XML
+2025-10-15 17:33:07,621 [INFO]  Factura guardada: E001-758 - INSTELC S.A.C.
+2025-10-15 17:33:07,621 [INFO]  Guardando ZIP en BD vinculado a factura ID 42
+2025-10-15 17:33:07,640 [INFO] Guardado en BD (BLOB): FACTURAE001-75820607062111.zip (ZIP)
+2025-10-15 17:33:07,640 [ERROR]  Error extrayendo FACTURAE001-75820607062111.zip: 'charmap' codec can't encode character '\u2192' in position 25: character maps to <undefined>
+2025-10-15 17:33:07,641 [INFO] Archivos PDF encontrados: 8
+2025-10-15 17:33:07,719 [INFO]  Asociando PDF PDF-DOC-E0016320508522291.PDF con factura nro_cpe E00163 (desde FACTURAE001-6320508522291.zip) -> factura ID 39
+2025-10-15 17:33:07,733 [INFO] Guardado en BD (BLOB): PDF-DOC-E0016320508522291.PDF (PDF)
+2025-10-15 17:33:07,741 [INFO]  Asociando PDF PDF-DOC-E0016420508522291.PDF con factura nro_cpe E00164 (desde FACTURAE001-6420508522291.zip) -> factura ID 40
+2025-10-15 17:33:07,754 [INFO] Guardado en BD (BLOB): PDF-DOC-E0016420508522291.PDF (PDF)
+2025-10-15 17:33:07,761 [INFO]  Asociando PDF PDF-DOC-E0016520508522291.PDF con factura nro_cpe E00165 (desde FACTURAE001-6520508522291.zip) -> factura ID 41
+2025-10-15 17:33:07,777 [INFO] Guardado en BD (BLOB): PDF-DOC-E0016520508522291.PDF (PDF)
+2025-10-15 17:33:07,784 [INFO]  Asociando PDF PDF-DOC-E00175820607062111.PDF con factura nro_cpe E001758 (desde FACTURAE001-75820607062111.zip) -> factura ID 42
+2025-10-15 17:33:07,800 [INFO] Guardado en BD (BLOB): PDF-DOC-E00175820607062111.PDF (PDF)
+2025-10-15 17:33:07,806 [INFO]  Asociando PDF PDF-DOC-E0016320508522291.PDF con factura nro_cpe E00163 (desde FACTURAE001-6320508522291.zip) -> factura ID 39
+2025-10-15 17:33:07,818 [ERROR]  Error al guardar archivo PDF-DOC-E0016320508522291.PDF en BD: 'charmap' codec can't encode characters in position 0-1: character maps to <undefined>
+2025-10-15 17:33:07,826 [INFO]  Asociando PDF PDF-DOC-E0016420508522291.PDF con factura nro_cpe E00164 (desde FACTURAE001-6420508522291.zip) -> factura ID 40
+2025-10-15 17:33:07,842 [ERROR]  Error al guardar archivo PDF-DOC-E0016420508522291.PDF en BD: 'charmap' codec can't encode characters in position 0-1: character maps to <undefined>
+2025-10-15 17:33:07,854 [INFO]  Asociando PDF PDF-DOC-E0016520508522291.PDF con factura nro_cpe E00165 (desde FACTURAE001-6520508522291.zip) -> factura ID 41
+2025-10-15 17:33:07,865 [ERROR]  Error al guardar archivo PDF-DOC-E0016520508522291.PDF en BD: 'charmap' codec can't encode characters in position 0-1: character maps to <undefined>
+2025-10-15 17:33:07,872 [INFO]  Asociando PDF PDF-DOC-E00175820607062111.PDF con factura nro_cpe E001758 (desde FACTURAE001-75820607062111.zip) -> factura ID 42
+2025-10-15 17:33:07,881 [ERROR]  Error al guardar archivo PDF-DOC-E00175820607062111.PDF en BD: 'charmap' codec can't encode characters in position 0-1: character maps to <undefined>
+2025-10-15 17:33:07,882 [INFO]  Eliminado de carpeta: FACTURAE001-6320508522291.XML
+2025-10-15 17:33:07,882 [INFO]  Eliminado de carpeta: FACTURAE001-6420508522291.XML
+2025-10-15 17:33:07,883 [INFO]  Eliminado de carpeta: FACTURAE001-6520508522291.XML
+2025-10-15 17:33:07,883 [INFO]  Eliminado de carpeta: FACTURAE001-75820607062111.XML
+2025-10-15 17:33:07,883 [INFO]  Eliminado de carpeta: PDF-DOC-E0016320508522291.pdf
+2025-10-15 17:33:07,884 [INFO]  Eliminado de carpeta: PDF-DOC-E0016420508522291.pdf
+2025-10-15 17:33:07,884 [INFO]  Eliminado de carpeta: PDF-DOC-E0016520508522291.pdf
+2025-10-15 17:33:07,884 [INFO]  Eliminado de carpeta: PDF-DOC-E00175820607062111.pdf
+2025-10-15 17:33:07,885 [ERROR] Error eliminando archivo C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0016320508522291.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0016320508522291.pdf'
+2025-10-15 17:33:07,885 [ERROR] Error eliminando archivo C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0016420508522291.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0016420508522291.pdf'
+2025-10-15 17:33:07,885 [ERROR] Error eliminando archivo C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0016520508522291.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0016520508522291.pdf'
+2025-10-15 17:33:07,885 [ERROR] Error eliminando archivo C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00175820607062111.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00175820607062111.pdf'
+2025-10-15 17:33:07,886 [INFO]  Eliminado de carpeta: FACTURAE001-6320508522291.zip
+2025-10-15 17:33:07,886 [INFO]  Eliminado de carpeta: FACTURAE001-6420508522291.zip
+2025-10-15 17:33:07,887 [INFO]  Eliminado de carpeta: FACTURAE001-6520508522291.zip
+2025-10-15 17:33:07,887 [INFO]  Eliminado de carpeta: FACTURAE001-75820607062111.zip
+2025-10-15 17:33:07,888 [INFO]  Proceso finalizado correctamente
+2025-10-15 18:23:39,862 [ERROR]  Debes proporcionar la ruta al archivo JSON como argumento
+2025-10-15 18:23:40,427 [INFO] Filtro fechas: 2024-06-12 - 2024-07-08
+2025-10-15 18:23:40,427 [INFO]  Iniciando procesamiento para empresa ID 1
+2025-10-15 18:23:40,428 [INFO] ZIPs encontrados: 0
+2025-10-15 18:23:40,428 [INFO] Archivos PDF encontrados: 0
+2025-10-15 18:23:40,429 [INFO]  No hay archivos PDF para procesar
+2025-10-15 18:23:40,429 [INFO]  Proceso finalizado correctamente
+2025-10-15 18:26:41,794 [INFO] Filtro fechas: 2024-06-12 - 2024-07-08
+2025-10-15 18:26:41,794 [INFO]  Iniciando procesamiento para empresa ID 1
+2025-10-15 18:26:41,795 [INFO] ZIPs encontrados: 0
+2025-10-15 18:26:41,796 [INFO] Archivos PDF encontrados: 0
+2025-10-15 18:26:41,796 [INFO]  No hay archivos PDF para procesar
+2025-10-15 18:26:41,796 [INFO]  Proceso finalizado correctamente
+2025-10-15 18:26:42,493 [INFO] Filtro fechas: 2024-06-12 - 2024-07-08
+2025-10-15 18:26:42,493 [INFO]  Iniciando procesamiento para empresa ID 1
+2025-10-15 18:26:42,494 [INFO] ZIPs encontrados: 0
+2025-10-15 18:26:42,494 [INFO] Archivos PDF encontrados: 0
+2025-10-15 18:26:42,495 [INFO]  No hay archivos PDF para procesar
+2025-10-15 18:26:42,495 [INFO]  Proceso finalizado correctamente
+2025-10-15 18:47:22,496 [INFO] Filtro fechas: 2024-07-08 - 2024-08-02
+2025-10-15 18:47:22,496 [INFO]  Iniciando procesamiento para empresa ID 1
+2025-10-15 18:47:22,497 [INFO] ZIPs encontrados: 2
+2025-10-15 18:47:22,502 [INFO]  Extraído ZIP: FACTURAE001-4120494384273.zip
+2025-10-15 18:47:22,502 [INFO]  Procesando XML dentro del ZIP: FACTURAE001-4120494384273.XML
+2025-10-15 18:47:22,694 [INFO]  Factura guardada: E001-41 - MINERA SANTA ENMA S.A.C.
+2025-10-15 18:47:22,694 [INFO]  Guardando ZIP en BD vinculado a factura ID 43
+2025-10-15 18:47:22,720 [INFO] Guardado en BD (BLOB): FACTURAE001-4120494384273.zip (ZIP)
+2025-10-15 18:47:22,720 [ERROR]  Error extrayendo FACTURAE001-4120494384273.zip: 'charmap' codec can't encode character '\u2192' in position 24: character maps to <undefined>
+2025-10-15 18:47:22,723 [INFO]  Extraído ZIP: FACTURAE001-4220494384273.zip
+2025-10-15 18:47:22,723 [INFO]  Procesando XML dentro del ZIP: FACTURAE001-4220494384273.XML
+2025-10-15 18:47:22,742 [INFO]  Factura guardada: E001-42 - MINERA SANTA ENMA S.A.C.
+2025-10-15 18:47:22,743 [INFO]  Guardando ZIP en BD vinculado a factura ID 44
+2025-10-15 18:47:22,763 [INFO] Guardado en BD (BLOB): FACTURAE001-4220494384273.zip (ZIP)
+2025-10-15 18:47:22,763 [ERROR]  Error extrayendo FACTURAE001-4220494384273.zip: 'charmap' codec can't encode character '\u2192' in position 24: character maps to <undefined>
+2025-10-15 18:47:22,764 [INFO] Archivos PDF encontrados: 0
+2025-10-15 18:47:22,764 [INFO]  No hay archivos PDF para procesar
+2025-10-15 18:47:22,764 [INFO]  Eliminado de carpeta: FACTURAE001-4120494384273.XML
+2025-10-15 18:47:22,765 [INFO]  Eliminado de carpeta: FACTURAE001-4220494384273.XML
+2025-10-15 18:47:22,765 [INFO]  Eliminado de carpeta: FACTURAE001-4120494384273.zip
+2025-10-15 18:47:22,765 [INFO]  Eliminado de carpeta: FACTURAE001-4220494384273.zip
+2025-10-15 18:47:22,765 [INFO]  Proceso finalizado correctamente

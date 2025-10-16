@@ -1,10 +1,8 @@
 <?php
 require_once __DIR__ . '/../../Controllers/FacturasController.php';
 
-
 $controller = new FacturasController();
 $data = $controller->listarFacturas();
-
 
 $empresa = $data['empresa'];
 $facturas = $data['facturas'];
@@ -56,7 +54,7 @@ $idEmpresa = $data['idEmpresa'];
                     <th>Moneda</th>
                     <th>Fecha Emisión</th>
                     <th>Estado SUNAT</th>
-                    <th>Archivo(s)</th>
+                    <th>Archivo XML</th>
                 </tr>
             </thead>
             <tbody>
@@ -90,8 +88,8 @@ $idEmpresa = $data['idEmpresa'];
 
                             if (!empty($archivos)) {
                                 foreach ($archivos as $archivo) {
-                                    if (strtoupper($archivo['tipo']) === 'PDF') {
-                                        echo "<a href='descargar.php?id={$archivo['id_archivo']}' class='btn btn-sm btn-outline-success'>📥 Descargar PDF</a>";
+                                    if (strtoupper($archivo['tipo']) === 'ZIP') {
+                                        echo "<a href='descargar.php?id={$archivo['id_archivo']}' class='btn btn-sm btn-outline-success'>📥 Descargar XML</a>";
                                         $xml_encontrado = true;
                                         break;
                                     }
@@ -99,7 +97,7 @@ $idEmpresa = $data['idEmpresa'];
                             }
 
                             if (!$xml_encontrado) {
-                                echo "<span class='text-muted'>Sin PDF</span>";
+                                echo "<span class='text-muted'>Sin XML</span>";
                             }
                             ?>
                         </td>
