@@ -1,0 +1,53 @@
+=== selenium_bot.py ===
+Traceback (most recent call last):
+  File "C:\wamp64\www\alibot\bot\selenium_bot.py", line 225, in <module>
+    descargar_documentos(empresa, fecha_inicio, fecha_fin)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\wamp64\www\alibot\bot\selenium_bot.py", line 157, in descargar_documentos
+    wait.until(EC.presence_of_element_located((By.ID, "listadoFacturas")))
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python313\Lib\site-packages\selenium\webdriver\support\wait.py", line 129, in until
+    value = method(self._driver)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python313\Lib\site-packages\selenium\webdriver\support\expected_conditions.py", line 104, in _predicate
+    return driver.find_element(*locator)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python313\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 926, in find_element
+    return self.execute(Command.FIND_ELEMENT, {"using": by, "value": value})["value"]
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python313\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 458, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python313\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 231, in check_response
+    raise exception_class(message, screen, stacktrace, alert_text)  # type: ignore[call-arg]  # mypy is not smart enough here
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+selenium.common.exceptions.UnexpectedAlertPresentException: Alert Text: El rango de fechas no debe ser mayor a 31 días calendarios
+Message: unexpected alert open: {Alert text : El rango de fechas no debe ser mayor a 31 días calendarios}
+  (Session info: chrome=141.0.7390.107)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6401be8e5+80021]
+	GetHandleVerifier [0x0x7ff6401be940+80112]
+	(No symbol) [0x0x7ff63ff4060f]
+	(No symbol) [0x0x7ff63ffea131]
+	(No symbol) [0x0x7ff63ffc1003]
+	(No symbol) [0x0x7ff63ff895d1]
+	(No symbol) [0x0x7ff63ff8a3f3]
+	GetHandleVerifier [0x0x7ff64047dc7d+2960429]
+	GetHandleVerifier [0x0x7ff640477f3a+2936554]
+	GetHandleVerifier [0x0x7ff640498977+3070247]
+	GetHandleVerifier [0x0x7ff6401d83ce+185214]
+	GetHandleVerifier [0x0x7ff6401dfe1f+216527]
+	GetHandleVerifier [0x0x7ff6401c7b24+117460]
+	GetHandleVerifier [0x0x7ff6401c7cdf+117903]
+	GetHandleVerifier [0x0x7ff6401adbb8+11112]
+	BaseThreadInitThunk [0x0x7ffce0167374+20]
+	RtlUserThreadStart [0x0x7ffce151cc91+33]
+
+
+=== procesar_archivos.py ===
+Filtro fechas: 2024-06-15 - 2025-06-18
+ Iniciando procesamiento para empresa ID 1
+ZIPs encontrados: 0
+Archivos PDF encontrados: 0
+ No hay archivos PDF para procesar
+ Proceso finalizado correctamente
+

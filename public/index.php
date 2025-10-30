@@ -82,7 +82,7 @@
       </li>
 
       <li><a class="dropdown-item" href="#">Detracciones</a></li>
-      <li><a class="dropdown-item" href="#">Recibos por honorario</a></li>
+      <li><a class="dropdown-item" href="reportes/admin_contable.php">Cuadro de calculo</a></li>
     </ul>
   </li>
 

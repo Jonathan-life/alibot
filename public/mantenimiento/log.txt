@@ -100,3 +100,32 @@
 2025-10-15 18:47:22,765 [INFO]  Eliminado de carpeta: FACTURAE001-4120494384273.zip
 2025-10-15 18:47:22,765 [INFO]  Eliminado de carpeta: FACTURAE001-4220494384273.zip
 2025-10-15 18:47:22,765 [INFO]  Proceso finalizado correctamente
+2025-10-22 16:14:27,232 [INFO] Filtro fechas: 2024-05-13 - 2024-05-25
+2025-10-22 16:14:27,233 [INFO]  Iniciando procesamiento para empresa ID 1
+2025-10-22 16:14:27,234 [INFO] ZIPs encontrados: 0
+2025-10-22 16:14:27,236 [INFO] Archivos PDF encontrados: 0
+2025-10-22 16:14:27,236 [INFO]  No hay archivos PDF para procesar
+2025-10-22 16:14:27,236 [INFO]  Proceso finalizado correctamente
+2025-10-22 16:16:09,698 [INFO] Filtro fechas: 2024-05-13 - 2024-05-25
+2025-10-22 16:16:09,700 [INFO]  Iniciando procesamiento para empresa ID 1
+2025-10-22 16:16:09,701 [INFO] ZIPs encontrados: 0
+2025-10-22 16:16:09,702 [INFO] Archivos PDF encontrados: 0
+2025-10-22 16:16:09,702 [INFO]  No hay archivos PDF para procesar
+2025-10-22 16:16:09,702 [INFO]  Proceso finalizado correctamente
+2025-10-22 16:33:16,948 [INFO] Filtro fechas: 2024-06-12 - 2024-06-15
+2025-10-22 16:33:16,949 [INFO]  Iniciando procesamiento para empresa ID 1
+2025-10-22 16:33:16,949 [INFO] ZIPs encontrados: 1
+2025-10-22 16:33:16,954 [INFO]  Extraído ZIP: FACTURAE001-2010619429040.zip
+2025-10-22 16:33:16,954 [INFO]  Procesando XML dentro del ZIP: FACTURAE001-2010619429040.XML
+2025-10-22 16:33:16,956 [INFO] Factura E001-20 fecha 2024-06-25 fuera del rango 2024-06-12 - 2024-06-15
+2025-10-22 16:33:16,956 [ERROR]  No se pudo procesar factura para XML FACTURAE001-2010619429040.XML
+2025-10-22 16:33:16,957 [INFO] Archivos PDF encontrados: 0
+2025-10-22 16:33:16,957 [INFO]  No hay archivos PDF para procesar
+2025-10-22 16:33:16,958 [INFO]  Eliminado de carpeta: FACTURAE001-2010619429040.zip
+2025-10-22 16:33:16,958 [INFO]  Proceso finalizado correctamente
+2025-10-24 18:20:15,264 [INFO] Filtro fechas: 2024-06-15 - 2025-06-18
+2025-10-24 18:20:15,265 [INFO]  Iniciando procesamiento para empresa ID 1
+2025-10-24 18:20:15,266 [INFO] ZIPs encontrados: 0
+2025-10-24 18:20:15,267 [INFO] Archivos PDF encontrados: 0
+2025-10-24 18:20:15,267 [INFO]  No hay archivos PDF para procesar
+2025-10-24 18:20:15,267 [INFO]  Proceso finalizado correctamente

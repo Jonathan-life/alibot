@@ -1,16 +1,15 @@
+# Activar motor de reescritura
 RewriteEngine On
-RewriteBase /alibot-api/public/
-# Activar mod_rewrite
-RewriteEngine On
-RewriteBase /
+RewriteBase /alibot/public/
 
-# Si el archivo o directorio no existe, reescribir
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
+# Si el archivo o directorio existe, no hacer nada
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
 
-# Reescribe "pagina" → "pagina.php"
+# Reescribir URLs limpias → archivo PHP correspondiente
+# Ejemplo: /aaa → aaa.php
 RewriteRule ^([^/]+)/?$ $1.php [L]
 
-# Opcional: redirige URL con .php a la versión limpia
-RewriteCond %{THE_REQUEST} \s/([^.]+)\.php[\s?]
-RewriteRule ^ %1 [R=301,L]
+# (Opcional) Forzar UTF-8 para PHP y HTML
+AddDefaultCharset UTF-8
