@@ -30,7 +30,7 @@
         <div class="card-body">
           <h5 class="card-title text-success">➕ Crear Nueva Deuda</h5>
           <p class="card-text">Registra una nueva deuda tributaria con todos sus detalles.</p>
-          <a href="crear_deuda.php" class="btn btn-success">Ir a Crear</a>
+          <a href="buscar_ruc.php" class="btn btn-success">Ir a Crear</a>
         </div>
       </div>
     </div>
@@ -39,9 +39,9 @@
     <div class="col-md-4">
       <div class="card text-center border-primary">
         <div class="card-body">
-          <h5 class="card-title text-primary">🔍 Buscar o Editar Deuda</h5>
+          <h5 class="card-title text-primary">🔍 Buscar +</h5>
           <p class="card-text">Busca deudas por RUC, periodo o formulario, y edita sus datos.</p>
-          <a href="buscar_ruc.php" class="btn btn-primary">Ir a Buscar</a>
+          <a href="reportes.php" class="btn btn-primary">Ir a Buscar</a>
         </div>
       </div>
     </div>

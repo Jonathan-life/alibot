@@ -49,7 +49,6 @@
               <li><a class="dropdown-item" href="permisos/empresa.php">Empresas</a></li>
             </ul>
           </li>
-          <li><a class="dropdown-item" href="mantenimiento/notificacion.php">Notificación</a></li>
         </ul>
       </li>
 
@@ -61,7 +60,7 @@
   <a class="dropdown-item" href="#">SUNAT</a>
   <ul class="dropdown-menu">
     <li><a class="dropdown-item" href="#">Buzón Electrónico</a></li>
-    <li><a class="dropdown-item" href="#">Casilla Electrónica</a></li>
+    <li><a class="dropdown-item" href="#">Libros Electrónicos</a></li>
 
     <!-- Submenú Compras -->
     <li class="dropdown-submenu">

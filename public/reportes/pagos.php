@@ -146,7 +146,7 @@ if ($ruc) {
             <button id="btnAbrirModal" class="btn btn-success">💾 Registrar Pago</button>
         </div>
 
-        <a href="menu_deudas.php" class="btn btn-secondary mt-3">← Volver</a>
+        <a href="admin_contable.php" class="btn btn-secondary mt-3">← Volver</a>
 
         <!-- Modal para Registrar Pago -->
         <div class="modal fade" id="modalPago" tabindex="-1" aria-modal="true" role="dialog">
