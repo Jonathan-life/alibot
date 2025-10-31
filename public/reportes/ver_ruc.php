@@ -112,7 +112,8 @@ echo "<div style='background:#eef;padding:10px;margin-bottom:10px;border:1px sol
           <td><input class="form-control form-control-sm" type="number" step="0.01" name="importe_tributaria" value="<?= htmlspecialchars($fila['importe_tributaria'] ?? 0) ?>"></td>
           <td><input class="form-control form-control-sm" type="number" step="0.01" name="interes_capitalizado" value="<?= htmlspecialchars($fila['interes_capitalizado'] ?? 0) ?>"></td>
           <td><input class="form-control form-control-sm" type="number" step="1" name="interes_moratorio" value="<?= htmlspecialchars($fila['interes_moratorio'] ?? 0) ?>" readonly></td>
-          <td><input class="form-control form-control-sm" type="number" step="0.01" name="pagos" value="<?= htmlspecialchars($fila['pagos'] ?? 0) ?>"></td>
+          <td><input class="form-control form-control-sm" type="number" step="0.01" name="pagos" value="<?= htmlspecialchars($fila['pagos'] ?? 0) ?>" readonly></td>
+
           <td><input class="form-control form-control-sm" type="number" step="1" name="saldo_total" value="<?= htmlspecialchars($fila['saldo_total'] ?? 0) ?>" readonly></td>
           <td><button type="button" class="btn btn-success btn-sm guardar">💾</button></td>
       </tr>
@@ -155,8 +156,9 @@ function calcularFila(fila) {
   let interesCalculado = (importe + capitalizado) * tasaDiaria * dias;
   interesCalculado = Math.round(interesCalculado); // 🔹 redondeo sin decimales
 
-  let saldoTotal = (importe + capitalizado + interesCalculado) - pagos;
-  saldoTotal = Math.round(saldoTotal); // 🔹 redondeo sin decimales
+  let saldoTotal = (importe + capitalizado + interesCalculado); // 🔹 sin restar pagos
+  saldoTotal = Math.round(saldoTotal);
+
 
   fila.find('input[name="interes_moratorio"]').val(interesCalculado);
   fila.find('input[name="saldo_total"]').val(saldoTotal);
@@ -186,7 +188,7 @@ $('#agregarFila').click(function () {
       <td><input class="form-control form-control-sm" type="number" step="0.01" name="importe_tributaria" value="0"></td>
       <td><input class="form-control form-control-sm" type="number" step="0.01" name="interes_capitalizado" value="0"></td>
       <td><input class="form-control form-control-sm" type="number" name="interes_moratorio" value="0" readonly></td>
-      <td><input class="form-control form-control-sm" type="number" step="0.01" name="pagos" value="0"></td>
+      <td><input class="form-control form-control-sm" type="number" step="0.01" name="pagos" value="0" readonly></td>
       <td><input class="form-control form-control-sm" type="number" name="saldo_total" value="0" readonly></td>
       <td><button type="button" class="btn btn-success btn-sm guardar">💾</button></td>
     </tr>`;
@@ -224,10 +226,10 @@ $(document).on('click', '.guardar', function () {
   $.ajax({
     url: 'actualizar_deuda_ajax.php',
     type: 'POST',
-    data: JSON.stringify(data),       // ✅ Enviar JSON puro
-    contentType: 'application/json',  // ✅ Indicar que es JSON
-    processData: false,               // ✅ No procesar
-    dataType: 'json',                 // ✅ Esperar JSON de respuesta
+    data: JSON.stringify(data),       
+    contentType: 'application/json',  
+    processData: false,               
+    dataType: 'json',                 
     success: function (res) {
       console.log("📥 Respuesta servidor:", res);
       if (res.status === 'ok') {

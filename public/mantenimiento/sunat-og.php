@@ -79,7 +79,6 @@ $empresas = $result->fetch_all(MYSQLI_ASSOC);
         <select name="tipo_descarga" class="form-select" required>
           <option value="recibidas">Recibidas (Compras)</option>
           <option value="emitidas">Emitidas (Ventas)</option>
-          <option value="ambas">Ambas</option>
         </select>
       </div>
 

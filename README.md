@@ -4,10 +4,14 @@ Estructura mínima para correr un prototipo local de **Alibot** (asistente conta
 
 ## Requisitos
 - Python 3 (para el bot demo)
-- Servidor local (XAMPP, Laragon, o `Wampserver`)
+- Servidor local ( `Wampserver`)
 
 ## Instalación rápida
 
- Abre el navegador en `http://localhost/alibot/public/index.php` (o ajusta según tu servidor).
+ Abre el navegador en `http://localhost/alibot/public/` (o ajusta según tu servidor).
 
+
+## Instalar dependencias
+pip install mysql-connector-python   selenium
+pip install pymupdf
 
