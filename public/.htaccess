@@ -1,15 +1,23 @@
-# Activar motor de reescritura
+# --------------------------------------
+# Habilitar motor de reescritura
+# --------------------------------------
 RewriteEngine On
 RewriteBase /alibot/public/
 
-# Si el archivo o directorio existe, no hacer nada
+# --------------------------------------
+# No reescribir si es un archivo o directorio real
+# --------------------------------------
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
-# Reescribir URLs limpias → archivo PHP correspondiente
-# Ejemplo: /aaa → aaa.php
-RewriteRule ^([^/]+)/?$ $1.php [L]
+# --------------------------------------
+# Reescribir URLs limpias sin extensión
+# Ejemplo: /empresa → empresa.php
+# --------------------------------------
+RewriteRule ^([a-zA-Z0-9_-]+)/?$ $1.php [L,QSA]
 
-# (Opcional) Forzar UTF-8 para PHP y HTML
+# --------------------------------------
+# Forzar UTF-8 para contenido HTML y PHP
+# --------------------------------------
 AddDefaultCharset UTF-8

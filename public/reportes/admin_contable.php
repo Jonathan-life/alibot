@@ -46,16 +46,6 @@
       </div>
     </div>
 
-    <!-- Registrar pago -->
-    <div class="col-md-4">
-      <div class="card text-center border-warning">
-        <div class="card-body">
-          <h5 class="card-title text-warning">💰 Registrar Pagos</h5>
-          <p class="card-text">Amortiza una deuda existente agregando uno o más pagos.</p>
-          <a href="pagos.php" class="btn btn-warning">Ir a Pagos</a>
-        </div>
-      </div>
-    </div>
   </div>
 
   <footer class="text-center mt-5 text-muted">

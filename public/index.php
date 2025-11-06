@@ -60,7 +60,7 @@
   <a class="dropdown-item" href="#">SUNAT</a>
   <ul class="dropdown-menu">
     <li><a class="dropdown-item" href="#">Buzón Electrónico</a></li>
-    <li><a class="dropdown-item" href="#">Libros Electrónicos</a></li>
+    <li><a class="dropdown-item" href="reportes/libro_contable.php">Libros Electrónicos</a></li>
 
     <!-- Submenú Compras -->
     <li class="dropdown-submenu">
@@ -80,18 +80,11 @@
         </ul>
       </li>
 
-      <li><a class="dropdown-item" href="#">Detracciones</a></li>
       <li><a class="dropdown-item" href="reportes/admin_contable.php">Cuadro de calculo</a></li>
     </ul>
   </li>
 
-    <li class="dropdown-submenu">
-      <a class="dropdown-item" href="#">SUNAFIL</a>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#">Inspecciones</a></li>
-        <li><a class="dropdown-item" href="#">Multas</a></li>
-      </ul>
-    </li>
+
   </ul>
 </li>
 
