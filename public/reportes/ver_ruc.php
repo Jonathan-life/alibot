@@ -81,7 +81,7 @@ if (!$deudas) $deudas = [];
       </tr>
       </thead>
 
-      <tbody>
+  <tbody>
       <?php $n = 1; foreach ($deudas as $fila): ?>
       <tr data-id="<?= htmlspecialchars($fila['id']) ?>">
         <td><input type="checkbox" class="chkDeuda"></td>
@@ -96,24 +96,30 @@ if (!$deudas) $deudas = [];
         <td><input class="form-control form-control-sm" type="date" name="fecha_pagos" value="<?= htmlspecialchars($fila['fecha_pagos'] ?? '') ?>"></td>
         <td><input class="form-control form-control-sm" type="date" name="fecha_calculos" value="<?= htmlspecialchars($fila['fecha_calculos'] ?? date('Y-m-d')) ?>"></td>
         <td><input class="form-control form-control-sm" name="etapa_basica" value="<?= htmlspecialchars($fila['etapa_basica'] ?? '') ?>"></td>
-        <td><input class="form-control form-control-sm" type="number" name="importe_tributaria" value="<?= htmlspecialchars($fila['importe_tributaria'] ?? 0) ?>"></td>
-        <td><input class="form-control form-control-sm" type="number" name="interes_capitalizado" value="<?= htmlspecialchars($fila['interes_capitalizado'] ?? 0) ?>"></td>
-        <td><input class="form-control form-control-sm" type="number" name="interes_moratorio" value="<?= htmlspecialchars($fila['interes_moratorio'] ?? 0) ?>" readonly></td>
-        <td><input class="form-control form-control-sm" type="number" name="pagos" value="<?= htmlspecialchars($fila['pagos'] ?? 0) ?>" readonly></td>
-        <td><input class="form-control form-control-sm saldo" type="number" name="saldo_total" value="<?= htmlspecialchars($fila['saldo_total'] ?? 0) ?>" readonly></td>
+        <td><input class="form-control form-control-sm" type="number" name="importe_tributaria" value="<?= number_format($fila['importe_tributaria'] ?? 0, 2, '.', '') ?>"></td>
+        <td><input class="form-control form-control-sm" type="number" name="interes_capitalizado" value="<?= number_format($fila['interes_capitalizado'] ?? 0, 2, '.', '') ?>"></td>
+        <td><input class="form-control form-control-sm" type="number" name="interes_moratorio" value="<?= number_format($fila['interes_moratorio'] ?? 0, 2, '.', '') ?>" readonly></td>
+        <td><input class="form-control form-control-sm" type="number" name="pagos" value="<?= number_format($fila['pagos'] ?? 0, 2, '.', '') ?>" readonly></td>
+        <td><input class="form-control form-control-sm saldo" type="number" name="saldo_total" value="<?= number_format($fila['saldo_total'] ?? 0, 2, '.', '') ?>" readonly></td>
         <td><button type="button" class="btn btn-success btn-sm guardar">💾</button></td>
       </tr>
       <?php endforeach; ?>
-      </tbody>
-    </table>
-  </div>
+    </tbody>
 
-  <div class="d-flex justify-content-between mt-3">
-    <a href="admin_contable.php" class="btn btn-secondary">← Volver</a>
-    <button class="btn btn-success" id="btnPago">💰 Registrar Pago</button>
-  </div>
+    <!-- TOTAL GENERAL -->
+    <tfoot class="table-secondary">
+      <tr>
+        <th colspan="16" class="text-end">TOTAL GENERAL:</th>
+        <th colspan="2" id="totalGeneral">S/ 0.00</th>
+      </tr>
+    </tfoot>
+  </table>
 </div>
 
+<div class="d-flex justify-content-between mt-3">
+  <a href="admin_contable.php" class="btn btn-secondary">← Volver</a>
+  <button class="btn btn-success" id="btnPago">💰 Registrar Pago</button>
+</div>
 <!-- MODAL DE PAGOS -->
 <div class="modal fade" id="modalPago" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -154,24 +160,21 @@ if (!$deudas) $deudas = [];
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-// Variables globales desde PHP
 const ruc = "<?= $empresa['ruc'] ?>";
 const id_empresa = "<?= $empresa['id_empresa'] ?>";
 
-$(document).ready(function () {
+$(function () {
 
-  // === FUNCIÓN: Obtener tasa diaria según rango histórico ===
+  // === FUNCIÓN: Obtener tasa diaria según rango histórico (SUNAT) ===
   function obtenerTasaDiaria(fechaInicio) {
     const f = new Date(fechaInicio);
-    if (isNaN(f)) return  0.0003374; // valor por defecto
-
-    // Tasa histórica según D.S. SUNAT
-    if (f < new Date('2020-04-01')) return 0.012 / 30; // 1.20% mensual
-    if (f < new Date('2021-04-01')) return 0.010 / 30; // 1.00% mensual
-    return 0.009 / 30; // 0.90% mensual (vigente desde abril 2021)
+    if (isNaN(f)) return 0.0003374;
+    if (f < new Date('2020-04-01')) return 0.0003374;
+    if (f < new Date('2021-04-01')) return 0.010 / 30;
+    return 0.009 / 30;
   }
 
-  // === FUNCIÓN: Calcular días ===
+  // === FUNCIÓN: Calcular días exactos ===
   function calcularDias(fechaInicio, fechaFin) {
     if (!fechaInicio) return 0;
     const inicio = new Date(fechaInicio);
@@ -181,37 +184,70 @@ $(document).ready(function () {
     return Math.max(0, Math.round((fin - inicio) / (1000 * 60 * 60 * 24)) + 1);
   }
 
-  // === FUNCIÓN PRINCIPAL: Calcular fila ===
-  function calcularFila(fila) {
-    let importe = parseFloat(fila.find('[name="importe_tributaria"]').val()) || 0;
-    let capitalizado = parseFloat(fila.find('[name="interes_capitalizado"]').val()) || 0;
-    let pagos = parseFloat(fila.find('[name="pagos"]').val()) || 0;
+  // === FUNCIÓN: Redondear a número entero ===
+  const rd = v => {
+    const num = parseFloat(v);
+    if (isNaN(num)) return 0;
+    return Math.round(num);
+  };
 
-    let fechaInicio = fila.find('[name="fecha_emision"]').val();
-    let fechaFin = fila.find('[name="fecha_calculos"]').val() || new Date().toISOString().split('T')[0];
-    let dias = calcularDias(fechaInicio, fechaFin);
+  // === FUNCIÓN PRINCIPAL: Calcular una fila ===
+  function calcularFila(fila, recalcularPorPago = false) {
+    let importe = rd(fila.find('[name="importe_tributaria"]').val());
+    let capitalizado = rd(fila.find('[name="interes_capitalizado"]').val());
+    let pagos = rd(fila.find('[name="pagos"]').val());
+    let interes = rd(fila.find('[name="interes_moratorio"]').val());
 
-    // Tasa diaria según rango
-    let tasa = obtenerTasaDiaria(fechaInicio);
+    if (!recalcularPorPago) {
+      let fechaInicio = fila.find('[name="fecha_emision"]').val();
+      let fechaFin = fila.find('[name="fecha_calculos"]').val() || new Date().toISOString().split('T')[0];
+      let dias = calcularDias(fechaInicio, fechaFin);
+      let tasa = obtenerTasaDiaria(fechaInicio);
+      interes = rd((importe + capitalizado) * tasa * dias);
+    }
 
-    // Cálculo SUNAT: interés = (importe + capitalizado) × tasa × días
-    let interes = (importe + capitalizado) * tasa * dias;
+    let saldo = rd(importe + capitalizado + interes - pagos);
 
-    // Redondeo oficial (dos decimales)
-    interes = parseFloat(interes.toFixed(2));
-
-    let saldo = (importe + capitalizado + interes - pagos).toFixed(2);
-
+    fila.find('[name="importe_tributaria"]').val(importe);
+    fila.find('[name="interes_capitalizado"]').val(capitalizado);
     fila.find('[name="interes_moratorio"]').val(interes);
+    fila.find('[name="pagos"]').val(pagos);
     fila.find('[name="saldo_total"]').val(saldo);
 
     return { interes, saldo };
   }
 
-  // === EVENTO: recalcular al modificar datos ===
-  $(document).on('input change', 'input:not([readonly])', function () {
-    calcularFila($(this).closest('tr'));
+  // === FUNCIÓN: Calcular total general ===
+  function calcularTotalGeneral() {
+    let total = 0;
+    $('#tablaDeudas tbody tr').each(function () {
+      const saldo = rd($(this).find('[name="saldo_total"]').val());
+      total += saldo;
+    });
+    $('#totalGeneral').text('S/ ' + rd(total));
+  }
+
+  // === EVENTOS: Recalcular al editar ===
+  $(document).on('input change', 'input:not([readonly]):not([name="pagos"])', function () {
+    const fila = $(this).closest('tr');
+    calcularFila(fila, false);
+    calcularTotalGeneral();
   });
+
+  $(document).on('input change', '[name="pagos"]', function () {
+    const fila = $(this).closest('tr');
+    calcularFila(fila, true);
+    calcularTotalGeneral();
+  });
+
+  // === CALCULAR TODO AL CARGAR LA TABLA ===
+  setTimeout(() => {
+    $('#tablaDeudas tbody tr').each(function () {
+      calcularFila($(this), false);
+    });
+    calcularTotalGeneral();
+  }, 200);
+
 
   // === AGREGAR NUEVA FILA ===
   $('#agregarFila').click(function () {
@@ -243,7 +279,7 @@ $(document).ready(function () {
   $(document).on('click', '.guardar', function () {
     const fila = $(this).closest('tr');
     const id = fila.data('id') || null;
-    const res = calcularFila(fila);
+    const res = calcularFila(fila, false);
 
     const data = {
       id,
@@ -287,7 +323,7 @@ $(document).ready(function () {
     });
   });
 
-  // === PAGOS === (sin cambios, correcto)
+  // === PAGOS (mostrar modal) ===
   $('#btnPago').click(function () {
     const seleccionadas = $('.chkDeuda:checked');
     if (seleccionadas.length === 0)
@@ -336,6 +372,8 @@ $(document).ready(function () {
     deudas.forEach(d => {
       const nuevoPago = d.pagos_anteriores + d.pago;
       const nuevoSaldo = Math.max(0, d.saldo - d.pago);
+
+      // Actualizar solo pagos y saldo en la fila (NO recalcular interés)
       d.fila.find('[name="pagos"]').val(nuevoPago.toFixed(2));
       d.fila.find('[name="saldo_total"]').val(nuevoSaldo.toFixed(2));
       d.fila.find('[name="fecha_pagos"]').val(fecha);
@@ -378,6 +416,7 @@ $(document).ready(function () {
 
 });
 </script>
+
 
 
 
