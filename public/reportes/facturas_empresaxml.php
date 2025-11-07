@@ -9,13 +9,18 @@ $facturas = $data['facturas'];
 $fecha_inicio = $data['fecha_inicio'];
 $fecha_fin = $data['fecha_fin'];
 $idEmpresa = $data['idEmpresa'];
+
+// ✅ FILTRAR SOLO FACTURAS DE COMPRA
+$facturas = array_filter($facturas, function ($factura) {
+    return isset($factura['origen']) && strtoupper($factura['origen']) === 'COMPRA';
+});
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Facturas - <?= htmlspecialchars($empresa['razon_social']) ?> (<?= htmlspecialchars($empresa['ruc']) ?>)</title>
+    <title>Facturas de Compras (XML) - <?= htmlspecialchars($empresa['razon_social']) ?> (<?= htmlspecialchars($empresa['ruc']) ?>)</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body { background-color: #f8f9fa; }
@@ -25,7 +30,7 @@ $idEmpresa = $data['idEmpresa'];
 </head>
 <body>
 <div class="container">
-    <h3 class="mb-4">📄 Facturas de <strong><?= htmlspecialchars($empresa['razon_social']) ?></strong> (<?= htmlspecialchars($empresa['ruc']) ?>)</h3>
+    <h3 class="mb-4">🧾 Facturas de <strong>COMPRAS</strong> (XML) de <?= htmlspecialchars($empresa['razon_social']) ?> (<?= htmlspecialchars($empresa['ruc']) ?>)</h3>
 
     <form method="GET" class="row g-3 mb-4 align-items-end">
         <input type="hidden" name="id_empresa" value="<?= $idEmpresa ?>">
@@ -106,7 +111,7 @@ $idEmpresa = $data['idEmpresa'];
             </tbody>
         </table>
     <?php else: ?>
-        <div class="alert alert-warning">⚠ No hay facturas registradas para esta empresa en el rango de fechas seleccionado.</div>
+        <div class="alert alert-warning">⚠ No hay facturas de <strong>COMPRA</strong> registradas para esta empresa en el rango de fechas seleccionado.</div>
     <?php endif; ?>
 
     <a href="venta_sire.php" class="btn btn-secondary mt-3">← Volver al listado de empresas</a>
@@ -115,3 +120,4 @@ $idEmpresa = $data['idEmpresa'];
 </html>
 
 <?php $controller->cerrarConexion(); ?>
+ 

@@ -136,7 +136,7 @@ $empresas = $controller->listarEmpresas(); // solo empresas activas
               <strong>RUC:</strong> <?= htmlspecialchars($empresa['ruc']) ?>
             </p>
             <a href="facturas_empresa.php?id_empresa=<?= $empresa['id_empresa'] ?>" class="btn btn-sm btn-outline-primary">
-              Ver facturas con razon social fa-arrow-left
+              Ver facturas 
             </a>
           </div>
         </div>

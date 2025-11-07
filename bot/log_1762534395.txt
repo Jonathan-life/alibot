@@ -1,0 +1,18 @@
+=== ventaselenium.py ===
+
+
+=== procesar_archivos.py ===
+ Error parseando fechas: 'charmap' codec can't encode character '\U0001f4c5' in position 0: character maps to <undefined>
+ Iniciando procesamiento para empresa ID 1 (RUC 20494384273)
+ ZIPs encontrados: 2
+ Extraído ZIP: FACTURAE001-4120494384273.zip
+ Error procesando XML FACTURAE001-4120494384273.XML: 1062 (23000): Duplicate entry '1-FACTURA-E001-41' for key 'facturas.ux_comp_empresa_doc'
+ No se pudo procesar XML FACTURAE001-4120494384273.XML
+ Extraído ZIP: FACTURAE001-4220494384273.zip
+ Error procesando XML FACTURAE001-4220494384273.XML: 1062 (23000): Duplicate entry '1-FACTURA-E001-42' for key 'facturas.ux_comp_empresa_doc'
+ No se pudo procesar XML FACTURAE001-4220494384273.XML
+ PDFs encontrados: 0
+ Eliminado: FACTURAE001-4120494384273.zip
+ Eliminado: FACTURAE001-4220494384273.zip
+ Proceso finalizado correctamente
+
