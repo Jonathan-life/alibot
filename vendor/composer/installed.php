@@ -3,7 +3,7 @@
         'name' => 'asus/alibot-api',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '6f23d77dacc90db4df94a0f58fdd028494a2acd5',
+        'reference' => 'a0bc9e15562af2635cf327bfd23f1ae3e8a6d241',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'asus/alibot-api' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '6f23d77dacc90db4df94a0f58fdd028494a2acd5',
+            'reference' => 'a0bc9e15562af2635cf327bfd23f1ae3e8a6d241',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

@@ -12,7 +12,7 @@ class BotController {
         }
 
         // Ruta del ejecutable de Python
-        $this->python = "C:\\Users\\SENATI\\AppData\\Local\\Programs\\Python\\Python314\\python.exe";
+        $this->python = "C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\python.exe";
 
         // Ruta base del proyecto
         $this->base_dir = realpath(__DIR__ . '/..');

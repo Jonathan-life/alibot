@@ -132,7 +132,7 @@ def procesar_xml(archivo, id_empresa, ruc_empresa, fecha_inicio=None, fecha_fin=
         descripcion = root.find(".//cac:InvoiceLine/cac:Item/cbc:Description", ns)
         descripcion = descripcion.text.strip() if descripcion is not None else ""
 
-        # === Montos ===
+        # === Montos generales ===
         base_imponible = root.find(".//cac:LegalMonetaryTotal/cbc:LineExtensionAmount", ns)
         base_imponible = float(base_imponible.text.strip()) if base_imponible is not None else 0.0
 
@@ -144,6 +144,28 @@ def procesar_xml(archivo, id_empresa, ruc_empresa, fecha_inicio=None, fecha_fin=
 
         moneda = root.find(".//cbc:DocumentCurrencyCode", ns)
         moneda = moneda.text.strip() if moneda is not None else "PEN"
+
+        # === Subtotales por tipo de operación (gravad/exonerada/inafecta/exportación) ===
+        base_gravadas = base_exoneradas = base_inafectas = base_exportacion = 0.0
+
+        for tax_subtotal in root.findall(".//cac:TaxSubtotal", ns):
+            tax_amount_node = tax_subtotal.find("cbc:TaxableAmount", ns)
+            tax_amount = float(tax_amount_node.text) if tax_amount_node is not None else 0.0
+
+            reason_node = tax_subtotal.find(".//cbc:TaxExemptionReasonCode", ns)
+            tax_category_node = tax_subtotal.find(".//cac:TaxCategory/cac:TaxScheme/cbc:ID", ns)
+            codigo = reason_node.text.strip() if reason_node is not None else ""
+            codigo_tax = tax_category_node.text.strip() if tax_category_node is not None else ""
+
+            # Se detecta por código SUNAT
+            if codigo == "10" or codigo_tax == "1000":
+                base_gravadas += tax_amount
+            elif codigo == "20" or codigo_tax == "9998":
+                base_inafectas += tax_amount
+            elif codigo == "30" or codigo_tax == "9997":
+                base_exoneradas += tax_amount
+            elif codigo == "40" or codigo_tax == "9995":
+                base_exportacion += tax_amount
 
         # === Tipo documento ===
         tipo_doc_code = root.find(".//cbc:InvoiceTypeCode", ns)
@@ -172,19 +194,23 @@ def procesar_xml(archivo, id_empresa, ruc_empresa, fecha_inicio=None, fecha_fin=
                 id_empresa, tipo_doc, serie, correlativo, nro_cpe,
                 fecha_emision, fecha_vencimiento, ruc_emisor, nombre_emisor,
                 ruc_receptor, nombre_receptor, descripcion, base_imponible,
-                igv, importe_total, moneda, origen, estado_sunat, fecha_registro
+                igv, importe_total, moneda, origen, estado_sunat, 
+                base_gravadas, base_exoneradas, base_inafectas, base_exportacion,
+                fecha_registro
             )
             VALUES (
                 %s, %s, %s, %s, %s,
                 %s, %s, %s, %s,
                 %s, %s, %s, %s,
-                %s, %s, %s, %s, %s, NOW()
+                %s, %s, %s, %s,
+                %s, %s, %s, %s, NOW()
             )
         """, (
             id_empresa, tipo_doc, serie, correlativo, nro_cpe,
             fecha_emision, fecha_vencimiento, ruc_emisor, nombre_emisor,
             ruc_receptor, nombre_receptor, descripcion, base_imponible,
-            igv, importe_total, moneda, origen, estado_sunat
+            igv, importe_total, moneda, origen, estado_sunat,
+            base_gravadas, base_exoneradas, base_inafectas, base_exportacion
         ))
         conn.commit()
         id_factura = cursor.lastrowid
@@ -197,6 +223,7 @@ def procesar_xml(archivo, id_empresa, ruc_empresa, fecha_inicio=None, fecha_fin=
     except Exception as e:
         log(f" Error procesando XML {archivo}: {e}", "error")
         return None, None
+
 
 def procesar_pdf(pdf_path):
     try:

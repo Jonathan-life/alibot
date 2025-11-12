@@ -14,4 +14,5 @@ Estructura mínima para correr un prototipo local de **Alibot** (asistente conta
 ## Instalar dependencias
 pip install mysql-connector-python   selenium
 pip install pymupdf
+composer require phpoffice/phpspreadsheet
 
