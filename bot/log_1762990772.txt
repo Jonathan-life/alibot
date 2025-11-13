@@ -1,6 +1,0 @@
-=== selenium_bot.py ===
-El sistema no puede encontrar la ruta especificada.
-
-=== procesar_archivos.py ===
-El sistema no puede encontrar la ruta especificada.
-

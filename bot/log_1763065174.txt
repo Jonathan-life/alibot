@@ -1,0 +1,70 @@
+=== selenium_bot.py ===
+
+
+=== procesar_archivos.py ===
+ Filtro de fechas: 2024-06-13 - 2024-06-13
+ Iniciando procesamiento para empresa ID 1 (RUC 20494384273)
+ ZIPs encontrados: 6
+ Extraído ZIP: FACTURAE001-184320602124895.zip
+Valores para INSERT XML FACTURAE001-184320602124895.XML: (1, 'FACTURA', 'E001', '1843', 'E001-1843', '2024-06-13', None, '20602124895', 'GLOBAL SERVICE & SUPPLIERS S.A.C.', '20494384273', 'MINERA SANTA ENMA S.A.C.', 'BIODIGESTOR 7000LTS FARPLAST CON ACC', Decimal('8135.80'), Decimal('1464.44'), Decimal('9600.24'), 'PEN', 'COMPRA', 'ACEPTADO', Decimal('16271.60'), Decimal('0.00'), Decimal('0.00'), Decimal('0.00'), None)
+Factura guardada: E001-1843 - GLOBAL SERVICE & SUPPLIERS S.A.C. (COMPRA)
+ Guardado en BD (BLOB): FACTURAE001-184320602124895.zip (ZIP)
+ Extraído ZIP: FACTURAE001-359310413232975.zip
+Valores para INSERT XML FACTURAE001-359310413232975.XML: (1, 'FACTURA', 'E001', '3593', 'E001-3593', '2024-06-13', None, '10413232975', 'MENESES MEDINA CHRIS JACQUELINE', '20494384273', 'MINERA SANTA ENMA S.A.C.', 'SERVICIO DE TRANSPORTE DE CUCHILLAS MOTONIVELADORA', Decimal('338.98'), Decimal('61.02'), Decimal('400.00'), 'PEN', 'COMPRA', 'ACEPTADO', Decimal('677.96'), Decimal('0.00'), Decimal('0.00'), Decimal('0.00'), None)
+Factura guardada: E001-3593 - MENESES MEDINA CHRIS JACQUELINE (COMPRA)
+ Guardado en BD (BLOB): FACTURAE001-359310413232975.zip (ZIP)
+ Extraído ZIP: FACTURAE001-5635620452733421.zip
+Valores para INSERT XML FACTURAE001-5635620452733421.XML: (1, 'FACTURA', 'E001', '56356', 'E001-56356', '2024-06-13', None, '20452733421', 'FERRETERIA SAN PEDRO S.A.C.', '20494384273', 'MINERA SANTA ENMA S.A.C.', 'TEMPLE MARTELL X5KG', Decimal('35.59'), Decimal('6.41'), Decimal('42.00'), 'PEN', 'COMPRA', 'ACEPTADO', Decimal('71.183218'), Decimal('0.00'), Decimal('0.00'), Decimal('0.00'), None)
+Factura guardada: E001-56356 - FERRETERIA SAN PEDRO S.A.C. (COMPRA)
+ Guardado en BD (BLOB): FACTURAE001-5635620452733421.zip (ZIP)
+ Extraído ZIP: FACTURAE001-67010479265742.zip
+Valores para INSERT XML FACTURAE001-67010479265742.XML: (1, 'FACTURA', 'E001', '670', 'E001-670', '2024-06-13', None, '10479265742', 'NAPA SIGUAS LESLY PAOLA', '20494384273', 'MINERA SANTA ENMA S.A.C.', 'BALDE DE PINTURA', Decimal('116.95'), Decimal('21.05'), Decimal('138.00'), 'PEN', 'COMPRA', 'ACEPTADO', Decimal('233.899'), Decimal('0.00'), Decimal('0.00'), Decimal('0.00'), None)
+Factura guardada: E001-670 - NAPA SIGUAS LESLY PAOLA (COMPRA)
+ Guardado en BD (BLOB): FACTURAE001-67010479265742.zip (ZIP)
+ Extraído ZIP: FACTURAE001-69920607062111.zip
+Valores para INSERT XML FACTURAE001-69920607062111.XML: (1, 'FACTURA', 'E001', '699', 'E001-699', '2024-06-13', None, '20607062111', 'INSTELC S.A.C.', '20494384273', 'MINERA SANTA ENMA S.A.C.', 'PRESOSTATO DE AGUA', Decimal('1676.27'), Decimal('301.73'), Decimal('1978.00'), 'PEN', 'COMPRA', 'ACEPTADO', Decimal('3352.54118874'), Decimal('0.00'), Decimal('0.00'), Decimal('0.00'), None)
+Factura guardada: E001-699 - INSTELC S.A.C. (COMPRA)
+ Guardado en BD (BLOB): FACTURAE001-69920607062111.zip (ZIP)
+ Extraído ZIP: FACTURAE001-8610447903712.zip
+Valores para INSERT XML FACTURAE001-8610447903712.XML: (1, 'FACTURA', 'E001', '86', 'E001-86', '2024-06-13', None, '10447903712', 'MARQUEZ TAFUR MIGUEL ANGEL', '20494384273', 'MINERA SANTA ENMA S.A.C.', 'DE CABLE ELCOFLEX HD7RN-F 4GX6MM2 440/750 V SUMERGIBLE', Decimal('100.00'), Decimal('18.00'), Decimal('118.00'), 'USD', 'COMPRA', 'ACEPTADO', Decimal('200.00'), Decimal('0.00'), Decimal('0.00'), Decimal('0.00'), None)
+Factura guardada: E001-86 - MARQUEZ TAFUR MIGUEL ANGEL (COMPRA)
+ Guardado en BD (BLOB): FACTURAE001-8610447903712.zip (ZIP)
+ PDFs encontrados: 12
+ Guardado en BD (BLOB): PDF-DOC-E001184320602124895.PDF (PDF)
+ Guardado en BD (BLOB): PDF-DOC-E001359310413232975.PDF (PDF)
+ Guardado en BD (BLOB): PDF-DOC-E0015635620452733421.PDF (PDF)
+ Guardado en BD (BLOB): PDF-DOC-E00167010479265742.PDF (PDF)
+ Guardado en BD (BLOB): PDF-DOC-E00169920607062111.PDF (PDF)
+ Guardado en BD (BLOB): PDF-DOC-E0018610447903712.PDF (PDF)
+ Ya existe en BD: PDF-DOC-E001184320602124895.PDF (ID factura 52), no se guarda duplicado
+ Ya existe en BD: PDF-DOC-E001359310413232975.PDF (ID factura 53), no se guarda duplicado
+ Ya existe en BD: PDF-DOC-E0015635620452733421.PDF (ID factura 54), no se guarda duplicado
+ Ya existe en BD: PDF-DOC-E00167010479265742.PDF (ID factura 55), no se guarda duplicado
+ Ya existe en BD: PDF-DOC-E00169920607062111.PDF (ID factura 56), no se guarda duplicado
+ Ya existe en BD: PDF-DOC-E0018610447903712.PDF (ID factura 57), no se guarda duplicado
+ Eliminado: FACTURAE001-184320602124895.XML
+ Eliminado: FACTURAE001-359310413232975.XML
+ Eliminado: FACTURAE001-5635620452733421.XML
+ Eliminado: FACTURAE001-67010479265742.XML
+ Eliminado: FACTURAE001-69920607062111.XML
+ Eliminado: FACTURAE001-8610447903712.XML
+ Eliminado: PDF-DOC-E001184320602124895.pdf
+ Eliminado: PDF-DOC-E001359310413232975.pdf
+ Eliminado: PDF-DOC-E0015635620452733421.pdf
+ Eliminado: PDF-DOC-E00167010479265742.pdf
+ Eliminado: PDF-DOC-E00169920607062111.pdf
+ Eliminado: PDF-DOC-E0018610447903712.pdf
+ Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E001184320602124895.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E001184320602124895.pdf'
+ Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E001359310413232975.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E001359310413232975.pdf'
+ Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0015635620452733421.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0015635620452733421.pdf'
+ Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00167010479265742.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00167010479265742.pdf'
+ Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00169920607062111.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00169920607062111.pdf'
+ Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0018610447903712.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0018610447903712.pdf'
+ Eliminado: FACTURAE001-184320602124895.zip
+ Eliminado: FACTURAE001-359310413232975.zip
+ Eliminado: FACTURAE001-5635620452733421.zip
+ Eliminado: FACTURAE001-67010479265742.zip
+ Eliminado: FACTURAE001-69920607062111.zip
+ Eliminado: FACTURAE001-8610447903712.zip
+ Proceso finalizado correctamente
+

@@ -151,3 +151,786 @@
 2025-11-07 11:55:32,771 [INFO]  Eliminado: FACTURAE001-4120494384273.zip
 2025-11-07 11:55:32,771 [INFO]  Eliminado: FACTURAE001-4220494384273.zip
 2025-11-07 11:55:32,771 [INFO]  Proceso finalizado correctamente
+2025-11-13 14:00:31,075 [INFO]  Error parseando fechas: 'charmap' codec can't encode character '\U0001f4c5' in position 0: character maps to <undefined>
+2025-11-13 14:00:31,076 [INFO]  Iniciando procesamiento para empresa ID 1 (RUC 20494384273)
+2025-11-13 14:00:31,076 [INFO]  ZIPs encontrados: 6
+2025-11-13 14:00:31,081 [INFO]  Extraído ZIP: FACTURAE001-184320602124895.zip
+2025-11-13 14:00:31,351 [ERROR]  Error procesando XML FACTURAE001-184320602124895.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:00:31,352 [ERROR]  No se pudo procesar XML FACTURAE001-184320602124895.XML
+2025-11-13 14:00:31,355 [INFO]  Extraído ZIP: FACTURAE001-359310413232975.zip
+2025-11-13 14:00:31,380 [ERROR]  Error procesando XML FACTURAE001-359310413232975.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:00:31,380 [ERROR]  No se pudo procesar XML FACTURAE001-359310413232975.XML
+2025-11-13 14:00:31,383 [INFO]  Extraído ZIP: FACTURAE001-5635620452733421.zip
+2025-11-13 14:00:31,409 [ERROR]  Error procesando XML FACTURAE001-5635620452733421.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:00:31,409 [ERROR]  No se pudo procesar XML FACTURAE001-5635620452733421.XML
+2025-11-13 14:00:31,412 [INFO]  Extraído ZIP: FACTURAE001-67010479265742.zip
+2025-11-13 14:00:31,436 [ERROR]  Error procesando XML FACTURAE001-67010479265742.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:00:31,436 [ERROR]  No se pudo procesar XML FACTURAE001-67010479265742.XML
+2025-11-13 14:00:31,439 [INFO]  Extraído ZIP: FACTURAE001-69920607062111.zip
+2025-11-13 14:00:31,464 [ERROR]  Error procesando XML FACTURAE001-69920607062111.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:00:31,465 [ERROR]  No se pudo procesar XML FACTURAE001-69920607062111.XML
+2025-11-13 14:00:31,468 [INFO]  Extraído ZIP: FACTURAE001-8610447903712.zip
+2025-11-13 14:00:31,491 [ERROR]  Error procesando XML FACTURAE001-8610447903712.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:00:31,492 [ERROR]  No se pudo procesar XML FACTURAE001-8610447903712.XML
+2025-11-13 14:00:31,492 [INFO]  PDFs encontrados: 12
+2025-11-13 14:00:31,589 [ERROR]  PDF PDF-DOC-E001184320602124895.PDF no asociado a ninguna factura
+2025-11-13 14:00:31,610 [ERROR]  PDF PDF-DOC-E001359310413232975.PDF no asociado a ninguna factura
+2025-11-13 14:00:31,629 [ERROR]  PDF PDF-DOC-E0015635620452733421.PDF no asociado a ninguna factura
+2025-11-13 14:00:31,648 [ERROR]  PDF PDF-DOC-E00167010479265742.PDF no asociado a ninguna factura
+2025-11-13 14:00:31,672 [ERROR]  PDF PDF-DOC-E00169920607062111.PDF no asociado a ninguna factura
+2025-11-13 14:00:31,693 [ERROR]  PDF PDF-DOC-E0018610447903712.PDF no asociado a ninguna factura
+2025-11-13 14:00:31,743 [ERROR]  PDF PDF-DOC-E001184320602124895.PDF no asociado a ninguna factura
+2025-11-13 14:00:31,750 [ERROR]  PDF PDF-DOC-E001359310413232975.PDF no asociado a ninguna factura
+2025-11-13 14:00:31,759 [ERROR]  PDF PDF-DOC-E0015635620452733421.PDF no asociado a ninguna factura
+2025-11-13 14:00:31,784 [ERROR]  PDF PDF-DOC-E00167010479265742.PDF no asociado a ninguna factura
+2025-11-13 14:00:31,807 [ERROR]  PDF PDF-DOC-E00169920607062111.PDF no asociado a ninguna factura
+2025-11-13 14:00:31,817 [ERROR]  PDF PDF-DOC-E0018610447903712.PDF no asociado a ninguna factura
+2025-11-13 14:00:31,817 [INFO]  Eliminado: PDF-DOC-E001184320602124895.pdf
+2025-11-13 14:00:31,818 [INFO]  Eliminado: PDF-DOC-E001359310413232975.pdf
+2025-11-13 14:00:31,819 [INFO]  Eliminado: PDF-DOC-E0015635620452733421.pdf
+2025-11-13 14:00:31,832 [INFO]  Eliminado: PDF-DOC-E00167010479265742.pdf
+2025-11-13 14:00:31,833 [INFO]  Eliminado: PDF-DOC-E00169920607062111.pdf
+2025-11-13 14:00:31,834 [INFO]  Eliminado: PDF-DOC-E0018610447903712.pdf
+2025-11-13 14:00:31,835 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E001184320602124895.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E001184320602124895.pdf'
+2025-11-13 14:00:31,835 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E001359310413232975.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E001359310413232975.pdf'
+2025-11-13 14:00:31,835 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0015635620452733421.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0015635620452733421.pdf'
+2025-11-13 14:00:31,836 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00167010479265742.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00167010479265742.pdf'
+2025-11-13 14:00:31,837 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00169920607062111.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00169920607062111.pdf'
+2025-11-13 14:00:31,837 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0018610447903712.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0018610447903712.pdf'
+2025-11-13 14:00:31,838 [INFO]  Eliminado: FACTURAE001-184320602124895.zip
+2025-11-13 14:00:31,839 [INFO]  Eliminado: FACTURAE001-359310413232975.zip
+2025-11-13 14:00:31,840 [INFO]  Eliminado: FACTURAE001-5635620452733421.zip
+2025-11-13 14:00:31,841 [INFO]  Eliminado: FACTURAE001-67010479265742.zip
+2025-11-13 14:00:31,842 [INFO]  Eliminado: FACTURAE001-69920607062111.zip
+2025-11-13 14:00:31,842 [INFO]  Eliminado: FACTURAE001-8610447903712.zip
+2025-11-13 14:00:31,842 [INFO]  Proceso finalizado correctamente
+2025-11-13 14:10:30,502 [INFO]  Filtro de fechas: 2024-06-13 - 2024-06-14
+2025-11-13 14:10:30,502 [INFO]  Iniciando procesamiento para empresa ID 1 (RUC 20494384273)
+2025-11-13 14:10:30,502 [INFO]  ZIPs encontrados: 6
+2025-11-13 14:10:30,523 [INFO]  Extraído ZIP: FACTURAE001-184320602124895.zip
+2025-11-13 14:10:30,718 [ERROR]  Error procesando XML FACTURAE001-184320602124895.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:10:30,719 [ERROR]  No se pudo procesar XML FACTURAE001-184320602124895.XML
+2025-11-13 14:10:30,736 [INFO]  Extraído ZIP: FACTURAE001-359310413232975.zip
+2025-11-13 14:10:30,758 [ERROR]  Error procesando XML FACTURAE001-359310413232975.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:10:30,758 [ERROR]  No se pudo procesar XML FACTURAE001-359310413232975.XML
+2025-11-13 14:10:30,774 [INFO]  Extraído ZIP: FACTURAE001-5635620452733421.zip
+2025-11-13 14:10:30,795 [ERROR]  Error procesando XML FACTURAE001-5635620452733421.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:10:30,795 [ERROR]  No se pudo procesar XML FACTURAE001-5635620452733421.XML
+2025-11-13 14:10:30,811 [INFO]  Extraído ZIP: FACTURAE001-67010479265742.zip
+2025-11-13 14:10:30,834 [ERROR]  Error procesando XML FACTURAE001-67010479265742.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:10:30,835 [ERROR]  No se pudo procesar XML FACTURAE001-67010479265742.XML
+2025-11-13 14:10:30,853 [INFO]  Extraído ZIP: FACTURAE001-69920607062111.zip
+2025-11-13 14:10:30,879 [ERROR]  Error procesando XML FACTURAE001-69920607062111.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:10:30,879 [ERROR]  No se pudo procesar XML FACTURAE001-69920607062111.XML
+2025-11-13 14:10:30,897 [INFO]  Extraído ZIP: FACTURAE001-8610447903712.zip
+2025-11-13 14:10:30,919 [ERROR]  Error procesando XML FACTURAE001-8610447903712.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:10:30,919 [ERROR]  No se pudo procesar XML FACTURAE001-8610447903712.XML
+2025-11-13 14:10:30,920 [INFO]  PDFs encontrados: 12
+2025-11-13 14:10:31,017 [ERROR]  PDF PDF-DOC-E001184320602124895.PDF no asociado a ninguna factura
+2025-11-13 14:10:31,035 [ERROR]  PDF PDF-DOC-E001359310413232975.PDF no asociado a ninguna factura
+2025-11-13 14:10:31,053 [ERROR]  PDF PDF-DOC-E0015635620452733421.PDF no asociado a ninguna factura
+2025-11-13 14:10:31,072 [ERROR]  PDF PDF-DOC-E00167010479265742.PDF no asociado a ninguna factura
+2025-11-13 14:10:31,090 [ERROR]  PDF PDF-DOC-E00169920607062111.PDF no asociado a ninguna factura
+2025-11-13 14:10:31,108 [ERROR]  PDF PDF-DOC-E0018610447903712.PDF no asociado a ninguna factura
+2025-11-13 14:10:31,114 [ERROR]  PDF PDF-DOC-E001184320602124895.PDF no asociado a ninguna factura
+2025-11-13 14:10:31,121 [ERROR]  PDF PDF-DOC-E001359310413232975.PDF no asociado a ninguna factura
+2025-11-13 14:10:31,127 [ERROR]  PDF PDF-DOC-E0015635620452733421.PDF no asociado a ninguna factura
+2025-11-13 14:10:31,135 [ERROR]  PDF PDF-DOC-E00167010479265742.PDF no asociado a ninguna factura
+2025-11-13 14:10:31,143 [ERROR]  PDF PDF-DOC-E00169920607062111.PDF no asociado a ninguna factura
+2025-11-13 14:10:31,150 [ERROR]  PDF PDF-DOC-E0018610447903712.PDF no asociado a ninguna factura
+2025-11-13 14:10:31,151 [INFO]  Eliminado: PDF-DOC-E001184320602124895.pdf
+2025-11-13 14:10:31,151 [INFO]  Eliminado: PDF-DOC-E001359310413232975.pdf
+2025-11-13 14:10:31,152 [INFO]  Eliminado: PDF-DOC-E0015635620452733421.pdf
+2025-11-13 14:10:31,152 [INFO]  Eliminado: PDF-DOC-E00167010479265742.pdf
+2025-11-13 14:10:31,153 [INFO]  Eliminado: PDF-DOC-E00169920607062111.pdf
+2025-11-13 14:10:31,153 [INFO]  Eliminado: PDF-DOC-E0018610447903712.pdf
+2025-11-13 14:10:31,153 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E001184320602124895.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E001184320602124895.pdf'
+2025-11-13 14:10:31,154 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E001359310413232975.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E001359310413232975.pdf'
+2025-11-13 14:10:31,154 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0015635620452733421.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0015635620452733421.pdf'
+2025-11-13 14:10:31,154 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00167010479265742.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00167010479265742.pdf'
+2025-11-13 14:10:31,154 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00169920607062111.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00169920607062111.pdf'
+2025-11-13 14:10:31,155 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0018610447903712.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0018610447903712.pdf'
+2025-11-13 14:10:31,156 [INFO]  Eliminado: FACTURAE001-184320602124895.zip
+2025-11-13 14:10:31,156 [INFO]  Eliminado: FACTURAE001-359310413232975.zip
+2025-11-13 14:10:31,157 [INFO]  Eliminado: FACTURAE001-5635620452733421.zip
+2025-11-13 14:10:31,158 [INFO]  Eliminado: FACTURAE001-67010479265742.zip
+2025-11-13 14:10:31,159 [INFO]  Eliminado: FACTURAE001-69920607062111.zip
+2025-11-13 14:10:31,159 [INFO]  Eliminado: FACTURAE001-8610447903712.zip
+2025-11-13 14:10:31,159 [INFO]  Proceso finalizado correctamente
+2025-11-13 14:13:52,724 [INFO]  Filtro de fechas: 2024-06-13 - 2024-06-14
+2025-11-13 14:13:52,724 [INFO]  Iniciando procesamiento para empresa ID 1 (RUC 20494384273)
+2025-11-13 14:13:52,725 [INFO]  ZIPs encontrados: 6
+2025-11-13 14:13:52,742 [INFO]  Extraído ZIP: FACTURAE001-184320602124895.zip
+2025-11-13 14:13:52,809 [ERROR]  Error procesando XML FACTURAE001-184320602124895.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:13:52,809 [ERROR]  No se pudo procesar XML FACTURAE001-184320602124895.XML
+2025-11-13 14:13:52,825 [INFO]  Extraído ZIP: FACTURAE001-359310413232975.zip
+2025-11-13 14:13:52,847 [ERROR]  Error procesando XML FACTURAE001-359310413232975.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:13:52,848 [ERROR]  No se pudo procesar XML FACTURAE001-359310413232975.XML
+2025-11-13 14:13:52,864 [INFO]  Extraído ZIP: FACTURAE001-5635620452733421.zip
+2025-11-13 14:13:52,886 [ERROR]  Error procesando XML FACTURAE001-5635620452733421.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:13:52,886 [ERROR]  No se pudo procesar XML FACTURAE001-5635620452733421.XML
+2025-11-13 14:13:52,904 [INFO]  Extraído ZIP: FACTURAE001-67010479265742.zip
+2025-11-13 14:13:52,926 [ERROR]  Error procesando XML FACTURAE001-67010479265742.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:13:52,926 [ERROR]  No se pudo procesar XML FACTURAE001-67010479265742.XML
+2025-11-13 14:13:52,946 [INFO]  Extraído ZIP: FACTURAE001-69920607062111.zip
+2025-11-13 14:13:52,972 [ERROR]  Error procesando XML FACTURAE001-69920607062111.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:13:52,972 [ERROR]  No se pudo procesar XML FACTURAE001-69920607062111.XML
+2025-11-13 14:13:52,990 [INFO]  Extraído ZIP: FACTURAE001-8610447903712.zip
+2025-11-13 14:13:53,011 [ERROR]  Error procesando XML FACTURAE001-8610447903712.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:13:53,011 [ERROR]  No se pudo procesar XML FACTURAE001-8610447903712.XML
+2025-11-13 14:13:53,012 [INFO]  PDFs encontrados: 12
+2025-11-13 14:13:53,040 [ERROR]  PDF PDF-DOC-E001184320602124895.PDF no asociado a ninguna factura
+2025-11-13 14:13:53,061 [ERROR]  PDF PDF-DOC-E001359310413232975.PDF no asociado a ninguna factura
+2025-11-13 14:13:53,080 [ERROR]  PDF PDF-DOC-E0015635620452733421.PDF no asociado a ninguna factura
+2025-11-13 14:13:53,097 [ERROR]  PDF PDF-DOC-E00167010479265742.PDF no asociado a ninguna factura
+2025-11-13 14:13:53,115 [ERROR]  PDF PDF-DOC-E00169920607062111.PDF no asociado a ninguna factura
+2025-11-13 14:13:53,131 [ERROR]  PDF PDF-DOC-E0018610447903712.PDF no asociado a ninguna factura
+2025-11-13 14:13:53,138 [ERROR]  PDF PDF-DOC-E001184320602124895.PDF no asociado a ninguna factura
+2025-11-13 14:13:53,144 [ERROR]  PDF PDF-DOC-E001359310413232975.PDF no asociado a ninguna factura
+2025-11-13 14:13:53,150 [ERROR]  PDF PDF-DOC-E0015635620452733421.PDF no asociado a ninguna factura
+2025-11-13 14:13:53,156 [ERROR]  PDF PDF-DOC-E00167010479265742.PDF no asociado a ninguna factura
+2025-11-13 14:13:53,162 [ERROR]  PDF PDF-DOC-E00169920607062111.PDF no asociado a ninguna factura
+2025-11-13 14:13:53,169 [ERROR]  PDF PDF-DOC-E0018610447903712.PDF no asociado a ninguna factura
+2025-11-13 14:13:53,169 [INFO]  Eliminado: PDF-DOC-E001184320602124895.pdf
+2025-11-13 14:13:53,170 [INFO]  Eliminado: PDF-DOC-E001359310413232975.pdf
+2025-11-13 14:13:53,170 [INFO]  Eliminado: PDF-DOC-E0015635620452733421.pdf
+2025-11-13 14:13:53,170 [INFO]  Eliminado: PDF-DOC-E00167010479265742.pdf
+2025-11-13 14:13:53,171 [INFO]  Eliminado: PDF-DOC-E00169920607062111.pdf
+2025-11-13 14:13:53,171 [INFO]  Eliminado: PDF-DOC-E0018610447903712.pdf
+2025-11-13 14:13:53,171 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E001184320602124895.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E001184320602124895.pdf'
+2025-11-13 14:13:53,171 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E001359310413232975.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E001359310413232975.pdf'
+2025-11-13 14:13:53,172 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0015635620452733421.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0015635620452733421.pdf'
+2025-11-13 14:13:53,172 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00167010479265742.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00167010479265742.pdf'
+2025-11-13 14:13:53,172 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00169920607062111.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00169920607062111.pdf'
+2025-11-13 14:13:53,172 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0018610447903712.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0018610447903712.pdf'
+2025-11-13 14:13:53,172 [INFO]  Eliminado: FACTURAE001-184320602124895.zip
+2025-11-13 14:13:53,173 [INFO]  Eliminado: FACTURAE001-359310413232975.zip
+2025-11-13 14:13:53,173 [INFO]  Eliminado: FACTURAE001-5635620452733421.zip
+2025-11-13 14:13:53,173 [INFO]  Eliminado: FACTURAE001-67010479265742.zip
+2025-11-13 14:13:53,174 [INFO]  Eliminado: FACTURAE001-69920607062111.zip
+2025-11-13 14:13:53,174 [INFO]  Eliminado: FACTURAE001-8610447903712.zip
+2025-11-13 14:13:53,174 [INFO]  Proceso finalizado correctamente
+2025-11-13 14:20:13,421 [INFO]  Filtro de fechas: 2024-06-13 - 2024-06-14
+2025-11-13 14:20:13,421 [INFO]  Iniciando procesamiento para empresa ID 1 (RUC 20494384273)
+2025-11-13 14:20:13,422 [INFO]  ZIPs encontrados: 6
+2025-11-13 14:20:13,439 [INFO]  Extraído ZIP: FACTURAE001-184320602124895.zip
+2025-11-13 14:20:13,510 [ERROR]  Error procesando XML FACTURAE001-184320602124895.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:20:13,510 [ERROR]  No se pudo procesar XML FACTURAE001-184320602124895.XML
+2025-11-13 14:20:13,528 [INFO]  Extraído ZIP: FACTURAE001-359310413232975.zip
+2025-11-13 14:20:13,550 [ERROR]  Error procesando XML FACTURAE001-359310413232975.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:20:13,551 [ERROR]  No se pudo procesar XML FACTURAE001-359310413232975.XML
+2025-11-13 14:20:13,567 [INFO]  Extraído ZIP: FACTURAE001-5635620452733421.zip
+2025-11-13 14:20:13,589 [ERROR]  Error procesando XML FACTURAE001-5635620452733421.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:20:13,589 [ERROR]  No se pudo procesar XML FACTURAE001-5635620452733421.XML
+2025-11-13 14:20:13,607 [INFO]  Extraído ZIP: FACTURAE001-67010479265742.zip
+2025-11-13 14:20:13,628 [ERROR]  Error procesando XML FACTURAE001-67010479265742.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:20:13,629 [ERROR]  No se pudo procesar XML FACTURAE001-67010479265742.XML
+2025-11-13 14:20:13,645 [INFO]  Extraído ZIP: FACTURAE001-69920607062111.zip
+2025-11-13 14:20:13,670 [ERROR]  Error procesando XML FACTURAE001-69920607062111.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:20:13,670 [ERROR]  No se pudo procesar XML FACTURAE001-69920607062111.XML
+2025-11-13 14:20:13,687 [INFO]  Extraído ZIP: FACTURAE001-8610447903712.zip
+2025-11-13 14:20:13,709 [ERROR]  Error procesando XML FACTURAE001-8610447903712.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:20:13,709 [ERROR]  No se pudo procesar XML FACTURAE001-8610447903712.XML
+2025-11-13 14:20:13,710 [INFO]  PDFs encontrados: 12
+2025-11-13 14:20:13,738 [ERROR]  PDF PDF-DOC-E001184320602124895.PDF no asociado a ninguna factura
+2025-11-13 14:20:13,755 [ERROR]  PDF PDF-DOC-E001359310413232975.PDF no asociado a ninguna factura
+2025-11-13 14:20:13,773 [ERROR]  PDF PDF-DOC-E0015635620452733421.PDF no asociado a ninguna factura
+2025-11-13 14:20:13,790 [ERROR]  PDF PDF-DOC-E00167010479265742.PDF no asociado a ninguna factura
+2025-11-13 14:20:13,809 [ERROR]  PDF PDF-DOC-E00169920607062111.PDF no asociado a ninguna factura
+2025-11-13 14:20:13,826 [ERROR]  PDF PDF-DOC-E0018610447903712.PDF no asociado a ninguna factura
+2025-11-13 14:20:13,832 [ERROR]  PDF PDF-DOC-E001184320602124895.PDF no asociado a ninguna factura
+2025-11-13 14:20:13,839 [ERROR]  PDF PDF-DOC-E001359310413232975.PDF no asociado a ninguna factura
+2025-11-13 14:20:13,845 [ERROR]  PDF PDF-DOC-E0015635620452733421.PDF no asociado a ninguna factura
+2025-11-13 14:20:13,852 [ERROR]  PDF PDF-DOC-E00167010479265742.PDF no asociado a ninguna factura
+2025-11-13 14:20:13,858 [ERROR]  PDF PDF-DOC-E00169920607062111.PDF no asociado a ninguna factura
+2025-11-13 14:20:13,866 [ERROR]  PDF PDF-DOC-E0018610447903712.PDF no asociado a ninguna factura
+2025-11-13 14:20:13,867 [INFO]  Eliminado: PDF-DOC-E001184320602124895.pdf
+2025-11-13 14:20:13,868 [INFO]  Eliminado: PDF-DOC-E001359310413232975.pdf
+2025-11-13 14:20:13,868 [INFO]  Eliminado: PDF-DOC-E0015635620452733421.pdf
+2025-11-13 14:20:13,869 [INFO]  Eliminado: PDF-DOC-E00167010479265742.pdf
+2025-11-13 14:20:13,869 [INFO]  Eliminado: PDF-DOC-E00169920607062111.pdf
+2025-11-13 14:20:13,869 [INFO]  Eliminado: PDF-DOC-E0018610447903712.pdf
+2025-11-13 14:20:13,870 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E001184320602124895.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E001184320602124895.pdf'
+2025-11-13 14:20:13,870 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E001359310413232975.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E001359310413232975.pdf'
+2025-11-13 14:20:13,870 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0015635620452733421.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0015635620452733421.pdf'
+2025-11-13 14:20:13,870 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00167010479265742.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00167010479265742.pdf'
+2025-11-13 14:20:13,870 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00169920607062111.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00169920607062111.pdf'
+2025-11-13 14:20:13,871 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0018610447903712.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0018610447903712.pdf'
+2025-11-13 14:20:13,871 [INFO]  Eliminado: FACTURAE001-184320602124895.zip
+2025-11-13 14:20:13,871 [INFO]  Eliminado: FACTURAE001-359310413232975.zip
+2025-11-13 14:20:13,872 [INFO]  Eliminado: FACTURAE001-5635620452733421.zip
+2025-11-13 14:20:13,872 [INFO]  Eliminado: FACTURAE001-67010479265742.zip
+2025-11-13 14:20:13,872 [INFO]  Eliminado: FACTURAE001-69920607062111.zip
+2025-11-13 14:20:13,873 [INFO]  Eliminado: FACTURAE001-8610447903712.zip
+2025-11-13 14:20:13,873 [INFO]  Proceso finalizado correctamente
+2025-11-13 14:25:48,294 [INFO]  Filtro de fechas: 2024-06-13 - 2024-06-14
+2025-11-13 14:25:48,295 [INFO]  Iniciando procesamiento para empresa ID 1 (RUC 20494384273)
+2025-11-13 14:25:48,295 [INFO]  ZIPs encontrados: 6
+2025-11-13 14:25:48,312 [INFO]  Extraído ZIP: FACTURAE001-184320602124895.zip
+2025-11-13 14:25:48,379 [ERROR]  Error procesando XML FACTURAE001-184320602124895.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:25:48,380 [ERROR]  No se pudo procesar XML FACTURAE001-184320602124895.XML
+2025-11-13 14:25:48,396 [INFO]  Extraído ZIP: FACTURAE001-359310413232975.zip
+2025-11-13 14:25:48,419 [ERROR]  Error procesando XML FACTURAE001-359310413232975.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:25:48,419 [ERROR]  No se pudo procesar XML FACTURAE001-359310413232975.XML
+2025-11-13 14:25:48,436 [INFO]  Extraído ZIP: FACTURAE001-5635620452733421.zip
+2025-11-13 14:25:48,458 [ERROR]  Error procesando XML FACTURAE001-5635620452733421.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:25:48,458 [ERROR]  No se pudo procesar XML FACTURAE001-5635620452733421.XML
+2025-11-13 14:25:48,475 [INFO]  Extraído ZIP: FACTURAE001-67010479265742.zip
+2025-11-13 14:25:48,498 [ERROR]  Error procesando XML FACTURAE001-67010479265742.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:25:48,498 [ERROR]  No se pudo procesar XML FACTURAE001-67010479265742.XML
+2025-11-13 14:25:48,514 [INFO]  Extraído ZIP: FACTURAE001-69920607062111.zip
+2025-11-13 14:25:48,538 [ERROR]  Error procesando XML FACTURAE001-69920607062111.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:25:48,539 [ERROR]  No se pudo procesar XML FACTURAE001-69920607062111.XML
+2025-11-13 14:25:48,556 [INFO]  Extraído ZIP: FACTURAE001-8610447903712.zip
+2025-11-13 14:25:48,591 [ERROR]  Error procesando XML FACTURAE001-8610447903712.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:25:48,591 [ERROR]  No se pudo procesar XML FACTURAE001-8610447903712.XML
+2025-11-13 14:25:48,592 [INFO]  PDFs encontrados: 12
+2025-11-13 14:25:48,622 [ERROR]  PDF PDF-DOC-E001184320602124895.PDF no asociado a ninguna factura
+2025-11-13 14:25:48,641 [ERROR]  PDF PDF-DOC-E001359310413232975.PDF no asociado a ninguna factura
+2025-11-13 14:25:48,660 [ERROR]  PDF PDF-DOC-E0015635620452733421.PDF no asociado a ninguna factura
+2025-11-13 14:25:48,679 [ERROR]  PDF PDF-DOC-E00167010479265742.PDF no asociado a ninguna factura
+2025-11-13 14:25:48,700 [ERROR]  PDF PDF-DOC-E00169920607062111.PDF no asociado a ninguna factura
+2025-11-13 14:25:48,719 [ERROR]  PDF PDF-DOC-E0018610447903712.PDF no asociado a ninguna factura
+2025-11-13 14:25:48,725 [ERROR]  PDF PDF-DOC-E001184320602124895.PDF no asociado a ninguna factura
+2025-11-13 14:25:48,734 [ERROR]  PDF PDF-DOC-E001359310413232975.PDF no asociado a ninguna factura
+2025-11-13 14:25:48,742 [ERROR]  PDF PDF-DOC-E0015635620452733421.PDF no asociado a ninguna factura
+2025-11-13 14:25:48,756 [ERROR]  PDF PDF-DOC-E00167010479265742.PDF no asociado a ninguna factura
+2025-11-13 14:25:48,763 [ERROR]  PDF PDF-DOC-E00169920607062111.PDF no asociado a ninguna factura
+2025-11-13 14:25:48,775 [ERROR]  PDF PDF-DOC-E0018610447903712.PDF no asociado a ninguna factura
+2025-11-13 14:25:48,775 [INFO]  Eliminado: PDF-DOC-E001184320602124895.pdf
+2025-11-13 14:25:48,776 [INFO]  Eliminado: PDF-DOC-E001359310413232975.pdf
+2025-11-13 14:25:48,776 [INFO]  Eliminado: PDF-DOC-E0015635620452733421.pdf
+2025-11-13 14:25:48,776 [INFO]  Eliminado: PDF-DOC-E00167010479265742.pdf
+2025-11-13 14:25:48,777 [INFO]  Eliminado: PDF-DOC-E00169920607062111.pdf
+2025-11-13 14:25:48,777 [INFO]  Eliminado: PDF-DOC-E0018610447903712.pdf
+2025-11-13 14:25:48,777 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E001184320602124895.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E001184320602124895.pdf'
+2025-11-13 14:25:48,778 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E001359310413232975.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E001359310413232975.pdf'
+2025-11-13 14:25:48,778 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0015635620452733421.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0015635620452733421.pdf'
+2025-11-13 14:25:48,778 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00167010479265742.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00167010479265742.pdf'
+2025-11-13 14:25:48,778 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00169920607062111.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00169920607062111.pdf'
+2025-11-13 14:25:48,778 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0018610447903712.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0018610447903712.pdf'
+2025-11-13 14:25:48,779 [INFO]  Eliminado: FACTURAE001-184320602124895.zip
+2025-11-13 14:25:48,779 [INFO]  Eliminado: FACTURAE001-359310413232975.zip
+2025-11-13 14:25:48,779 [INFO]  Eliminado: FACTURAE001-5635620452733421.zip
+2025-11-13 14:25:48,780 [INFO]  Eliminado: FACTURAE001-67010479265742.zip
+2025-11-13 14:25:48,780 [INFO]  Eliminado: FACTURAE001-69920607062111.zip
+2025-11-13 14:25:48,781 [INFO]  Eliminado: FACTURAE001-8610447903712.zip
+2025-11-13 14:25:48,781 [INFO]  Proceso finalizado correctamente
+2025-11-13 14:35:59,077 [INFO]  Filtro de fechas: 2024-06-13 - 2024-06-13
+2025-11-13 14:35:59,077 [INFO]  Iniciando procesamiento para empresa ID 1 (RUC 20494384273)
+2025-11-13 14:35:59,078 [INFO]  ZIPs encontrados: 6
+2025-11-13 14:35:59,097 [INFO]  Extraído ZIP: FACTURAE001-184320602124895.zip
+2025-11-13 14:35:59,173 [ERROR]  Error procesando XML FACTURAE001-184320602124895.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:35:59,173 [ERROR]  No se pudo procesar XML FACTURAE001-184320602124895.XML
+2025-11-13 14:35:59,190 [INFO]  Extraído ZIP: FACTURAE001-359310413232975.zip
+2025-11-13 14:35:59,213 [ERROR]  Error procesando XML FACTURAE001-359310413232975.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:35:59,214 [ERROR]  No se pudo procesar XML FACTURAE001-359310413232975.XML
+2025-11-13 14:35:59,233 [INFO]  Extraído ZIP: FACTURAE001-5635620452733421.zip
+2025-11-13 14:35:59,257 [ERROR]  Error procesando XML FACTURAE001-5635620452733421.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:35:59,258 [ERROR]  No se pudo procesar XML FACTURAE001-5635620452733421.XML
+2025-11-13 14:35:59,276 [INFO]  Extraído ZIP: FACTURAE001-67010479265742.zip
+2025-11-13 14:35:59,298 [ERROR]  Error procesando XML FACTURAE001-67010479265742.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:35:59,299 [ERROR]  No se pudo procesar XML FACTURAE001-67010479265742.XML
+2025-11-13 14:35:59,318 [INFO]  Extraído ZIP: FACTURAE001-69920607062111.zip
+2025-11-13 14:35:59,343 [ERROR]  Error procesando XML FACTURAE001-69920607062111.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:35:59,343 [ERROR]  No se pudo procesar XML FACTURAE001-69920607062111.XML
+2025-11-13 14:35:59,360 [INFO]  Extraído ZIP: FACTURAE001-8610447903712.zip
+2025-11-13 14:35:59,381 [ERROR]  Error procesando XML FACTURAE001-8610447903712.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:35:59,381 [ERROR]  No se pudo procesar XML FACTURAE001-8610447903712.XML
+2025-11-13 14:35:59,382 [INFO]  PDFs encontrados: 12
+2025-11-13 14:35:59,408 [ERROR]  PDF PDF-DOC-E001184320602124895.PDF no asociado a ninguna factura
+2025-11-13 14:35:59,425 [ERROR]  PDF PDF-DOC-E001359310413232975.PDF no asociado a ninguna factura
+2025-11-13 14:35:59,442 [ERROR]  PDF PDF-DOC-E0015635620452733421.PDF no asociado a ninguna factura
+2025-11-13 14:35:59,459 [ERROR]  PDF PDF-DOC-E00167010479265742.PDF no asociado a ninguna factura
+2025-11-13 14:35:59,477 [ERROR]  PDF PDF-DOC-E00169920607062111.PDF no asociado a ninguna factura
+2025-11-13 14:35:59,495 [ERROR]  PDF PDF-DOC-E0018610447903712.PDF no asociado a ninguna factura
+2025-11-13 14:35:59,501 [ERROR]  PDF PDF-DOC-E001184320602124895.PDF no asociado a ninguna factura
+2025-11-13 14:35:59,507 [ERROR]  PDF PDF-DOC-E001359310413232975.PDF no asociado a ninguna factura
+2025-11-13 14:35:59,513 [ERROR]  PDF PDF-DOC-E0015635620452733421.PDF no asociado a ninguna factura
+2025-11-13 14:35:59,519 [ERROR]  PDF PDF-DOC-E00167010479265742.PDF no asociado a ninguna factura
+2025-11-13 14:35:59,527 [ERROR]  PDF PDF-DOC-E00169920607062111.PDF no asociado a ninguna factura
+2025-11-13 14:35:59,533 [ERROR]  PDF PDF-DOC-E0018610447903712.PDF no asociado a ninguna factura
+2025-11-13 14:35:59,534 [INFO]  Eliminado: PDF-DOC-E001184320602124895.pdf
+2025-11-13 14:35:59,534 [INFO]  Eliminado: PDF-DOC-E001359310413232975.pdf
+2025-11-13 14:35:59,535 [INFO]  Eliminado: PDF-DOC-E0015635620452733421.pdf
+2025-11-13 14:35:59,535 [INFO]  Eliminado: PDF-DOC-E00167010479265742.pdf
+2025-11-13 14:35:59,535 [INFO]  Eliminado: PDF-DOC-E00169920607062111.pdf
+2025-11-13 14:35:59,536 [INFO]  Eliminado: PDF-DOC-E0018610447903712.pdf
+2025-11-13 14:35:59,536 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E001184320602124895.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E001184320602124895.pdf'
+2025-11-13 14:35:59,536 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E001359310413232975.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E001359310413232975.pdf'
+2025-11-13 14:35:59,536 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0015635620452733421.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0015635620452733421.pdf'
+2025-11-13 14:35:59,537 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00167010479265742.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00167010479265742.pdf'
+2025-11-13 14:35:59,537 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00169920607062111.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00169920607062111.pdf'
+2025-11-13 14:35:59,537 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0018610447903712.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0018610447903712.pdf'
+2025-11-13 14:35:59,537 [INFO]  Eliminado: FACTURAE001-184320602124895.zip
+2025-11-13 14:35:59,538 [INFO]  Eliminado: FACTURAE001-359310413232975.zip
+2025-11-13 14:35:59,538 [INFO]  Eliminado: FACTURAE001-5635620452733421.zip
+2025-11-13 14:35:59,539 [INFO]  Eliminado: FACTURAE001-67010479265742.zip
+2025-11-13 14:35:59,539 [INFO]  Eliminado: FACTURAE001-69920607062111.zip
+2025-11-13 14:35:59,540 [INFO]  Eliminado: FACTURAE001-8610447903712.zip
+2025-11-13 14:35:59,540 [INFO]  Proceso finalizado correctamente
+2025-11-13 14:39:27,285 [INFO]  Filtro de fechas: 2024-06-13 - 2024-06-13
+2025-11-13 14:39:27,285 [INFO]  Iniciando procesamiento para empresa ID 1 (RUC 20494384273)
+2025-11-13 14:39:27,285 [INFO]  ZIPs encontrados: 6
+2025-11-13 14:39:27,304 [INFO]  Extraído ZIP: FACTURAE001-184320602124895.zip
+2025-11-13 14:39:27,375 [ERROR]  Error procesando XML FACTURAE001-184320602124895.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:39:27,376 [ERROR]  No se pudo procesar XML FACTURAE001-184320602124895.XML
+2025-11-13 14:39:27,393 [INFO]  Extraído ZIP: FACTURAE001-359310413232975.zip
+2025-11-13 14:39:27,416 [ERROR]  Error procesando XML FACTURAE001-359310413232975.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:39:27,416 [ERROR]  No se pudo procesar XML FACTURAE001-359310413232975.XML
+2025-11-13 14:39:27,434 [INFO]  Extraído ZIP: FACTURAE001-5635620452733421.zip
+2025-11-13 14:39:27,457 [ERROR]  Error procesando XML FACTURAE001-5635620452733421.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:39:27,457 [ERROR]  No se pudo procesar XML FACTURAE001-5635620452733421.XML
+2025-11-13 14:39:27,475 [INFO]  Extraído ZIP: FACTURAE001-67010479265742.zip
+2025-11-13 14:39:27,502 [ERROR]  Error procesando XML FACTURAE001-67010479265742.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:39:27,502 [ERROR]  No se pudo procesar XML FACTURAE001-67010479265742.XML
+2025-11-13 14:39:27,520 [INFO]  Extraído ZIP: FACTURAE001-69920607062111.zip
+2025-11-13 14:39:27,545 [ERROR]  Error procesando XML FACTURAE001-69920607062111.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:39:27,546 [ERROR]  No se pudo procesar XML FACTURAE001-69920607062111.XML
+2025-11-13 14:39:27,564 [INFO]  Extraído ZIP: FACTURAE001-8610447903712.zip
+2025-11-13 14:39:27,588 [ERROR]  Error procesando XML FACTURAE001-8610447903712.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:39:27,588 [ERROR]  No se pudo procesar XML FACTURAE001-8610447903712.XML
+2025-11-13 14:39:27,589 [INFO]  PDFs encontrados: 12
+2025-11-13 14:39:27,618 [ERROR]  PDF PDF-DOC-E001184320602124895.PDF no asociado a ninguna factura
+2025-11-13 14:39:27,637 [ERROR]  PDF PDF-DOC-E001359310413232975.PDF no asociado a ninguna factura
+2025-11-13 14:39:27,655 [ERROR]  PDF PDF-DOC-E0015635620452733421.PDF no asociado a ninguna factura
+2025-11-13 14:39:27,674 [ERROR]  PDF PDF-DOC-E00167010479265742.PDF no asociado a ninguna factura
+2025-11-13 14:39:27,693 [ERROR]  PDF PDF-DOC-E00169920607062111.PDF no asociado a ninguna factura
+2025-11-13 14:39:27,714 [ERROR]  PDF PDF-DOC-E0018610447903712.PDF no asociado a ninguna factura
+2025-11-13 14:39:27,721 [ERROR]  PDF PDF-DOC-E001184320602124895.PDF no asociado a ninguna factura
+2025-11-13 14:39:27,727 [ERROR]  PDF PDF-DOC-E001359310413232975.PDF no asociado a ninguna factura
+2025-11-13 14:39:27,734 [ERROR]  PDF PDF-DOC-E0015635620452733421.PDF no asociado a ninguna factura
+2025-11-13 14:39:27,740 [ERROR]  PDF PDF-DOC-E00167010479265742.PDF no asociado a ninguna factura
+2025-11-13 14:39:27,747 [ERROR]  PDF PDF-DOC-E00169920607062111.PDF no asociado a ninguna factura
+2025-11-13 14:39:27,754 [ERROR]  PDF PDF-DOC-E0018610447903712.PDF no asociado a ninguna factura
+2025-11-13 14:39:27,755 [INFO]  Eliminado: PDF-DOC-E001184320602124895.pdf
+2025-11-13 14:39:27,756 [INFO]  Eliminado: PDF-DOC-E001359310413232975.pdf
+2025-11-13 14:39:27,756 [INFO]  Eliminado: PDF-DOC-E0015635620452733421.pdf
+2025-11-13 14:39:27,756 [INFO]  Eliminado: PDF-DOC-E00167010479265742.pdf
+2025-11-13 14:39:27,757 [INFO]  Eliminado: PDF-DOC-E00169920607062111.pdf
+2025-11-13 14:39:27,757 [INFO]  Eliminado: PDF-DOC-E0018610447903712.pdf
+2025-11-13 14:39:27,757 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E001184320602124895.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E001184320602124895.pdf'
+2025-11-13 14:39:27,758 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E001359310413232975.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E001359310413232975.pdf'
+2025-11-13 14:39:27,758 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0015635620452733421.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0015635620452733421.pdf'
+2025-11-13 14:39:27,758 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00167010479265742.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00167010479265742.pdf'
+2025-11-13 14:39:27,758 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00169920607062111.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00169920607062111.pdf'
+2025-11-13 14:39:27,758 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0018610447903712.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0018610447903712.pdf'
+2025-11-13 14:39:27,759 [INFO]  Eliminado: FACTURAE001-184320602124895.zip
+2025-11-13 14:39:27,759 [INFO]  Eliminado: FACTURAE001-359310413232975.zip
+2025-11-13 14:39:27,759 [INFO]  Eliminado: FACTURAE001-5635620452733421.zip
+2025-11-13 14:39:27,760 [INFO]  Eliminado: FACTURAE001-67010479265742.zip
+2025-11-13 14:39:27,760 [INFO]  Eliminado: FACTURAE001-69920607062111.zip
+2025-11-13 14:39:27,761 [INFO]  Eliminado: FACTURAE001-8610447903712.zip
+2025-11-13 14:39:27,761 [INFO]  Proceso finalizado correctamente
+2025-11-13 14:42:51,271 [INFO]  Filtro de fechas: 2024-06-13 - 2024-06-13
+2025-11-13 14:42:51,271 [INFO]  Iniciando procesamiento para empresa ID 1 (RUC 20494384273)
+2025-11-13 14:42:51,271 [INFO]  ZIPs encontrados: 0
+2025-11-13 14:42:51,272 [INFO]  PDFs encontrados: 0
+2025-11-13 14:42:51,272 [INFO]  Proceso finalizado correctamente
+2025-11-13 14:44:18,921 [INFO]  Filtro de fechas: 2024-06-13 - 2024-06-13
+2025-11-13 14:44:18,922 [INFO]  Iniciando procesamiento para empresa ID 1 (RUC 20494384273)
+2025-11-13 14:44:18,922 [INFO]  ZIPs encontrados: 6
+2025-11-13 14:44:18,940 [INFO]  Extraído ZIP: FACTURAE001-184320602124895.zip
+2025-11-13 14:44:19,010 [ERROR]  Error procesando XML FACTURAE001-184320602124895.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:44:19,010 [ERROR]  No se pudo procesar XML FACTURAE001-184320602124895.XML
+2025-11-13 14:44:19,027 [INFO]  Extraído ZIP: FACTURAE001-359310413232975.zip
+2025-11-13 14:44:19,050 [ERROR]  Error procesando XML FACTURAE001-359310413232975.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:44:19,050 [ERROR]  No se pudo procesar XML FACTURAE001-359310413232975.XML
+2025-11-13 14:44:19,067 [INFO]  Extraído ZIP: FACTURAE001-5635620452733421.zip
+2025-11-13 14:44:19,089 [ERROR]  Error procesando XML FACTURAE001-5635620452733421.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:44:19,089 [ERROR]  No se pudo procesar XML FACTURAE001-5635620452733421.XML
+2025-11-13 14:44:19,107 [INFO]  Extraído ZIP: FACTURAE001-67010479265742.zip
+2025-11-13 14:44:19,129 [ERROR]  Error procesando XML FACTURAE001-67010479265742.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:44:19,129 [ERROR]  No se pudo procesar XML FACTURAE001-67010479265742.XML
+2025-11-13 14:44:19,149 [INFO]  Extraído ZIP: FACTURAE001-69920607062111.zip
+2025-11-13 14:44:19,176 [ERROR]  Error procesando XML FACTURAE001-69920607062111.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:44:19,177 [ERROR]  No se pudo procesar XML FACTURAE001-69920607062111.XML
+2025-11-13 14:44:19,198 [INFO]  Extraído ZIP: FACTURAE001-8610447903712.zip
+2025-11-13 14:44:19,222 [ERROR]  Error procesando XML FACTURAE001-8610447903712.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:44:19,222 [ERROR]  No se pudo procesar XML FACTURAE001-8610447903712.XML
+2025-11-13 14:44:19,223 [INFO]  PDFs encontrados: 12
+2025-11-13 14:44:19,252 [ERROR]  PDF PDF-DOC-E001184320602124895.PDF no asociado a ninguna factura
+2025-11-13 14:44:19,270 [ERROR]  PDF PDF-DOC-E001359310413232975.PDF no asociado a ninguna factura
+2025-11-13 14:44:19,289 [ERROR]  PDF PDF-DOC-E0015635620452733421.PDF no asociado a ninguna factura
+2025-11-13 14:44:19,308 [ERROR]  PDF PDF-DOC-E00167010479265742.PDF no asociado a ninguna factura
+2025-11-13 14:44:19,327 [ERROR]  PDF PDF-DOC-E00169920607062111.PDF no asociado a ninguna factura
+2025-11-13 14:44:19,346 [ERROR]  PDF PDF-DOC-E0018610447903712.PDF no asociado a ninguna factura
+2025-11-13 14:44:19,353 [ERROR]  PDF PDF-DOC-E001184320602124895.PDF no asociado a ninguna factura
+2025-11-13 14:44:19,359 [ERROR]  PDF PDF-DOC-E001359310413232975.PDF no asociado a ninguna factura
+2025-11-13 14:44:19,366 [ERROR]  PDF PDF-DOC-E0015635620452733421.PDF no asociado a ninguna factura
+2025-11-13 14:44:19,372 [ERROR]  PDF PDF-DOC-E00167010479265742.PDF no asociado a ninguna factura
+2025-11-13 14:44:19,379 [ERROR]  PDF PDF-DOC-E00169920607062111.PDF no asociado a ninguna factura
+2025-11-13 14:44:19,386 [ERROR]  PDF PDF-DOC-E0018610447903712.PDF no asociado a ninguna factura
+2025-11-13 14:44:19,386 [INFO]  Eliminado: PDF-DOC-E001184320602124895.pdf
+2025-11-13 14:44:19,387 [INFO]  Eliminado: PDF-DOC-E001359310413232975.pdf
+2025-11-13 14:44:19,388 [INFO]  Eliminado: PDF-DOC-E0015635620452733421.pdf
+2025-11-13 14:44:19,388 [INFO]  Eliminado: PDF-DOC-E00167010479265742.pdf
+2025-11-13 14:44:19,388 [INFO]  Eliminado: PDF-DOC-E00169920607062111.pdf
+2025-11-13 14:44:19,389 [INFO]  Eliminado: PDF-DOC-E0018610447903712.pdf
+2025-11-13 14:44:19,389 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E001184320602124895.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E001184320602124895.pdf'
+2025-11-13 14:44:19,389 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E001359310413232975.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E001359310413232975.pdf'
+2025-11-13 14:44:19,389 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0015635620452733421.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0015635620452733421.pdf'
+2025-11-13 14:44:19,389 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00167010479265742.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00167010479265742.pdf'
+2025-11-13 14:44:19,390 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00169920607062111.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00169920607062111.pdf'
+2025-11-13 14:44:19,390 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0018610447903712.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0018610447903712.pdf'
+2025-11-13 14:44:19,390 [INFO]  Eliminado: FACTURAE001-184320602124895.zip
+2025-11-13 14:44:19,391 [INFO]  Eliminado: FACTURAE001-359310413232975.zip
+2025-11-13 14:44:19,391 [INFO]  Eliminado: FACTURAE001-5635620452733421.zip
+2025-11-13 14:44:19,391 [INFO]  Eliminado: FACTURAE001-67010479265742.zip
+2025-11-13 14:44:19,392 [INFO]  Eliminado: FACTURAE001-69920607062111.zip
+2025-11-13 14:44:19,392 [INFO]  Eliminado: FACTURAE001-8610447903712.zip
+2025-11-13 14:44:19,392 [INFO]  Proceso finalizado correctamente
+2025-11-13 14:48:12,738 [INFO]  Filtro de fechas: 2024-06-13 - 2024-06-13
+2025-11-13 14:48:12,738 [INFO]  Iniciando procesamiento para empresa ID 1 (RUC 20494384273)
+2025-11-13 14:48:12,739 [INFO]  ZIPs encontrados: 6
+2025-11-13 14:48:12,758 [INFO]  Extraído ZIP: FACTURAE001-184320602124895.zip
+2025-11-13 14:48:12,826 [ERROR]  Error procesando XML FACTURAE001-184320602124895.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:48:12,827 [ERROR]  No se pudo procesar XML FACTURAE001-184320602124895.XML
+2025-11-13 14:48:12,844 [INFO]  Extraído ZIP: FACTURAE001-359310413232975.zip
+2025-11-13 14:48:12,866 [ERROR]  Error procesando XML FACTURAE001-359310413232975.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:48:12,866 [ERROR]  No se pudo procesar XML FACTURAE001-359310413232975.XML
+2025-11-13 14:48:12,882 [INFO]  Extraído ZIP: FACTURAE001-5635620452733421.zip
+2025-11-13 14:48:12,904 [ERROR]  Error procesando XML FACTURAE001-5635620452733421.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:48:12,905 [ERROR]  No se pudo procesar XML FACTURAE001-5635620452733421.XML
+2025-11-13 14:48:12,921 [INFO]  Extraído ZIP: FACTURAE001-67010479265742.zip
+2025-11-13 14:48:12,944 [ERROR]  Error procesando XML FACTURAE001-67010479265742.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:48:12,945 [ERROR]  No se pudo procesar XML FACTURAE001-67010479265742.XML
+2025-11-13 14:48:12,963 [INFO]  Extraído ZIP: FACTURAE001-69920607062111.zip
+2025-11-13 14:48:12,994 [ERROR]  Error procesando XML FACTURAE001-69920607062111.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:48:12,995 [ERROR]  No se pudo procesar XML FACTURAE001-69920607062111.XML
+2025-11-13 14:48:13,016 [INFO]  Extraído ZIP: FACTURAE001-8610447903712.zip
+2025-11-13 14:48:13,040 [ERROR]  Error procesando XML FACTURAE001-8610447903712.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:48:13,041 [ERROR]  No se pudo procesar XML FACTURAE001-8610447903712.XML
+2025-11-13 14:48:13,042 [INFO]  PDFs encontrados: 12
+2025-11-13 14:48:13,073 [ERROR]  PDF PDF-DOC-E001184320602124895.PDF no asociado a ninguna factura
+2025-11-13 14:48:13,100 [ERROR]  PDF PDF-DOC-E001359310413232975.PDF no asociado a ninguna factura
+2025-11-13 14:48:13,120 [ERROR]  PDF PDF-DOC-E0015635620452733421.PDF no asociado a ninguna factura
+2025-11-13 14:48:13,138 [ERROR]  PDF PDF-DOC-E00167010479265742.PDF no asociado a ninguna factura
+2025-11-13 14:48:13,157 [ERROR]  PDF PDF-DOC-E00169920607062111.PDF no asociado a ninguna factura
+2025-11-13 14:48:13,176 [ERROR]  PDF PDF-DOC-E0018610447903712.PDF no asociado a ninguna factura
+2025-11-13 14:48:13,182 [ERROR]  PDF PDF-DOC-E001184320602124895.PDF no asociado a ninguna factura
+2025-11-13 14:48:13,189 [ERROR]  PDF PDF-DOC-E001359310413232975.PDF no asociado a ninguna factura
+2025-11-13 14:48:13,195 [ERROR]  PDF PDF-DOC-E0015635620452733421.PDF no asociado a ninguna factura
+2025-11-13 14:48:13,201 [ERROR]  PDF PDF-DOC-E00167010479265742.PDF no asociado a ninguna factura
+2025-11-13 14:48:13,207 [ERROR]  PDF PDF-DOC-E00169920607062111.PDF no asociado a ninguna factura
+2025-11-13 14:48:13,214 [ERROR]  PDF PDF-DOC-E0018610447903712.PDF no asociado a ninguna factura
+2025-11-13 14:48:13,215 [INFO]  Eliminado: PDF-DOC-E001184320602124895.pdf
+2025-11-13 14:48:13,216 [INFO]  Eliminado: PDF-DOC-E001359310413232975.pdf
+2025-11-13 14:48:13,216 [INFO]  Eliminado: PDF-DOC-E0015635620452733421.pdf
+2025-11-13 14:48:13,216 [INFO]  Eliminado: PDF-DOC-E00167010479265742.pdf
+2025-11-13 14:48:13,217 [INFO]  Eliminado: PDF-DOC-E00169920607062111.pdf
+2025-11-13 14:48:13,217 [INFO]  Eliminado: PDF-DOC-E0018610447903712.pdf
+2025-11-13 14:48:13,217 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E001184320602124895.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E001184320602124895.pdf'
+2025-11-13 14:48:13,217 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E001359310413232975.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E001359310413232975.pdf'
+2025-11-13 14:48:13,218 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0015635620452733421.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0015635620452733421.pdf'
+2025-11-13 14:48:13,218 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00167010479265742.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00167010479265742.pdf'
+2025-11-13 14:48:13,218 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00169920607062111.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00169920607062111.pdf'
+2025-11-13 14:48:13,218 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0018610447903712.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0018610447903712.pdf'
+2025-11-13 14:48:13,218 [INFO]  Eliminado: FACTURAE001-184320602124895.zip
+2025-11-13 14:48:13,219 [INFO]  Eliminado: FACTURAE001-359310413232975.zip
+2025-11-13 14:48:13,219 [INFO]  Eliminado: FACTURAE001-5635620452733421.zip
+2025-11-13 14:48:13,219 [INFO]  Eliminado: FACTURAE001-67010479265742.zip
+2025-11-13 14:48:13,220 [INFO]  Eliminado: FACTURAE001-69920607062111.zip
+2025-11-13 14:48:13,220 [INFO]  Eliminado: FACTURAE001-8610447903712.zip
+2025-11-13 14:48:13,220 [INFO]  Proceso finalizado correctamente
+2025-11-13 14:57:40,777 [INFO]  Filtro de fechas: 2024-06-13 - 2024-06-13
+2025-11-13 14:57:40,777 [INFO]  Iniciando procesamiento para empresa ID 1 (RUC 20494384273)
+2025-11-13 14:57:40,777 [INFO]  ZIPs encontrados: 6
+2025-11-13 14:57:40,794 [INFO]  Extraído ZIP: FACTURAE001-184320602124895.zip
+2025-11-13 14:57:40,864 [ERROR]  Error procesando XML FACTURAE001-184320602124895.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:57:40,864 [ERROR]  No se pudo procesar XML FACTURAE001-184320602124895.XML
+2025-11-13 14:57:40,883 [INFO]  Extraído ZIP: FACTURAE001-359310413232975.zip
+2025-11-13 14:57:40,906 [ERROR]  Error procesando XML FACTURAE001-359310413232975.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:57:40,906 [ERROR]  No se pudo procesar XML FACTURAE001-359310413232975.XML
+2025-11-13 14:57:40,924 [INFO]  Extraído ZIP: FACTURAE001-5635620452733421.zip
+2025-11-13 14:57:40,948 [ERROR]  Error procesando XML FACTURAE001-5635620452733421.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:57:40,948 [ERROR]  No se pudo procesar XML FACTURAE001-5635620452733421.XML
+2025-11-13 14:57:40,967 [INFO]  Extraído ZIP: FACTURAE001-67010479265742.zip
+2025-11-13 14:57:40,992 [ERROR]  Error procesando XML FACTURAE001-67010479265742.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:57:40,992 [ERROR]  No se pudo procesar XML FACTURAE001-67010479265742.XML
+2025-11-13 14:57:41,012 [INFO]  Extraído ZIP: FACTURAE001-69920607062111.zip
+2025-11-13 14:57:41,041 [ERROR]  Error procesando XML FACTURAE001-69920607062111.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:57:41,042 [ERROR]  No se pudo procesar XML FACTURAE001-69920607062111.XML
+2025-11-13 14:57:41,060 [INFO]  Extraído ZIP: FACTURAE001-8610447903712.zip
+2025-11-13 14:57:41,084 [ERROR]  Error procesando XML FACTURAE001-8610447903712.XML: Not all parameters were used in the SQL statement
+2025-11-13 14:57:41,084 [ERROR]  No se pudo procesar XML FACTURAE001-8610447903712.XML
+2025-11-13 14:57:41,085 [INFO]  PDFs encontrados: 12
+2025-11-13 14:57:41,115 [ERROR]  PDF PDF-DOC-E001184320602124895.PDF no asociado a ninguna factura
+2025-11-13 14:57:41,134 [ERROR]  PDF PDF-DOC-E001359310413232975.PDF no asociado a ninguna factura
+2025-11-13 14:57:41,154 [ERROR]  PDF PDF-DOC-E0015635620452733421.PDF no asociado a ninguna factura
+2025-11-13 14:57:41,174 [ERROR]  PDF PDF-DOC-E00167010479265742.PDF no asociado a ninguna factura
+2025-11-13 14:57:41,195 [ERROR]  PDF PDF-DOC-E00169920607062111.PDF no asociado a ninguna factura
+2025-11-13 14:57:41,217 [ERROR]  PDF PDF-DOC-E0018610447903712.PDF no asociado a ninguna factura
+2025-11-13 14:57:41,226 [ERROR]  PDF PDF-DOC-E001184320602124895.PDF no asociado a ninguna factura
+2025-11-13 14:57:41,233 [ERROR]  PDF PDF-DOC-E001359310413232975.PDF no asociado a ninguna factura
+2025-11-13 14:57:41,242 [ERROR]  PDF PDF-DOC-E0015635620452733421.PDF no asociado a ninguna factura
+2025-11-13 14:57:41,248 [ERROR]  PDF PDF-DOC-E00167010479265742.PDF no asociado a ninguna factura
+2025-11-13 14:57:41,257 [ERROR]  PDF PDF-DOC-E00169920607062111.PDF no asociado a ninguna factura
+2025-11-13 14:57:41,264 [ERROR]  PDF PDF-DOC-E0018610447903712.PDF no asociado a ninguna factura
+2025-11-13 14:57:41,265 [INFO]  Eliminado: PDF-DOC-E001184320602124895.pdf
+2025-11-13 14:57:41,265 [INFO]  Eliminado: PDF-DOC-E001359310413232975.pdf
+2025-11-13 14:57:41,266 [INFO]  Eliminado: PDF-DOC-E0015635620452733421.pdf
+2025-11-13 14:57:41,266 [INFO]  Eliminado: PDF-DOC-E00167010479265742.pdf
+2025-11-13 14:57:41,267 [INFO]  Eliminado: PDF-DOC-E00169920607062111.pdf
+2025-11-13 14:57:41,267 [INFO]  Eliminado: PDF-DOC-E0018610447903712.pdf
+2025-11-13 14:57:41,268 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E001184320602124895.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E001184320602124895.pdf'
+2025-11-13 14:57:41,268 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E001359310413232975.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E001359310413232975.pdf'
+2025-11-13 14:57:41,268 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0015635620452733421.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0015635620452733421.pdf'
+2025-11-13 14:57:41,268 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00167010479265742.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00167010479265742.pdf'
+2025-11-13 14:57:41,268 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00169920607062111.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00169920607062111.pdf'
+2025-11-13 14:57:41,269 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0018610447903712.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0018610447903712.pdf'
+2025-11-13 14:57:41,270 [INFO]  Eliminado: FACTURAE001-184320602124895.zip
+2025-11-13 14:57:41,270 [INFO]  Eliminado: FACTURAE001-359310413232975.zip
+2025-11-13 14:57:41,270 [INFO]  Eliminado: FACTURAE001-5635620452733421.zip
+2025-11-13 14:57:41,271 [INFO]  Eliminado: FACTURAE001-67010479265742.zip
+2025-11-13 14:57:41,271 [INFO]  Eliminado: FACTURAE001-69920607062111.zip
+2025-11-13 14:57:41,273 [INFO]  Eliminado: FACTURAE001-8610447903712.zip
+2025-11-13 14:57:41,274 [INFO]  Proceso finalizado correctamente
+2025-11-13 15:02:49,479 [INFO]  Filtro de fechas: 2024-06-13 - 2024-06-13
+2025-11-13 15:02:49,480 [INFO]  Iniciando procesamiento para empresa ID 1 (RUC 20494384273)
+2025-11-13 15:02:49,480 [INFO]  ZIPs encontrados: 6
+2025-11-13 15:02:49,502 [INFO]  Extraído ZIP: FACTURAE001-184320602124895.zip
+2025-11-13 15:02:49,577 [ERROR] ERROR SQL procesando XML FACTURAE001-184320602124895.XML:
+Not all parameters were used in the SQL statement
+VALORES: (1, 'FACTURA', 'E001', '1843', 'E001-1843', '2024-06-13', None, '20602124895', 'GLOBAL SERVICE & SUPPLIERS S.A.C.', '20494384273', 'MINERA SANTA ENMA S.A.C.', 'BIODIGESTOR 7000LTS FARPLAST CON ACC', 8135.8, 1464.44, 9600.24, 'PEN', 'COMPRA', 'ACEPTADO', 16271.6, 0.0, 0.0, 0.0, None)
+2025-11-13 15:02:49,577 [ERROR]  No se pudo procesar XML FACTURAE001-184320602124895.XML
+2025-11-13 15:02:49,599 [INFO]  Extraído ZIP: FACTURAE001-359310413232975.zip
+2025-11-13 15:02:49,626 [ERROR] ERROR SQL procesando XML FACTURAE001-359310413232975.XML:
+Not all parameters were used in the SQL statement
+VALORES: (1, 'FACTURA', 'E001', '3593', 'E001-3593', '2024-06-13', None, '10413232975', 'MENESES MEDINA CHRIS JACQUELINE', '20494384273', 'MINERA SANTA ENMA S.A.C.', 'SERVICIO DE TRANSPORTE DE CUCHILLAS MOTONIVELADORA', 338.98, 61.02, 400.0, 'PEN', 'COMPRA', 'ACEPTADO', 677.96, 0.0, 0.0, 0.0, None)
+2025-11-13 15:02:49,626 [ERROR]  No se pudo procesar XML FACTURAE001-359310413232975.XML
+2025-11-13 15:02:49,647 [INFO]  Extraído ZIP: FACTURAE001-5635620452733421.zip
+2025-11-13 15:02:49,675 [ERROR] ERROR SQL procesando XML FACTURAE001-5635620452733421.XML:
+Not all parameters were used in the SQL statement
+VALORES: (1, 'FACTURA', 'E001', '56356', 'E001-56356', '2024-06-13', None, '20452733421', 'FERRETERIA SAN PEDRO S.A.C.', '20494384273', 'MINERA SANTA ENMA S.A.C.', 'TEMPLE MARTELL X5KG', 35.59, 6.41, 42.0, 'PEN', 'COMPRA', 'ACEPTADO', 71.18321800000001, 0.0, 0.0, 0.0, None)
+2025-11-13 15:02:49,676 [ERROR]  No se pudo procesar XML FACTURAE001-5635620452733421.XML
+2025-11-13 15:02:49,696 [INFO]  Extraído ZIP: FACTURAE001-67010479265742.zip
+2025-11-13 15:02:49,724 [ERROR] ERROR SQL procesando XML FACTURAE001-67010479265742.XML:
+Not all parameters were used in the SQL statement
+VALORES: (1, 'FACTURA', 'E001', '670', 'E001-670', '2024-06-13', None, '10479265742', 'NAPA SIGUAS LESLY PAOLA', '20494384273', 'MINERA SANTA ENMA S.A.C.', 'BALDE DE PINTURA', 116.95, 21.05, 138.0, 'PEN', 'COMPRA', 'ACEPTADO', 233.899, 0.0, 0.0, 0.0, None)
+2025-11-13 15:02:49,724 [ERROR]  No se pudo procesar XML FACTURAE001-67010479265742.XML
+2025-11-13 15:02:49,745 [INFO]  Extraído ZIP: FACTURAE001-69920607062111.zip
+2025-11-13 15:02:49,772 [ERROR] ERROR SQL procesando XML FACTURAE001-69920607062111.XML:
+Not all parameters were used in the SQL statement
+VALORES: (1, 'FACTURA', 'E001', '699', 'E001-699', '2024-06-13', None, '20607062111', 'INSTELC S.A.C.', '20494384273', 'MINERA SANTA ENMA S.A.C.', 'PRESOSTATO DE AGUA', 1676.27, 301.73, 1978.0, 'PEN', 'COMPRA', 'ACEPTADO', 3352.54118874, 0.0, 0.0, 0.0, None)
+2025-11-13 15:02:49,773 [ERROR]  No se pudo procesar XML FACTURAE001-69920607062111.XML
+2025-11-13 15:02:49,790 [INFO]  Extraído ZIP: FACTURAE001-8610447903712.zip
+2025-11-13 15:02:49,813 [ERROR] ERROR SQL procesando XML FACTURAE001-8610447903712.XML:
+Not all parameters were used in the SQL statement
+VALORES: (1, 'FACTURA', 'E001', '86', 'E001-86', '2024-06-13', None, '10447903712', 'MARQUEZ TAFUR MIGUEL ANGEL', '20494384273', 'MINERA SANTA ENMA S.A.C.', 'DE CABLE ELCOFLEX HD7RN-F 4GX6MM2 440/750 V SUMERGIBLE', 100.0, 18.0, 118.0, 'USD', 'COMPRA', 'ACEPTADO', 200.0, 0.0, 0.0, 0.0, None)
+2025-11-13 15:02:49,813 [ERROR]  No se pudo procesar XML FACTURAE001-8610447903712.XML
+2025-11-13 15:02:49,814 [INFO]  PDFs encontrados: 12
+2025-11-13 15:02:49,842 [ERROR]  PDF PDF-DOC-E001184320602124895.PDF no asociado a ninguna factura
+2025-11-13 15:02:49,861 [ERROR]  PDF PDF-DOC-E001359310413232975.PDF no asociado a ninguna factura
+2025-11-13 15:02:49,881 [ERROR]  PDF PDF-DOC-E0015635620452733421.PDF no asociado a ninguna factura
+2025-11-13 15:02:49,900 [ERROR]  PDF PDF-DOC-E00167010479265742.PDF no asociado a ninguna factura
+2025-11-13 15:02:49,924 [ERROR]  PDF PDF-DOC-E00169920607062111.PDF no asociado a ninguna factura
+2025-11-13 15:02:49,944 [ERROR]  PDF PDF-DOC-E0018610447903712.PDF no asociado a ninguna factura
+2025-11-13 15:02:49,950 [ERROR]  PDF PDF-DOC-E001184320602124895.PDF no asociado a ninguna factura
+2025-11-13 15:02:49,958 [ERROR]  PDF PDF-DOC-E001359310413232975.PDF no asociado a ninguna factura
+2025-11-13 15:02:49,964 [ERROR]  PDF PDF-DOC-E0015635620452733421.PDF no asociado a ninguna factura
+2025-11-13 15:02:49,970 [ERROR]  PDF PDF-DOC-E00167010479265742.PDF no asociado a ninguna factura
+2025-11-13 15:02:49,978 [ERROR]  PDF PDF-DOC-E00169920607062111.PDF no asociado a ninguna factura
+2025-11-13 15:02:49,985 [ERROR]  PDF PDF-DOC-E0018610447903712.PDF no asociado a ninguna factura
+2025-11-13 15:02:49,986 [INFO]  Eliminado: PDF-DOC-E001184320602124895.pdf
+2025-11-13 15:02:49,986 [INFO]  Eliminado: PDF-DOC-E001359310413232975.pdf
+2025-11-13 15:02:49,987 [INFO]  Eliminado: PDF-DOC-E0015635620452733421.pdf
+2025-11-13 15:02:49,987 [INFO]  Eliminado: PDF-DOC-E00167010479265742.pdf
+2025-11-13 15:02:49,988 [INFO]  Eliminado: PDF-DOC-E00169920607062111.pdf
+2025-11-13 15:02:49,988 [INFO]  Eliminado: PDF-DOC-E0018610447903712.pdf
+2025-11-13 15:02:49,988 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E001184320602124895.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E001184320602124895.pdf'
+2025-11-13 15:02:49,989 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E001359310413232975.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E001359310413232975.pdf'
+2025-11-13 15:02:49,989 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0015635620452733421.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0015635620452733421.pdf'
+2025-11-13 15:02:49,989 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00167010479265742.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00167010479265742.pdf'
+2025-11-13 15:02:49,989 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00169920607062111.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00169920607062111.pdf'
+2025-11-13 15:02:49,989 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0018610447903712.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0018610447903712.pdf'
+2025-11-13 15:02:49,990 [INFO]  Eliminado: FACTURAE001-184320602124895.zip
+2025-11-13 15:02:49,990 [INFO]  Eliminado: FACTURAE001-359310413232975.zip
+2025-11-13 15:02:49,990 [INFO]  Eliminado: FACTURAE001-5635620452733421.zip
+2025-11-13 15:02:49,991 [INFO]  Eliminado: FACTURAE001-67010479265742.zip
+2025-11-13 15:02:49,991 [INFO]  Eliminado: FACTURAE001-69920607062111.zip
+2025-11-13 15:02:49,991 [INFO]  Eliminado: FACTURAE001-8610447903712.zip
+2025-11-13 15:02:49,991 [INFO]  Proceso finalizado correctamente
+2025-11-13 15:08:33,945 [INFO]  Filtro de fechas: 2024-06-13 - 2024-06-13
+2025-11-13 15:08:33,945 [INFO]  Iniciando procesamiento para empresa ID 1 (RUC 20494384273)
+2025-11-13 15:08:33,946 [INFO]  ZIPs encontrados: 6
+2025-11-13 15:08:33,962 [INFO]  Extraído ZIP: FACTURAE001-184320602124895.zip
+2025-11-13 15:08:33,980 [INFO] Valores para INSERT XML FACTURAE001-184320602124895.XML: (1, 'FACTURA', 'E001', '1843', 'E001-1843', '2024-06-13', None, '20602124895', 'GLOBAL SERVICE & SUPPLIERS S.A.C.', '20494384273', 'MINERA SANTA ENMA S.A.C.', 'BIODIGESTOR 7000LTS FARPLAST CON ACC', Decimal('8135.80'), Decimal('1464.44'), Decimal('9600.24'), 'PEN', 'COMPRA', 'ACEPTADO', Decimal('16271.60'), Decimal('0.00'), Decimal('0.00'), Decimal('0.00'), None)
+2025-11-13 15:08:34,032 [ERROR] ERROR SQL procesando XML FACTURAE001-184320602124895.XML: Not all parameters were used in the SQL statement
+2025-11-13 15:08:34,033 [ERROR]  No se pudo procesar XML FACTURAE001-184320602124895.XML
+2025-11-13 15:08:34,050 [INFO]  Extraído ZIP: FACTURAE001-359310413232975.zip
+2025-11-13 15:08:34,064 [INFO] Valores para INSERT XML FACTURAE001-359310413232975.XML: (1, 'FACTURA', 'E001', '3593', 'E001-3593', '2024-06-13', None, '10413232975', 'MENESES MEDINA CHRIS JACQUELINE', '20494384273', 'MINERA SANTA ENMA S.A.C.', 'SERVICIO DE TRANSPORTE DE CUCHILLAS MOTONIVELADORA', Decimal('338.98'), Decimal('61.02'), Decimal('400.00'), 'PEN', 'COMPRA', 'ACEPTADO', Decimal('677.96'), Decimal('0.00'), Decimal('0.00'), Decimal('0.00'), None)
+2025-11-13 15:08:34,072 [ERROR] ERROR SQL procesando XML FACTURAE001-359310413232975.XML: Not all parameters were used in the SQL statement
+2025-11-13 15:08:34,072 [ERROR]  No se pudo procesar XML FACTURAE001-359310413232975.XML
+2025-11-13 15:08:34,089 [INFO]  Extraído ZIP: FACTURAE001-5635620452733421.zip
+2025-11-13 15:08:34,104 [INFO] Valores para INSERT XML FACTURAE001-5635620452733421.XML: (1, 'FACTURA', 'E001', '56356', 'E001-56356', '2024-06-13', None, '20452733421', 'FERRETERIA SAN PEDRO S.A.C.', '20494384273', 'MINERA SANTA ENMA S.A.C.', 'TEMPLE MARTELL X5KG', Decimal('35.59'), Decimal('6.41'), Decimal('42.00'), 'PEN', 'COMPRA', 'ACEPTADO', Decimal('71.183218'), Decimal('0.00'), Decimal('0.00'), Decimal('0.00'), None)
+2025-11-13 15:08:34,112 [ERROR] ERROR SQL procesando XML FACTURAE001-5635620452733421.XML: Not all parameters were used in the SQL statement
+2025-11-13 15:08:34,112 [ERROR]  No se pudo procesar XML FACTURAE001-5635620452733421.XML
+2025-11-13 15:08:34,129 [INFO]  Extraído ZIP: FACTURAE001-67010479265742.zip
+2025-11-13 15:08:34,143 [INFO] Valores para INSERT XML FACTURAE001-67010479265742.XML: (1, 'FACTURA', 'E001', '670', 'E001-670', '2024-06-13', None, '10479265742', 'NAPA SIGUAS LESLY PAOLA', '20494384273', 'MINERA SANTA ENMA S.A.C.', 'BALDE DE PINTURA', Decimal('116.95'), Decimal('21.05'), Decimal('138.00'), 'PEN', 'COMPRA', 'ACEPTADO', Decimal('233.899'), Decimal('0.00'), Decimal('0.00'), Decimal('0.00'), None)
+2025-11-13 15:08:34,151 [ERROR] ERROR SQL procesando XML FACTURAE001-67010479265742.XML: Not all parameters were used in the SQL statement
+2025-11-13 15:08:34,151 [ERROR]  No se pudo procesar XML FACTURAE001-67010479265742.XML
+2025-11-13 15:08:34,171 [INFO]  Extraído ZIP: FACTURAE001-69920607062111.zip
+2025-11-13 15:08:34,188 [INFO] Valores para INSERT XML FACTURAE001-69920607062111.XML: (1, 'FACTURA', 'E001', '699', 'E001-699', '2024-06-13', None, '20607062111', 'INSTELC S.A.C.', '20494384273', 'MINERA SANTA ENMA S.A.C.', 'PRESOSTATO DE AGUA', Decimal('1676.27'), Decimal('301.73'), Decimal('1978.00'), 'PEN', 'COMPRA', 'ACEPTADO', Decimal('3352.54118874'), Decimal('0.00'), Decimal('0.00'), Decimal('0.00'), None)
+2025-11-13 15:08:34,197 [ERROR] ERROR SQL procesando XML FACTURAE001-69920607062111.XML: Not all parameters were used in the SQL statement
+2025-11-13 15:08:34,197 [ERROR]  No se pudo procesar XML FACTURAE001-69920607062111.XML
+2025-11-13 15:08:34,216 [INFO]  Extraído ZIP: FACTURAE001-8610447903712.zip
+2025-11-13 15:08:34,231 [INFO] Valores para INSERT XML FACTURAE001-8610447903712.XML: (1, 'FACTURA', 'E001', '86', 'E001-86', '2024-06-13', None, '10447903712', 'MARQUEZ TAFUR MIGUEL ANGEL', '20494384273', 'MINERA SANTA ENMA S.A.C.', 'DE CABLE ELCOFLEX HD7RN-F 4GX6MM2 440/750 V SUMERGIBLE', Decimal('100.00'), Decimal('18.00'), Decimal('118.00'), 'USD', 'COMPRA', 'ACEPTADO', Decimal('200.00'), Decimal('0.00'), Decimal('0.00'), Decimal('0.00'), None)
+2025-11-13 15:08:34,240 [ERROR] ERROR SQL procesando XML FACTURAE001-8610447903712.XML: Not all parameters were used in the SQL statement
+2025-11-13 15:08:34,241 [ERROR]  No se pudo procesar XML FACTURAE001-8610447903712.XML
+2025-11-13 15:08:34,242 [INFO]  PDFs encontrados: 12
+2025-11-13 15:08:34,271 [ERROR]  PDF PDF-DOC-E001184320602124895.PDF no asociado a ninguna factura
+2025-11-13 15:08:34,291 [ERROR]  PDF PDF-DOC-E001359310413232975.PDF no asociado a ninguna factura
+2025-11-13 15:08:34,309 [ERROR]  PDF PDF-DOC-E0015635620452733421.PDF no asociado a ninguna factura
+2025-11-13 15:08:34,329 [ERROR]  PDF PDF-DOC-E00167010479265742.PDF no asociado a ninguna factura
+2025-11-13 15:08:34,349 [ERROR]  PDF PDF-DOC-E00169920607062111.PDF no asociado a ninguna factura
+2025-11-13 15:08:34,369 [ERROR]  PDF PDF-DOC-E0018610447903712.PDF no asociado a ninguna factura
+2025-11-13 15:08:34,375 [ERROR]  PDF PDF-DOC-E001184320602124895.PDF no asociado a ninguna factura
+2025-11-13 15:08:34,383 [ERROR]  PDF PDF-DOC-E001359310413232975.PDF no asociado a ninguna factura
+2025-11-13 15:08:34,389 [ERROR]  PDF PDF-DOC-E0015635620452733421.PDF no asociado a ninguna factura
+2025-11-13 15:08:34,396 [ERROR]  PDF PDF-DOC-E00167010479265742.PDF no asociado a ninguna factura
+2025-11-13 15:08:34,403 [ERROR]  PDF PDF-DOC-E00169920607062111.PDF no asociado a ninguna factura
+2025-11-13 15:08:34,410 [ERROR]  PDF PDF-DOC-E0018610447903712.PDF no asociado a ninguna factura
+2025-11-13 15:08:34,410 [INFO]  Eliminado: PDF-DOC-E001184320602124895.pdf
+2025-11-13 15:08:34,411 [INFO]  Eliminado: PDF-DOC-E001359310413232975.pdf
+2025-11-13 15:08:34,411 [INFO]  Eliminado: PDF-DOC-E0015635620452733421.pdf
+2025-11-13 15:08:34,412 [INFO]  Eliminado: PDF-DOC-E00167010479265742.pdf
+2025-11-13 15:08:34,412 [INFO]  Eliminado: PDF-DOC-E00169920607062111.pdf
+2025-11-13 15:08:34,412 [INFO]  Eliminado: PDF-DOC-E0018610447903712.pdf
+2025-11-13 15:08:34,413 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E001184320602124895.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E001184320602124895.pdf'
+2025-11-13 15:08:34,413 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E001359310413232975.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E001359310413232975.pdf'
+2025-11-13 15:08:34,413 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0015635620452733421.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0015635620452733421.pdf'
+2025-11-13 15:08:34,414 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00167010479265742.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00167010479265742.pdf'
+2025-11-13 15:08:34,414 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00169920607062111.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00169920607062111.pdf'
+2025-11-13 15:08:34,414 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0018610447903712.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0018610447903712.pdf'
+2025-11-13 15:08:34,414 [INFO]  Eliminado: FACTURAE001-184320602124895.zip
+2025-11-13 15:08:34,415 [INFO]  Eliminado: FACTURAE001-359310413232975.zip
+2025-11-13 15:08:34,415 [INFO]  Eliminado: FACTURAE001-5635620452733421.zip
+2025-11-13 15:08:34,415 [INFO]  Eliminado: FACTURAE001-67010479265742.zip
+2025-11-13 15:08:34,416 [INFO]  Eliminado: FACTURAE001-69920607062111.zip
+2025-11-13 15:08:34,416 [INFO]  Eliminado: FACTURAE001-8610447903712.zip
+2025-11-13 15:08:34,416 [INFO]  Proceso finalizado correctamente
+2025-11-13 15:14:06,985 [INFO]  Filtro de fechas: 2024-06-13 - 2024-06-13
+2025-11-13 15:14:06,986 [INFO]  Iniciando procesamiento para empresa ID 1 (RUC 20494384273)
+2025-11-13 15:14:06,986 [INFO]  ZIPs encontrados: 6
+2025-11-13 15:14:07,004 [INFO]  Extraído ZIP: FACTURAE001-184320602124895.zip
+2025-11-13 15:14:07,019 [INFO] Valores para INSERT XML FACTURAE001-184320602124895.XML: (1, 'FACTURA', 'E001', '1843', 'E001-1843', '2024-06-13', None, '20602124895', 'GLOBAL SERVICE & SUPPLIERS S.A.C.', '20494384273', 'MINERA SANTA ENMA S.A.C.', 'BIODIGESTOR 7000LTS FARPLAST CON ACC', Decimal('8135.80'), Decimal('1464.44'), Decimal('9600.24'), 'PEN', 'COMPRA', 'ACEPTADO', Decimal('16271.60'), Decimal('0.00'), Decimal('0.00'), Decimal('0.00'), None)
+2025-11-13 15:14:07,072 [ERROR] ERROR SQL procesando XML FACTURAE001-184320602124895.XML: Not all parameters were used in the SQL statement
+2025-11-13 15:14:07,073 [ERROR]  No se pudo procesar XML FACTURAE001-184320602124895.XML
+2025-11-13 15:14:07,090 [INFO]  Extraído ZIP: FACTURAE001-359310413232975.zip
+2025-11-13 15:14:07,106 [INFO] Valores para INSERT XML FACTURAE001-359310413232975.XML: (1, 'FACTURA', 'E001', '3593', 'E001-3593', '2024-06-13', None, '10413232975', 'MENESES MEDINA CHRIS JACQUELINE', '20494384273', 'MINERA SANTA ENMA S.A.C.', 'SERVICIO DE TRANSPORTE DE CUCHILLAS MOTONIVELADORA', Decimal('338.98'), Decimal('61.02'), Decimal('400.00'), 'PEN', 'COMPRA', 'ACEPTADO', Decimal('677.96'), Decimal('0.00'), Decimal('0.00'), Decimal('0.00'), None)
+2025-11-13 15:14:07,115 [ERROR] ERROR SQL procesando XML FACTURAE001-359310413232975.XML: Not all parameters were used in the SQL statement
+2025-11-13 15:14:07,115 [ERROR]  No se pudo procesar XML FACTURAE001-359310413232975.XML
+2025-11-13 15:14:07,134 [INFO]  Extraído ZIP: FACTURAE001-5635620452733421.zip
+2025-11-13 15:14:07,149 [INFO] Valores para INSERT XML FACTURAE001-5635620452733421.XML: (1, 'FACTURA', 'E001', '56356', 'E001-56356', '2024-06-13', None, '20452733421', 'FERRETERIA SAN PEDRO S.A.C.', '20494384273', 'MINERA SANTA ENMA S.A.C.', 'TEMPLE MARTELL X5KG', Decimal('35.59'), Decimal('6.41'), Decimal('42.00'), 'PEN', 'COMPRA', 'ACEPTADO', Decimal('71.183218'), Decimal('0.00'), Decimal('0.00'), Decimal('0.00'), None)
+2025-11-13 15:14:07,157 [ERROR] ERROR SQL procesando XML FACTURAE001-5635620452733421.XML: Not all parameters were used in the SQL statement
+2025-11-13 15:14:07,157 [ERROR]  No se pudo procesar XML FACTURAE001-5635620452733421.XML
+2025-11-13 15:14:07,176 [INFO]  Extraído ZIP: FACTURAE001-67010479265742.zip
+2025-11-13 15:14:07,191 [INFO] Valores para INSERT XML FACTURAE001-67010479265742.XML: (1, 'FACTURA', 'E001', '670', 'E001-670', '2024-06-13', None, '10479265742', 'NAPA SIGUAS LESLY PAOLA', '20494384273', 'MINERA SANTA ENMA S.A.C.', 'BALDE DE PINTURA', Decimal('116.95'), Decimal('21.05'), Decimal('138.00'), 'PEN', 'COMPRA', 'ACEPTADO', Decimal('233.899'), Decimal('0.00'), Decimal('0.00'), Decimal('0.00'), None)
+2025-11-13 15:14:07,200 [ERROR] ERROR SQL procesando XML FACTURAE001-67010479265742.XML: Not all parameters were used in the SQL statement
+2025-11-13 15:14:07,200 [ERROR]  No se pudo procesar XML FACTURAE001-67010479265742.XML
+2025-11-13 15:14:07,217 [INFO]  Extraído ZIP: FACTURAE001-69920607062111.zip
+2025-11-13 15:14:07,234 [INFO] Valores para INSERT XML FACTURAE001-69920607062111.XML: (1, 'FACTURA', 'E001', '699', 'E001-699', '2024-06-13', None, '20607062111', 'INSTELC S.A.C.', '20494384273', 'MINERA SANTA ENMA S.A.C.', 'PRESOSTATO DE AGUA', Decimal('1676.27'), Decimal('301.73'), Decimal('1978.00'), 'PEN', 'COMPRA', 'ACEPTADO', Decimal('3352.54118874'), Decimal('0.00'), Decimal('0.00'), Decimal('0.00'), None)
+2025-11-13 15:14:07,241 [ERROR] ERROR SQL procesando XML FACTURAE001-69920607062111.XML: Not all parameters were used in the SQL statement
+2025-11-13 15:14:07,242 [ERROR]  No se pudo procesar XML FACTURAE001-69920607062111.XML
+2025-11-13 15:14:07,259 [INFO]  Extraído ZIP: FACTURAE001-8610447903712.zip
+2025-11-13 15:14:07,273 [INFO] Valores para INSERT XML FACTURAE001-8610447903712.XML: (1, 'FACTURA', 'E001', '86', 'E001-86', '2024-06-13', None, '10447903712', 'MARQUEZ TAFUR MIGUEL ANGEL', '20494384273', 'MINERA SANTA ENMA S.A.C.', 'DE CABLE ELCOFLEX HD7RN-F 4GX6MM2 440/750 V SUMERGIBLE', Decimal('100.00'), Decimal('18.00'), Decimal('118.00'), 'USD', 'COMPRA', 'ACEPTADO', Decimal('200.00'), Decimal('0.00'), Decimal('0.00'), Decimal('0.00'), None)
+2025-11-13 15:14:07,281 [ERROR] ERROR SQL procesando XML FACTURAE001-8610447903712.XML: Not all parameters were used in the SQL statement
+2025-11-13 15:14:07,282 [ERROR]  No se pudo procesar XML FACTURAE001-8610447903712.XML
+2025-11-13 15:14:07,283 [INFO]  PDFs encontrados: 12
+2025-11-13 15:14:07,310 [ERROR]  PDF PDF-DOC-E001184320602124895.PDF no asociado a ninguna factura
+2025-11-13 15:14:07,329 [ERROR]  PDF PDF-DOC-E001359310413232975.PDF no asociado a ninguna factura
+2025-11-13 15:14:07,347 [ERROR]  PDF PDF-DOC-E0015635620452733421.PDF no asociado a ninguna factura
+2025-11-13 15:14:07,365 [ERROR]  PDF PDF-DOC-E00167010479265742.PDF no asociado a ninguna factura
+2025-11-13 15:14:07,383 [ERROR]  PDF PDF-DOC-E00169920607062111.PDF no asociado a ninguna factura
+2025-11-13 15:14:07,401 [ERROR]  PDF PDF-DOC-E0018610447903712.PDF no asociado a ninguna factura
+2025-11-13 15:14:07,408 [ERROR]  PDF PDF-DOC-E001184320602124895.PDF no asociado a ninguna factura
+2025-11-13 15:14:07,414 [ERROR]  PDF PDF-DOC-E001359310413232975.PDF no asociado a ninguna factura
+2025-11-13 15:14:07,420 [ERROR]  PDF PDF-DOC-E0015635620452733421.PDF no asociado a ninguna factura
+2025-11-13 15:14:07,428 [ERROR]  PDF PDF-DOC-E00167010479265742.PDF no asociado a ninguna factura
+2025-11-13 15:14:07,435 [ERROR]  PDF PDF-DOC-E00169920607062111.PDF no asociado a ninguna factura
+2025-11-13 15:14:07,442 [ERROR]  PDF PDF-DOC-E0018610447903712.PDF no asociado a ninguna factura
+2025-11-13 15:14:07,443 [INFO]  Eliminado: PDF-DOC-E001184320602124895.pdf
+2025-11-13 15:14:07,443 [INFO]  Eliminado: PDF-DOC-E001359310413232975.pdf
+2025-11-13 15:14:07,444 [INFO]  Eliminado: PDF-DOC-E0015635620452733421.pdf
+2025-11-13 15:14:07,444 [INFO]  Eliminado: PDF-DOC-E00167010479265742.pdf
+2025-11-13 15:14:07,444 [INFO]  Eliminado: PDF-DOC-E00169920607062111.pdf
+2025-11-13 15:14:07,445 [INFO]  Eliminado: PDF-DOC-E0018610447903712.pdf
+2025-11-13 15:14:07,445 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E001184320602124895.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E001184320602124895.pdf'
+2025-11-13 15:14:07,445 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E001359310413232975.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E001359310413232975.pdf'
+2025-11-13 15:14:07,445 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0015635620452733421.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0015635620452733421.pdf'
+2025-11-13 15:14:07,446 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00167010479265742.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00167010479265742.pdf'
+2025-11-13 15:14:07,446 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00169920607062111.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00169920607062111.pdf'
+2025-11-13 15:14:07,446 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0018610447903712.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0018610447903712.pdf'
+2025-11-13 15:14:07,446 [INFO]  Eliminado: FACTURAE001-184320602124895.zip
+2025-11-13 15:14:07,447 [INFO]  Eliminado: FACTURAE001-359310413232975.zip
+2025-11-13 15:14:07,447 [INFO]  Eliminado: FACTURAE001-5635620452733421.zip
+2025-11-13 15:14:07,447 [INFO]  Eliminado: FACTURAE001-67010479265742.zip
+2025-11-13 15:14:07,448 [INFO]  Eliminado: FACTURAE001-69920607062111.zip
+2025-11-13 15:14:07,448 [INFO]  Eliminado: FACTURAE001-8610447903712.zip
+2025-11-13 15:14:07,448 [INFO]  Proceso finalizado correctamente
+2025-11-13 15:20:37,567 [INFO]  Filtro de fechas: 2024-06-13 - 2024-06-13
+2025-11-13 15:20:37,567 [INFO]  Iniciando procesamiento para empresa ID 1 (RUC 20494384273)
+2025-11-13 15:20:37,568 [INFO]  ZIPs encontrados: 6
+2025-11-13 15:20:37,585 [INFO]  Extraído ZIP: FACTURAE001-184320602124895.zip
+2025-11-13 15:20:37,600 [INFO] Valores para INSERT XML FACTURAE001-184320602124895.XML: (1, 'FACTURA', 'E001', '1843', 'E001-1843', '2024-06-13', None, '20602124895', 'GLOBAL SERVICE & SUPPLIERS S.A.C.', '20494384273', 'MINERA SANTA ENMA S.A.C.', 'BIODIGESTOR 7000LTS FARPLAST CON ACC', Decimal('8135.80'), Decimal('1464.44'), Decimal('9600.24'), 'PEN', 'COMPRA', 'ACEPTADO', Decimal('16271.60'), Decimal('0.00'), Decimal('0.00'), Decimal('0.00'), None)
+2025-11-13 15:20:37,664 [INFO] Factura guardada: E001-1843 - GLOBAL SERVICE & SUPPLIERS S.A.C. (COMPRA)
+2025-11-13 15:20:37,680 [INFO]  Guardado en BD (BLOB): FACTURAE001-184320602124895.zip (ZIP)
+2025-11-13 15:20:37,698 [INFO]  Extraído ZIP: FACTURAE001-359310413232975.zip
+2025-11-13 15:20:37,712 [INFO] Valores para INSERT XML FACTURAE001-359310413232975.XML: (1, 'FACTURA', 'E001', '3593', 'E001-3593', '2024-06-13', None, '10413232975', 'MENESES MEDINA CHRIS JACQUELINE', '20494384273', 'MINERA SANTA ENMA S.A.C.', 'SERVICIO DE TRANSPORTE DE CUCHILLAS MOTONIVELADORA', Decimal('338.98'), Decimal('61.02'), Decimal('400.00'), 'PEN', 'COMPRA', 'ACEPTADO', Decimal('677.96'), Decimal('0.00'), Decimal('0.00'), Decimal('0.00'), None)
+2025-11-13 15:20:37,735 [INFO] Factura guardada: E001-3593 - MENESES MEDINA CHRIS JACQUELINE (COMPRA)
+2025-11-13 15:20:37,755 [INFO]  Guardado en BD (BLOB): FACTURAE001-359310413232975.zip (ZIP)
+2025-11-13 15:20:37,772 [INFO]  Extraído ZIP: FACTURAE001-5635620452733421.zip
+2025-11-13 15:20:37,786 [INFO] Valores para INSERT XML FACTURAE001-5635620452733421.XML: (1, 'FACTURA', 'E001', '56356', 'E001-56356', '2024-06-13', None, '20452733421', 'FERRETERIA SAN PEDRO S.A.C.', '20494384273', 'MINERA SANTA ENMA S.A.C.', 'TEMPLE MARTELL X5KG', Decimal('35.59'), Decimal('6.41'), Decimal('42.00'), 'PEN', 'COMPRA', 'ACEPTADO', Decimal('71.183218'), Decimal('0.00'), Decimal('0.00'), Decimal('0.00'), None)
+2025-11-13 15:20:37,798 [INFO] Factura guardada: E001-56356 - FERRETERIA SAN PEDRO S.A.C. (COMPRA)
+2025-11-13 15:20:37,812 [INFO]  Guardado en BD (BLOB): FACTURAE001-5635620452733421.zip (ZIP)
+2025-11-13 15:20:37,831 [INFO]  Extraído ZIP: FACTURAE001-67010479265742.zip
+2025-11-13 15:20:37,845 [INFO] Valores para INSERT XML FACTURAE001-67010479265742.XML: (1, 'FACTURA', 'E001', '670', 'E001-670', '2024-06-13', None, '10479265742', 'NAPA SIGUAS LESLY PAOLA', '20494384273', 'MINERA SANTA ENMA S.A.C.', 'BALDE DE PINTURA', Decimal('116.95'), Decimal('21.05'), Decimal('138.00'), 'PEN', 'COMPRA', 'ACEPTADO', Decimal('233.899'), Decimal('0.00'), Decimal('0.00'), Decimal('0.00'), None)
+2025-11-13 15:20:37,856 [INFO] Factura guardada: E001-670 - NAPA SIGUAS LESLY PAOLA (COMPRA)
+2025-11-13 15:20:37,870 [INFO]  Guardado en BD (BLOB): FACTURAE001-67010479265742.zip (ZIP)
+2025-11-13 15:20:37,888 [INFO]  Extraído ZIP: FACTURAE001-69920607062111.zip
+2025-11-13 15:20:37,906 [INFO] Valores para INSERT XML FACTURAE001-69920607062111.XML: (1, 'FACTURA', 'E001', '699', 'E001-699', '2024-06-13', None, '20607062111', 'INSTELC S.A.C.', '20494384273', 'MINERA SANTA ENMA S.A.C.', 'PRESOSTATO DE AGUA', Decimal('1676.27'), Decimal('301.73'), Decimal('1978.00'), 'PEN', 'COMPRA', 'ACEPTADO', Decimal('3352.54118874'), Decimal('0.00'), Decimal('0.00'), Decimal('0.00'), None)
+2025-11-13 15:20:37,916 [INFO] Factura guardada: E001-699 - INSTELC S.A.C. (COMPRA)
+2025-11-13 15:20:37,931 [INFO]  Guardado en BD (BLOB): FACTURAE001-69920607062111.zip (ZIP)
+2025-11-13 15:20:37,949 [INFO]  Extraído ZIP: FACTURAE001-8610447903712.zip
+2025-11-13 15:20:37,964 [INFO] Valores para INSERT XML FACTURAE001-8610447903712.XML: (1, 'FACTURA', 'E001', '86', 'E001-86', '2024-06-13', None, '10447903712', 'MARQUEZ TAFUR MIGUEL ANGEL', '20494384273', 'MINERA SANTA ENMA S.A.C.', 'DE CABLE ELCOFLEX HD7RN-F 4GX6MM2 440/750 V SUMERGIBLE', Decimal('100.00'), Decimal('18.00'), Decimal('118.00'), 'USD', 'COMPRA', 'ACEPTADO', Decimal('200.00'), Decimal('0.00'), Decimal('0.00'), Decimal('0.00'), None)
+2025-11-13 15:20:37,974 [INFO] Factura guardada: E001-86 - MARQUEZ TAFUR MIGUEL ANGEL (COMPRA)
+2025-11-13 15:20:37,997 [INFO]  Guardado en BD (BLOB): FACTURAE001-8610447903712.zip (ZIP)
+2025-11-13 15:20:37,998 [INFO]  PDFs encontrados: 12
+2025-11-13 15:20:38,039 [INFO]  Guardado en BD (BLOB): PDF-DOC-E001184320602124895.PDF (PDF)
+2025-11-13 15:20:38,068 [INFO]  Guardado en BD (BLOB): PDF-DOC-E001359310413232975.PDF (PDF)
+2025-11-13 15:20:38,101 [INFO]  Guardado en BD (BLOB): PDF-DOC-E0015635620452733421.PDF (PDF)
+2025-11-13 15:20:38,135 [INFO]  Guardado en BD (BLOB): PDF-DOC-E00167010479265742.PDF (PDF)
+2025-11-13 15:20:38,168 [INFO]  Guardado en BD (BLOB): PDF-DOC-E00169920607062111.PDF (PDF)
+2025-11-13 15:20:38,199 [INFO]  Guardado en BD (BLOB): PDF-DOC-E0018610447903712.PDF (PDF)
+2025-11-13 15:20:38,214 [INFO]  Ya existe en BD: PDF-DOC-E001184320602124895.PDF (ID factura 52), no se guarda duplicado
+2025-11-13 15:20:38,230 [INFO]  Ya existe en BD: PDF-DOC-E001359310413232975.PDF (ID factura 53), no se guarda duplicado
+2025-11-13 15:20:38,246 [INFO]  Ya existe en BD: PDF-DOC-E0015635620452733421.PDF (ID factura 54), no se guarda duplicado
+2025-11-13 15:20:38,262 [INFO]  Ya existe en BD: PDF-DOC-E00167010479265742.PDF (ID factura 55), no se guarda duplicado
+2025-11-13 15:20:38,278 [INFO]  Ya existe en BD: PDF-DOC-E00169920607062111.PDF (ID factura 56), no se guarda duplicado
+2025-11-13 15:20:38,295 [INFO]  Ya existe en BD: PDF-DOC-E0018610447903712.PDF (ID factura 57), no se guarda duplicado
+2025-11-13 15:20:38,296 [INFO]  Eliminado: FACTURAE001-184320602124895.XML
+2025-11-13 15:20:38,296 [INFO]  Eliminado: FACTURAE001-359310413232975.XML
+2025-11-13 15:20:38,296 [INFO]  Eliminado: FACTURAE001-5635620452733421.XML
+2025-11-13 15:20:38,297 [INFO]  Eliminado: FACTURAE001-67010479265742.XML
+2025-11-13 15:20:38,297 [INFO]  Eliminado: FACTURAE001-69920607062111.XML
+2025-11-13 15:20:38,297 [INFO]  Eliminado: FACTURAE001-8610447903712.XML
+2025-11-13 15:20:38,298 [INFO]  Eliminado: PDF-DOC-E001184320602124895.pdf
+2025-11-13 15:20:38,298 [INFO]  Eliminado: PDF-DOC-E001359310413232975.pdf
+2025-11-13 15:20:38,298 [INFO]  Eliminado: PDF-DOC-E0015635620452733421.pdf
+2025-11-13 15:20:38,299 [INFO]  Eliminado: PDF-DOC-E00167010479265742.pdf
+2025-11-13 15:20:38,299 [INFO]  Eliminado: PDF-DOC-E00169920607062111.pdf
+2025-11-13 15:20:38,299 [INFO]  Eliminado: PDF-DOC-E0018610447903712.pdf
+2025-11-13 15:20:38,300 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E001184320602124895.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E001184320602124895.pdf'
+2025-11-13 15:20:38,300 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E001359310413232975.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E001359310413232975.pdf'
+2025-11-13 15:20:38,300 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0015635620452733421.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0015635620452733421.pdf'
+2025-11-13 15:20:38,300 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00167010479265742.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00167010479265742.pdf'
+2025-11-13 15:20:38,300 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E00169920607062111.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E00169920607062111.pdf'
+2025-11-13 15:20:38,301 [ERROR]  Error eliminando C:\wamp64\www\alibot\descargas_sunat\PDF-DOC-E0018610447903712.pdf: [WinError 2] El sistema no puede encontrar el archivo especificado: 'C:\\wamp64\\www\\alibot\\descargas_sunat\\PDF-DOC-E0018610447903712.pdf'
+2025-11-13 15:20:38,301 [INFO]  Eliminado: FACTURAE001-184320602124895.zip
+2025-11-13 15:20:38,301 [INFO]  Eliminado: FACTURAE001-359310413232975.zip
+2025-11-13 15:20:38,302 [INFO]  Eliminado: FACTURAE001-5635620452733421.zip
+2025-11-13 15:20:38,302 [INFO]  Eliminado: FACTURAE001-67010479265742.zip
+2025-11-13 15:20:38,302 [INFO]  Eliminado: FACTURAE001-69920607062111.zip
+2025-11-13 15:20:38,303 [INFO]  Eliminado: FACTURAE001-8610447903712.zip
+2025-11-13 15:20:38,303 [INFO]  Proceso finalizado correctamente

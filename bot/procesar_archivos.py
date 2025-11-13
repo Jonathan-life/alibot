@@ -9,7 +9,7 @@ import sys
 import fitz  # PyMuPDF (pip install pymupdf)
 import json
 from datetime import datetime
-
+from decimal import Decimal
 # ==========================
 # CONFIGURACIÓN
 # ==========================
@@ -84,7 +84,7 @@ def guardar_archivo_binario(id_factura, archivo, tipo):
 def procesar_xml(archivo, id_empresa, ruc_empresa, fecha_inicio=None, fecha_fin=None):
     ruta = os.path.join(DOWNLOAD_DIR, archivo)
     if not os.path.exists(ruta):
-        log(f" No existe el archivo XML: {ruta}", "error")
+        log(f"No existe el archivo XML: {ruta}", "error")
         return None, None
 
     try:
@@ -96,97 +96,70 @@ def procesar_xml(archivo, id_empresa, ruc_empresa, fecha_inicio=None, fecha_fin=
         }
 
         # === Serie y correlativo ===
-        nro_cpe = root.find(".//cbc:ID", ns)
-        nro_cpe = nro_cpe.text.strip() if nro_cpe is not None else ""
+        nro_cpe_node = root.find(".//cbc:ID", ns)
+        nro_cpe = nro_cpe_node.text.strip() if nro_cpe_node is not None else ""
         serie, correlativo = ("", "")
         if "-" in nro_cpe:
             serie, correlativo = nro_cpe.split("-", 1)
 
         # === Fechas ===
-        fecha_emision = root.find(".//cbc:IssueDate", ns)
-        fecha_emision = fecha_emision.text.strip() if fecha_emision is not None else ""
-        fecha_vencimiento = root.find(".//cbc:DueDate", ns)
-        fecha_vencimiento = fecha_vencimiento.text.strip() if fecha_vencimiento is not None else None
+        fecha_emision_node = root.find(".//cbc:IssueDate", ns)
+        fecha_emision = fecha_emision_node.text.strip() if fecha_emision_node is not None else None
+
+        fecha_vencimiento_node = root.find(".//cbc:DueDate", ns)
+        fecha_vencimiento = fecha_vencimiento_node.text.strip() if fecha_vencimiento_node is not None else None
 
         # Filtro por rango de fechas
-        if fecha_inicio and fecha_fin:
+        if fecha_inicio and fecha_fin and fecha_emision:
             fecha_emision_dt = datetime.strptime(fecha_emision, "%Y-%m-%d")
             if not (fecha_inicio <= fecha_emision_dt <= fecha_fin):
                 log(f"Factura {nro_cpe} ({fecha_emision}) fuera del rango {fecha_inicio.date()} - {fecha_fin.date()}")
                 return None, None
 
         # === Emisor y receptor ===
-        ruc_emisor = root.find(".//cac:AccountingSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID", ns)
-        ruc_emisor = ruc_emisor.text.strip() if ruc_emisor is not None else ""
-
-        nombre_emisor = root.find(".//cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName", ns)
-        nombre_emisor = nombre_emisor.text.strip() if nombre_emisor is not None else ""
-
-        ruc_receptor = root.find(".//cac:AccountingCustomerParty/cac:Party/cac:PartyIdentification/cbc:ID", ns)
-        ruc_receptor = ruc_receptor.text.strip() if ruc_receptor is not None else ""
-
-        nombre_receptor = root.find(".//cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName", ns)
-        nombre_receptor = nombre_receptor.text.strip() if nombre_receptor is not None else ""
+        ruc_emisor = root.findtext(".//cac:AccountingSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID", default="", namespaces=ns)
+        nombre_emisor = root.findtext(".//cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName", default="", namespaces=ns)
+        ruc_receptor = root.findtext(".//cac:AccountingCustomerParty/cac:Party/cac:PartyIdentification/cbc:ID", default="", namespaces=ns)
+        nombre_receptor = root.findtext(".//cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName", default="", namespaces=ns)
 
         # === Descripción ===
-        descripcion = root.find(".//cac:InvoiceLine/cac:Item/cbc:Description", ns)
-        descripcion = descripcion.text.strip() if descripcion is not None else ""
+        descripcion = root.findtext(".//cac:InvoiceLine/cac:Item/cbc:Description", default="", namespaces=ns)
 
-        # === Montos generales ===
-        base_imponible = root.find(".//cac:LegalMonetaryTotal/cbc:LineExtensionAmount", ns)
-        base_imponible = float(base_imponible.text.strip()) if base_imponible is not None else 0.0
+        # === Montos ===
+        base_imponible = Decimal(root.findtext(".//cac:LegalMonetaryTotal/cbc:LineExtensionAmount", default="0.00", namespaces=ns))
+        igv = Decimal(root.findtext(".//cac:TaxTotal/cbc:TaxAmount", default="0.00", namespaces=ns))
+        importe_total = Decimal(root.findtext(".//cac:LegalMonetaryTotal/cbc:PayableAmount", default="0.00", namespaces=ns))
+        moneda = root.findtext(".//cbc:DocumentCurrencyCode", default="PEN", namespaces=ns)
 
-        igv = root.find(".//cac:TaxTotal/cbc:TaxAmount", ns)
-        igv = float(igv.text.strip()) if igv is not None else 0.0
-
-        importe_total = root.find(".//cac:LegalMonetaryTotal/cbc:PayableAmount", ns)
-        importe_total = float(importe_total.text.strip()) if importe_total is not None else 0.0
-
-        moneda = root.find(".//cbc:DocumentCurrencyCode", ns)
-        moneda = moneda.text.strip() if moneda is not None else "PEN"
-
-        # === Subtotales por tipo de operación (gravad/exonerada/inafecta/exportación) ===
-        base_gravadas = base_exoneradas = base_inafectas = base_exportacion = 0.0
-
+        # === Subtotales por tipo ===
+        base_gravadas = base_exoneradas = base_inafectas = base_exportacion = Decimal("0.00")
         for tax_subtotal in root.findall(".//cac:TaxSubtotal", ns):
-            tax_amount_node = tax_subtotal.find("cbc:TaxableAmount", ns)
-            tax_amount = float(tax_amount_node.text) if tax_amount_node is not None else 0.0
+            tax_amount = Decimal(tax_subtotal.findtext("cbc:TaxableAmount", default="0.00", namespaces=ns))
+            reason = tax_subtotal.findtext(".//cbc:TaxExemptionReasonCode", default="", namespaces=ns)
+            tax_code = tax_subtotal.findtext(".//cac:TaxCategory/cac:TaxScheme/cbc:ID", default="", namespaces=ns)
+            if reason == "10" or tax_code == "1000": base_gravadas += tax_amount
+            elif reason == "20" or tax_code == "9998": base_inafectas += tax_amount
+            elif reason == "30" or tax_code == "9997": base_exoneradas += tax_amount
+            elif reason == "40" or tax_code == "9995": base_exportacion += tax_amount
 
-            reason_node = tax_subtotal.find(".//cbc:TaxExemptionReasonCode", ns)
-            tax_category_node = tax_subtotal.find(".//cac:TaxCategory/cac:TaxScheme/cbc:ID", ns)
-            codigo = reason_node.text.strip() if reason_node is not None else ""
-            codigo_tax = tax_category_node.text.strip() if tax_category_node is not None else ""
-
-            # Se detecta por código SUNAT
-            if codigo == "10" or codigo_tax == "1000":
-                base_gravadas += tax_amount
-            elif codigo == "20" or codigo_tax == "9998":
-                base_inafectas += tax_amount
-            elif codigo == "30" or codigo_tax == "9997":
-                base_exoneradas += tax_amount
-            elif codigo == "40" or codigo_tax == "9995":
-                base_exportacion += tax_amount
-
-        # === Tipo documento ===
-        tipo_doc_code = root.find(".//cbc:InvoiceTypeCode", ns)
-        tipo_doc_code = tipo_doc_code.text.strip() if tipo_doc_code is not None else "01"
-        tipo_doc = {
-            "01": "FACTURA",
-            "03": "BOLETA",
-            "07": "NC",
-            "08": "ND"
-        }.get(tipo_doc_code, "OTROS")
-
-        # === Origen (COMPRA o VENTA) ===
-        origen = "COMPRA"
-        if ruc_emisor == ruc_empresa:
-            origen = "VENTA"
-        elif ruc_receptor == ruc_empresa:
-            origen = "COMPRA"
-
+        # === Tipo documento y origen ===
+        tipo_doc_code = root.findtext(".//cbc:InvoiceTypeCode", default="01", namespaces=ns)
+        tipo_doc = {"01":"FACTURA","03":"BOLETA","07":"NC","08":"ND"}.get(tipo_doc_code, "OTROS")
+        origen = "COMPRA" if ruc_emisor != ruc_empresa else "VENTA"
         estado_sunat = "ACEPTADO"
 
-        # === Guardar en BD ===
+        valores = (
+            id_empresa, tipo_doc, serie, correlativo, nro_cpe,
+            fecha_emision, fecha_vencimiento, ruc_emisor, nombre_emisor,
+            ruc_receptor, nombre_receptor, descripcion,
+            base_imponible, igv, importe_total, moneda,
+            origen, estado_sunat,
+            base_gravadas, base_exoneradas, base_inafectas, base_exportacion,
+            None
+        )
+
+        log(f"Valores para INSERT XML {archivo}: {valores}")
+
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute("""
@@ -194,34 +167,28 @@ def procesar_xml(archivo, id_empresa, ruc_empresa, fecha_inicio=None, fecha_fin=
                 id_empresa, tipo_doc, serie, correlativo, nro_cpe,
                 fecha_emision, fecha_vencimiento, ruc_emisor, nombre_emisor,
                 ruc_receptor, nombre_receptor, descripcion, base_imponible,
-                igv, importe_total, moneda, origen, estado_sunat, 
+                igv, importe_total, moneda, origen, estado_sunat,
                 base_gravadas, base_exoneradas, base_inafectas, base_exportacion,
-                fecha_registro
-            )
-            VALUES (
+                id_usuario_import
+            ) VALUES (
                 %s, %s, %s, %s, %s,
-                %s, %s, %s, %s,
-                %s, %s, %s, %s,
-                %s, %s, %s, %s,
-                %s, %s, %s, %s, NOW()
+                %s, %s, %s, %s, %s,
+                %s, %s, %s, %s, %s,
+                %s, %s, %s, %s, %s,
+                %s, %s, %s
             )
-        """, (
-            id_empresa, tipo_doc, serie, correlativo, nro_cpe,
-            fecha_emision, fecha_vencimiento, ruc_emisor, nombre_emisor,
-            ruc_receptor, nombre_receptor, descripcion, base_imponible,
-            igv, importe_total, moneda, origen, estado_sunat,
-            base_gravadas, base_exoneradas, base_inafectas, base_exportacion
-        ))
+        """, valores)
+
         conn.commit()
         id_factura = cursor.lastrowid
         cursor.close()
         conn.close()
 
-        log(f" Factura guardada: {nro_cpe} - {nombre_emisor} ({origen})")
+        log(f"Factura guardada: {nro_cpe} - {nombre_emisor} ({origen})")
         return id_factura, nro_cpe
 
     except Exception as e:
-        log(f" Error procesando XML {archivo}: {e}", "error")
+        log(f"ERROR SQL procesando XML {archivo}: {e}", "error")
         return None, None
 
 
@@ -328,7 +295,7 @@ if __name__ == "__main__":
         if "fecha_inicio" in data and "fecha_fin" in data:
             fecha_inicio = datetime.strptime(data["fecha_inicio"], "%d/%m/%Y")
             fecha_fin = datetime.strptime(data["fecha_fin"], "%d/%m/%Y")
-            log(f"📅 Filtro de fechas: {fecha_inicio.date()} - {fecha_fin.date()}")
+            log(f" Filtro de fechas: {fecha_inicio.date()} - {fecha_fin.date()}")
     except Exception as e:
         log(f" Error parseando fechas: {e}")
 
