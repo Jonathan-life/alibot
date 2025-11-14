@@ -141,10 +141,11 @@ $empresas = $empresaController->listarEmpresas();
                         <td><?= htmlspecialchars($e['ruc']) ?></td>
                         <td><?= htmlspecialchars($e['razon_social']) ?></td>
                         <td>
-                            <a href="listado_empresas?id_empresa=<?= $e['id_empresa'] ?>" 
-                               class="btn btn-primary btn-sm">
-                               Ver Registro de Compras
-                            </a>
+                            <!-- Botón que abre selección de tipo de registro -->
+                            <button class="btn btn-primary btn-sm" 
+                                    onclick="mostrarOpciones(<?= $e['id_empresa'] ?>)">
+                                Ver Registro
+                            </button>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -152,5 +153,41 @@ $empresas = $empresaController->listarEmpresas();
         </table>
     <?php endif; ?>
 </div>
+
+<!-- Modal de selección -->
+<div class="modal fade" id="modalOpciones" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Seleccione tipo de registro</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-center">
+        <button id="btnCompras" class="btn btn-success me-2">Registro de Compras</button>
+        <button id="btnVentas" class="btn btn-info">Registro de Ventas</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+let empresaId = null;
+
+function mostrarOpciones(id) {
+    empresaId = id;
+    const modal = new bootstrap.Modal(document.getElementById('modalOpciones'));
+    modal.show();
+}
+
+// Redirigir según selección
+document.getElementById('btnCompras').addEventListener('click', () => {
+    window.location.href = `listado_empresas.php?id_empresa=${empresaId}&tipo=compras`;
+});
+
+document.getElementById('btnVentas').addEventListener('click', () => {
+    window.location.href = `empresas_ventas.php?id_empresa=${empresaId}&tipo=ventas`;
+});
+</script>
 </body>
 </html>

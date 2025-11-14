@@ -20,19 +20,74 @@ if (!$empresa || empty($facturas)) {
     die("<div class='alert alert-danger'>No se encontró empresa o facturas.</div>");
 }
 
-// Mapeo de tipos de documentos a códigos SUNAT
+// Mapeo de tipos SUNAT
 $tipo_doc_sunat = [
     'FACTURA' => '01',
     'BOLETA' => '03',
     'NOTA DE CREDITO' => '07',
     'NOTA DE DEBITO' => '08',
 ];
+// Inicializar acumuladores (evita warnings "Undefined variable")
+$total_base = 0.0;
+$total_igv = 0.0;
+$total_importe = 0.0;
 
-// Totales
-$total_base = 0;
-$total_igv = 0;
-$total_importe = 0;
+// Si usas categorías separadas (opcional)
+$total_base_gravadas = 0.0;
+$total_base_exoneradas = 0.0;
+$total_base_inafectas = 0.0;
+$total_no_gravadas = 0.0;
+$total_otros_tributos = 0.0;
+
+// === TOTALES GENERALES ===
+$total_base_gravadas = 0;
+$total_igv_gravadas = 0;
+
+$total_base_exoneradas = 0;
+$total_igv_exoneradas = 0;
+
+$total_base_inafectas = 0;
+$total_igv_inafectas = 0;
+
+$total_no_gravadas = 0;
+$total_otros_tributos = 0;
+
+$total_importe_general = 0;
+
+// RECORRER FACTURAS Y SUMAR
+foreach ($facturas as $f) {
+
+    // GRAVADAS
+    $total_base_gravadas += (float)($f['base_gravadas'] ?? 0);
+    $total_igv_gravadas += (float)($f['igv'] ?? 0);
+
+    // EXONERADAS
+    $total_base_exoneradas += (float)($f['base_exoneradas'] ?? 0);
+
+    // INAFECTAS
+    $total_base_inafectas += (float)($f['base_inafectas'] ?? 0);
+
+    // NO GRAVADAS
+    $total_no_gravadas += (float)($f['no_gravadas'] ?? 0);
+
+    // OTROS TRIBUTOS
+    $total_otros_tributos += (float)($f['otros_tributos'] ?? 0);
+
+}
+    
+// CÁLCULO EXACTO DE TOTALES SEGÚN SUNAT
+$total_base_general =
+    $total_base_gravadas +
+    $total_base_exoneradas +
+    $total_base_inafectas +
+    $total_no_gravadas;
+
+$total_igv_general = $total_igv_gravadas;
+
+$total_importe_general = $total_base_general + $total_igv_general;
+
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -40,8 +95,7 @@ $total_importe = 0;
 <title>Registro de Compras - Formato SUNAT 8.1</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- LIBRERÍA CORRECTA PARA EXPORTAR CON ESTILOS -->
-<script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js"></script>
+
 
 <style>
 body { font-family: Arial, sans-serif; font-size: 11px; background-color: #fff; }
@@ -120,7 +174,7 @@ tfoot td { font-weight: bold; background-color: #eaeaea; }
             </tr>
         </thead>
 
-        <tbody>
+            <tbody>
         <?php $i = 1; foreach ($facturas as $f): ?>
             <tr>
                 <td><?= $i++ ?></td>
@@ -138,36 +192,70 @@ tfoot td { font-weight: bold; background-color: #eaeaea; }
                 <td><?= htmlspecialchars($f['ruc_emisor'] ?? '') ?></td>
                 <td><?= htmlspecialchars($f['nombre_emisor'] ?? '') ?></td>
 
-                <!-- Adquisiciones -->
-                <td><?= number_format((float)($f['base_imponible_gravadas'] ?? $f['base_imponible']), 2) ?></td>
-                <td><?= number_format((float)($f['igv_gravadas'] ?? $f['igv']), 2) ?></td>
-                <td><?= number_format((float)($f['base_imponible_mixtas'] ?? 0), 2) ?></td>
-                <td><?= number_format((float)($f['igv_mixtas'] ?? 0), 2) ?></td>
-                <td><?= number_format((float)($f['base_imponible_no_gravadas'] ?? 0), 2) ?></td>
-                <td><?= number_format((float)($f['igv_no_gravadas'] ?? 0), 2) ?></td>
+                <!-- Gravadas -->
+                <td><?= number_format((float)$f['base_gravadas'], 2) ?></td>
+                <td><?= number_format((float)$f['igv'], 2) ?></td>
 
-                <td>0.00</td>
+                <!-- Exoneradas -> operaciones gravadas y no gravadas -->
+                <td><?= number_format((float)$f['base_exoneradas'], 2) ?></td>
                 <td>0.00</td>
 
+                <!-- Inafectas -->
+                <td><?= number_format((float)$f['base_inafectas'], 2) ?></td>
+                <td>0.00</td>
+
+                <!-- Gravadas no gravadas -->
+                <td>0.00</td>
+
+                <!-- Otros tributos -->
+                <td>0.00</td>
+
+                <!-- Total -->
                 <td><?= number_format((float)$f['importe_total'], 2) ?></td>
-                <td><?= htmlspecialchars($f['moneda'] ?? '') ?></td>
+
+                <!-- Tipo de cambio (si moneda = USD) -->
+                <td><?= ($f['moneda'] == 'USD') ? '3.80' : '1.00' ?></td>
 
                 <!-- Referencias -->
                 <td></td><td></td><td></td><td></td>
             </tr>
         <?php endforeach; ?>
         </tbody>
-
         <tfoot>
             <tr>
                 <td colspan="10" class="text-end">TOTALES:</td>
-                <td><?= number_format($total_base, 2) ?></td>
-                <td><?= number_format($total_igv, 2) ?></td>
-                <td colspan="5"></td>
-                <td><?= number_format($total_importe, 2) ?></td>
-                <td colspan="6"></td>
+
+                <!-- Gravadas -->
+                <td><?= number_format($total_base_gravadas, 2) ?></td>
+                <td><?= number_format($total_igv_gravadas, 2) ?></td>
+
+                <!-- Exoneradas -->
+                <td><?= number_format($total_base_exoneradas, 2) ?></td>
+                <td><?= number_format($total_igv_exoneradas, 2) ?></td>
+
+                <!-- Inafectas -->
+                <td><?= number_format($total_base_inafectas, 2) ?></td>
+                <td><?= number_format($total_igv_inafectas, 2) ?></td>
+
+                <!-- No gravadas -->
+                <td><?= number_format($total_no_gravadas, 2) ?></td>
+
+                <!-- Otros tributos -->
+                <td><?= number_format($total_otros_tributos, 2) ?></td>
+
+                <!-- Importe total -->
+                <td><?= number_format($total_importe_general, 2) ?></td>
+
+                <!-- Tipo cambio -->
+                <td></td>
+
+                <!-- Referencias -->
+                <td colspan="4"></td>
             </tr>
         </tfoot>
+
+
+
     </table>
 
     <div class="text-end mt-3">
@@ -175,56 +263,44 @@ tfoot td { font-weight: bold; background-color: #eaeaea; }
     </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
-function exportTableToExcel(tableID, filename = '') {
-
+function exportTableToExcel(tableID, filename='Registro_Compras') {
     const table = document.getElementById(tableID);
-
-    // Convertir tabla a Excel con estilos
-    const wb = XLSX.utils.table_to_book(table, {
-        sheet: "RegistroCompras"
-    });
-
+    const wb = XLSX.utils.table_to_book(table, { sheet: "RegistroCompras" });
     const ws = wb.Sheets["RegistroCompras"];
-
-    // Obtener rango del Excel
     const range = XLSX.utils.decode_range(ws['!ref']);
 
-    // Aplicar estilos a cada celda
     for (let R = range.s.r; R <= range.e.r; R++) {
         for (let C = range.s.c; C <= range.e.c; C++) {
-
             const cell_address = XLSX.utils.encode_cell({ r: R, c: C });
             const cell = ws[cell_address];
             if (!cell) continue;
 
-            // Estilo general
+            // Detectar encabezado (thead)
+            const isHeader = R < 3;
+            // Detectar pie de tabla (tfoot)
+            const isFooter = R === range.e.r;
+
             cell.s = {
-                font: { name: "Arial", sz: 10 },
+                font: { name: "Arial", sz: 10, bold: isHeader || isFooter },
                 alignment: { horizontal: "center", vertical: "center", wrapText: true },
                 border: {
                     top: { style: "thin", color: { rgb: "000000" } },
                     bottom: { style: "thin", color: { rgb: "000000" } },
                     left: { style: "thin", color: { rgb: "000000" } },
                     right: { style: "thin", color: { rgb: "000000" } }
-                }
+                },
+                fill: (isHeader || isFooter) ? { fgColor: { rgb: "EAEAEA" } } : { fgColor: { rgb: "FFFFFF" } }
             };
-
-            // Encabezados — color gris
-            if (R === 0) {
-                cell.s.fill = { fgColor: { rgb: "EAEAEA" } };
-                cell.s.font.bold = true;
-            }
         }
     }
 
-    // Descargar archivo
-    XLSX.writeFile(
-        wb,
-        filename ? filename + ".xlsx" : "Registro_Compras.xlsx"
-    );
+    XLSX.writeFile(wb, filename + ".xlsx");
 }
+
 </script>
+
 
 </body>
 </html>

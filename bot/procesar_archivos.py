@@ -6,10 +6,11 @@ import logging
 import zipfile
 import re
 import sys
-import fitz  # PyMuPDF (pip install pymupdf)
+import fitz  # PyMuPDF
 import json
 from datetime import datetime
 from decimal import Decimal
+
 # ==========================
 # CONFIGURACIÓN
 # ==========================
@@ -25,13 +26,16 @@ logging.basicConfig(
     encoding="utf-8"
 )
 
-def log(msg, level="info"):
-    print(msg)
-    if level == "error":
-        logging.error(msg)
-    else:
-        logging.info(msg)
+def log(msg, tipo="info"):
+    try:
+        print(msg)
+    except UnicodeEncodeError:
+        msg_limpio = msg.encode("ascii", errors="ignore").decode()
+        print(msg_limpio)
 
+# ==========================
+# CONEXIÓN A MYSQL
+# ==========================
 def get_connection():
     return mysql.connector.connect(
         host="localhost",
@@ -40,28 +44,29 @@ def get_connection():
         database="sistema_contable"
     )
 
+# ==========================
+# GUARDAR PDF / ZIP EN BLOB
+# ==========================
 def guardar_archivo_binario(id_factura, archivo, tipo):
-    if id_factura is None:
-        log(f" No se puede guardar {archivo} porque no hay ID de factura", "error")
+    if not id_factura:
+        log(f"No se puede guardar {archivo}, id_factura es NULL", "error")
         return
 
     ruta = os.path.join(DOWNLOAD_DIR, archivo)
     if not os.path.exists(ruta):
-        log(f" No existe el archivo: {ruta}", "error")
+        log(f"No existe el archivo: {ruta}", "error")
         return
 
     try:
         conn = get_connection()
         cursor = conn.cursor()
-
         cursor.execute("""
             SELECT COUNT(*) FROM archivos_factura
             WHERE id_factura = %s AND nombre_archivo = %s
         """, (id_factura, archivo))
-        existe = cursor.fetchone()[0]
 
-        if existe > 0:
-            log(f" Ya existe en BD: {archivo} (ID factura {id_factura}), no se guarda duplicado")
+        if cursor.fetchone()[0] > 0:
+            log(f"Archivo duplicado NO guardado: {archivo}")
             cursor.close()
             conn.close()
             return
@@ -73,232 +78,230 @@ def guardar_archivo_binario(id_factura, archivo, tipo):
             INSERT INTO archivos_factura (id_factura, tipo, nombre_archivo, ruta, archivo_binario)
             VALUES (%s, %s, %s, %s, %s)
         """, (id_factura, tipo.upper(), archivo, ruta, contenido))
+
         conn.commit()
         cursor.close()
         conn.close()
+        log(f"Archivo guardado: {archivo}")
 
-        log(f" Guardado en BD (BLOB): {archivo} ({tipo.upper()})")
     except Exception as e:
-        log(f" Error al guardar archivo {archivo} en BD: {e}", "error")
+        log(f"Error guardando archivo {archivo}: {e}", "error")
 
+# ==========================
+# PROCESAMIENTO XML
+# ==========================
 def procesar_xml(archivo, id_empresa, ruc_empresa, fecha_inicio=None, fecha_fin=None):
     ruta = os.path.join(DOWNLOAD_DIR, archivo)
     if not os.path.exists(ruta):
-        log(f"No existe el archivo XML: {ruta}", "error")
+        log(f"No existe XML: {ruta}", "error")
         return None, None
 
     try:
         tree = ET.parse(ruta)
         root = tree.getroot()
+
         ns = {
             "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
             "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
         }
 
-        # === Serie y correlativo ===
-        nro_cpe_node = root.find(".//cbc:ID", ns)
-        nro_cpe = nro_cpe_node.text.strip() if nro_cpe_node is not None else ""
+        # SERIE - CORRELATIVO
+        nro_cpe = root.findtext(".//cbc:ID", default="", namespaces=ns)
         serie, correlativo = ("", "")
         if "-" in nro_cpe:
             serie, correlativo = nro_cpe.split("-", 1)
 
-        # === Fechas ===
-        fecha_emision_node = root.find(".//cbc:IssueDate", ns)
-        fecha_emision = fecha_emision_node.text.strip() if fecha_emision_node is not None else None
+        # FECHAS
+        fecha_emision = root.findtext(".//cbc:IssueDate", default=None, namespaces=ns)
+        fecha_vencimiento = root.findtext(".//cbc:DueDate", default=None, namespaces=ns)
 
-        fecha_vencimiento_node = root.find(".//cbc:DueDate", ns)
-        fecha_vencimiento = fecha_vencimiento_node.text.strip() if fecha_vencimiento_node is not None else None
-
-        # Filtro por rango de fechas
         if fecha_inicio and fecha_fin and fecha_emision:
-            fecha_emision_dt = datetime.strptime(fecha_emision, "%Y-%m-%d")
-            if not (fecha_inicio <= fecha_emision_dt <= fecha_fin):
-                log(f"Factura {nro_cpe} ({fecha_emision}) fuera del rango {fecha_inicio.date()} - {fecha_fin.date()}")
+            f = datetime.strptime(fecha_emision, "%Y-%m-%d")
+            if not (fecha_inicio <= f <= fecha_fin):
+                log(f"⚠ {nro_cpe} fuera del rango")
                 return None, None
 
-        # === Emisor y receptor ===
+        # EMISOR - RECEPTOR
         ruc_emisor = root.findtext(".//cac:AccountingSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID", default="", namespaces=ns)
         nombre_emisor = root.findtext(".//cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName", default="", namespaces=ns)
+
         ruc_receptor = root.findtext(".//cac:AccountingCustomerParty/cac:Party/cac:PartyIdentification/cbc:ID", default="", namespaces=ns)
         nombre_receptor = root.findtext(".//cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName", default="", namespaces=ns)
 
-        # === Descripción ===
         descripcion = root.findtext(".//cac:InvoiceLine/cac:Item/cbc:Description", default="", namespaces=ns)
 
-        # === Montos ===
-        base_imponible = Decimal(root.findtext(".//cac:LegalMonetaryTotal/cbc:LineExtensionAmount", default="0.00", namespaces=ns))
+        # ==========================
+        # BASES SEGÚN SUNAT
+        # ==========================
+        base_gravadas = base_exoneradas = base_inafectas = base_exportacion = Decimal("0.00")
+
+        for t in root.findall(".//cac:TaxSubtotal", ns):
+            amount = Decimal(t.findtext("cbc:TaxableAmount", default="0.00", namespaces=ns))
+            reason = t.findtext(".//cbc:TaxExemptionReasonCode", default="", namespaces=ns)
+            tax_id = t.findtext(".//cac:TaxCategory/cac:TaxScheme/cbc:ID", default="", namespaces=ns)
+
+            if reason == "10" or tax_id == "1000":
+                base_gravadas += amount
+            elif reason == "20" or tax_id == "9998":
+                base_inafectas += amount
+            elif reason == "30" or tax_id == "9997":
+                base_exoneradas += amount
+            elif reason == "40" or tax_id == "9995":
+                base_exportacion += amount
+
+        # Base imponible = suma de las 4 bases
+        base_imponible = base_gravadas + base_inafectas + base_exoneradas + base_exportacion
+
+        # IGV solo sobre bases gravadas
         igv = Decimal(root.findtext(".//cac:TaxTotal/cbc:TaxAmount", default="0.00", namespaces=ns))
-        importe_total = Decimal(root.findtext(".//cac:LegalMonetaryTotal/cbc:PayableAmount", default="0.00", namespaces=ns))
+
+        # Importe total
+        importe_total = base_imponible + igv
+
+        # Moneda
         moneda = root.findtext(".//cbc:DocumentCurrencyCode", default="PEN", namespaces=ns)
 
-        # === Subtotales por tipo ===
-        base_gravadas = base_exoneradas = base_inafectas = base_exportacion = Decimal("0.00")
-        for tax_subtotal in root.findall(".//cac:TaxSubtotal", ns):
-            tax_amount = Decimal(tax_subtotal.findtext("cbc:TaxableAmount", default="0.00", namespaces=ns))
-            reason = tax_subtotal.findtext(".//cbc:TaxExemptionReasonCode", default="", namespaces=ns)
-            tax_code = tax_subtotal.findtext(".//cac:TaxCategory/cac:TaxScheme/cbc:ID", default="", namespaces=ns)
-            if reason == "10" or tax_code == "1000": base_gravadas += tax_amount
-            elif reason == "20" or tax_code == "9998": base_inafectas += tax_amount
-            elif reason == "30" or tax_code == "9997": base_exoneradas += tax_amount
-            elif reason == "40" or tax_code == "9995": base_exportacion += tax_amount
+        # Tipo de documento
+        tipo_doc_map = {"01": "FACTURA", "03": "BOLETA", "07": "NC", "08": "ND"}
+        tipo_doc = tipo_doc_map.get(root.findtext(".//cbc:InvoiceTypeCode", default="01", namespaces=ns), "OTROS")
 
-        # === Tipo documento y origen ===
-        tipo_doc_code = root.findtext(".//cbc:InvoiceTypeCode", default="01", namespaces=ns)
-        tipo_doc = {"01":"FACTURA","03":"BOLETA","07":"NC","08":"ND"}.get(tipo_doc_code, "OTROS")
+        # Origen
         origen = "COMPRA" if ruc_emisor != ruc_empresa else "VENTA"
-        estado_sunat = "ACEPTADO"
 
+        # Valores para BD
         valores = (
             id_empresa, tipo_doc, serie, correlativo, nro_cpe,
-            fecha_emision, fecha_vencimiento, ruc_emisor, nombre_emisor,
-            ruc_receptor, nombre_receptor, descripcion,
-            base_imponible, igv, importe_total, moneda,
-            origen, estado_sunat,
+            fecha_emision, fecha_vencimiento,
+            ruc_emisor, nombre_emisor, ruc_receptor, nombre_receptor,
+            descripcion, base_imponible, igv, importe_total, moneda,
+            origen, "ACEPTADO",
             base_gravadas, base_exoneradas, base_inafectas, base_exportacion,
             None
         )
 
-        log(f"Valores para INSERT XML {archivo}: {valores}")
-
+        # INSERTAR EN BD
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute("""
             INSERT INTO facturas (
                 id_empresa, tipo_doc, serie, correlativo, nro_cpe,
-                fecha_emision, fecha_vencimiento, ruc_emisor, nombre_emisor,
-                ruc_receptor, nombre_receptor, descripcion, base_imponible,
-                igv, importe_total, moneda, origen, estado_sunat,
+                fecha_emision, fecha_vencimiento,
+                ruc_emisor, nombre_emisor, ruc_receptor, nombre_receptor,
+                descripcion, base_imponible, igv, importe_total, moneda,
+                origen, estado_sunat,
                 base_gravadas, base_exoneradas, base_inafectas, base_exportacion,
                 id_usuario_import
-            ) VALUES (
-                %s, %s, %s, %s, %s,
-                %s, %s, %s, %s, %s,
-                %s, %s, %s, %s, %s,
-                %s, %s, %s, %s, %s,
-                %s, %s, %s
-            )
+            ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
         """, valores)
-
         conn.commit()
         id_factura = cursor.lastrowid
         cursor.close()
         conn.close()
 
-        log(f"Factura guardada: {nro_cpe} - {nombre_emisor} ({origen})")
+        log(f"Guardada factura {nro_cpe}")
         return id_factura, nro_cpe
 
     except Exception as e:
-        log(f"ERROR SQL procesando XML {archivo}: {e}", "error")
+        log(f"ERROR XML {archivo}: {e}", "error")
         return None, None
 
-
+# ==========================
+# PROCESAR PDF (SERIE-CORRELATIVO)
+# ==========================
 def procesar_pdf(pdf_path):
     try:
         doc = fitz.open(pdf_path)
-        texto = ""
-        for pagina in doc:
-            texto += pagina.get_text("text")
+        texto = "".join(page.get_text("text") for page in doc)
         doc.close()
 
         match = re.search(r'([A-Z]\d{3})-?(\d+)', texto)
         if match:
-            serie = match.group(1)
-            correlativo = match.group(2)
-            return f"{serie}{correlativo}"
+            return f"{match.group(1)}{match.group(2)}"
         return None
-    except Exception as e:
-        log(f" Error leyendo PDF {os.path.basename(pdf_path)}: {e}", "error")
+    except:
         return None
 
+# ==========================
+# PROCESAR ARCHIVOS
+# ==========================
 def procesar_archivos_descargados(id_empresa, ruc_empresa, fecha_inicio=None, fecha_fin=None):
     zip_files = glob.glob(os.path.join(DOWNLOAD_DIR, "*.zip"))
-    log(f" ZIPs encontrados: {len(zip_files)}")
-
-    xml_files = []
     xml_map = {}
+    log(f"ZIP encontrados: {len(zip_files)}")
 
     for zip_file in zip_files:
         zip_name = os.path.basename(zip_file)
         try:
-            with zipfile.ZipFile(zip_file, 'r') as zip_ref:
-                zip_ref.extractall(DOWNLOAD_DIR)
-                log(f" Extraído ZIP: {zip_name}")
-
-                xml_in_zip = [f for f in zip_ref.namelist() if f.lower().endswith(".xml")]
-                if not xml_in_zip:
-                    log(f" No se encontró XML dentro de {zip_name}", "error")
+            with zipfile.ZipFile(zip_file, 'r') as z:
+                z.extractall(DOWNLOAD_DIR)
+                xmls = [f for f in z.namelist() if f.lower().endswith(".xml")]
+                if not xmls:
+                    log(f"ZIP sin XML: {zip_name}")
                     continue
 
-                xml_path = os.path.join(DOWNLOAD_DIR, xml_in_zip[0])
-                id_factura, nro_cpe = procesar_xml(xml_in_zip[0], id_empresa, ruc_empresa, fecha_inicio, fecha_fin)
+                xml_name = xmls[0]
+                id_factura, nro_cpe = procesar_xml(xml_name, id_empresa, ruc_empresa, fecha_inicio, fecha_fin)
 
-                if id_factura and nro_cpe:
+                if id_factura:
+                    clave = nro_cpe.replace("-", "").upper()
+                    xml_map[clave] = (id_factura, zip_name)
                     guardar_archivo_binario(id_factura, zip_name, "ZIP")
-                    xml_files.append(xml_path)
-                    key = nro_cpe.replace("-", "").upper()
-                    xml_map[key] = (id_factura, zip_name)
-                else:
-                    log(f" No se pudo procesar XML {xml_in_zip[0]}", "error")
 
         except Exception as e:
-            log(f" Error extrayendo {zip_name}: {e}", "error")
+            log(f"Error ZIP {zip_name}: {e}", "error")
 
-    # === PDFs ===
-    pdf_files = glob.glob(os.path.join(DOWNLOAD_DIR, "*.pdf")) + glob.glob(os.path.join(DOWNLOAD_DIR, "*.PDF"))
-    log(f" PDFs encontrados: {len(pdf_files)}")
-
-    for pdf_path in pdf_files:
+    # PDFs
+    pdfs = glob.glob(os.path.join(DOWNLOAD_DIR, "*.pdf"))
+    for pdf_path in pdfs:
         pdf_name = os.path.basename(pdf_path).upper()
-        nro_cpe_pdf = procesar_pdf(pdf_path)
-        if not nro_cpe_pdf:
-            match = re.search(r'([A-Z]\d{3})-?(\d+)', pdf_name)
-            if match:
-                nro_cpe_pdf = f"{match.group(1)}{match.group(2)}"
-
-        if nro_cpe_pdf and nro_cpe_pdf in xml_map:
-            id_factura, _ = xml_map[nro_cpe_pdf]
+        nro = procesar_pdf(pdf_path)
+        if not nro:
+            m = re.search(r'([A-Z]\d{3})(\d+)', pdf_name)
+            if m:
+                nro = f"{m.group(1)}{m.group(2)}"
+        if nro and nro in xml_map:
+            id_factura, zipname = xml_map[nro]
             guardar_archivo_binario(id_factura, pdf_name, "PDF")
         else:
-            log(f" PDF {pdf_name} no asociado a ninguna factura", "error")
+            log(f"PDF NO ASOCIADO: {pdf_name}")
 
-    # === Eliminar procesados ===
-    for file_path in xml_files + pdf_files + zip_files:
+    # ELIMINAR ARCHIVOS
+    for file in zip_files + pdfs + glob.glob(os.path.join(DOWNLOAD_DIR, "*.xml")):
         try:
-            os.remove(file_path)
-            log(f" Eliminado: {os.path.basename(file_path)}")
-        except Exception as e:
-            log(f" Error eliminando {file_path}: {e}", "error")
+            os.remove(file)
+        except:
+            pass
 
+# ==========================
+# EJECUCIÓN PRINCIPAL
+# ==========================
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        log(" Debes proporcionar la ruta al archivo JSON como argumento", "error")
+        log("Debes pasar JSON de configuración", "error")
         sys.exit(1)
 
     json_path = sys.argv[1]
     if not os.path.exists(json_path):
-        log(f" El archivo JSON no existe: {json_path}", "error")
+        log("No existe JSON", "error")
         sys.exit(1)
 
-    with open(json_path, "r", encoding="utf-8") as f:
-        data = json.load(f)
+    data = json.load(open(json_path, "r", encoding="utf-8"))
 
     empresa = data.get("empresa", {})
     id_empresa = empresa.get("id_empresa")
     ruc_empresa = str(empresa.get("ruc", "")).strip()
 
     if not id_empresa or not ruc_empresa:
-        log(" El JSON debe incluir 'id_empresa' y 'ruc' de la empresa", "error")
+        log("JSON incompleto", "error")
         sys.exit(1)
 
     fecha_inicio = fecha_fin = None
     try:
-        if "fecha_inicio" in data and "fecha_fin" in data:
+        if data.get("fecha_inicio") and data.get("fecha_fin"):
             fecha_inicio = datetime.strptime(data["fecha_inicio"], "%d/%m/%Y")
             fecha_fin = datetime.strptime(data["fecha_fin"], "%d/%m/%Y")
-            log(f" Filtro de fechas: {fecha_inicio.date()} - {fecha_fin.date()}")
-    except Exception as e:
-        log(f" Error parseando fechas: {e}")
+    except:
+        pass
 
-    log(f" Iniciando procesamiento para empresa ID {id_empresa} (RUC {ruc_empresa})")
     procesar_archivos_descargados(id_empresa, ruc_empresa, fecha_inicio, fecha_fin)
-    log(" Proceso finalizado correctamente")
+    log("PROCESO FINALIZADO")
