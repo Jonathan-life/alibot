@@ -39,7 +39,10 @@ $total_importe = 0;
 <meta charset="UTF-8">
 <title>Registro de Compras - Formato SUNAT 8.1</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+<!-- LIBRERÍA CORRECTA PARA EXPORTAR CON ESTILOS -->
+<script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js"></script>
+
 <style>
 body { font-family: Arial, sans-serif; font-size: 11px; background-color: #fff; }
 h4, h5, p { text-align: center; margin: 0; padding: 0; }
@@ -174,9 +177,54 @@ tfoot td { font-weight: bold; background-color: #eaeaea; }
 
 <script>
 function exportTableToExcel(tableID, filename = '') {
-    const wb = XLSX.utils.table_to_book(document.getElementById(tableID), { sheet: "RegistroCompras" });
-    XLSX.writeFile(wb, filename || "Registro_Compras.xlsx");
+
+    const table = document.getElementById(tableID);
+
+    // Convertir tabla a Excel con estilos
+    const wb = XLSX.utils.table_to_book(table, {
+        sheet: "RegistroCompras"
+    });
+
+    const ws = wb.Sheets["RegistroCompras"];
+
+    // Obtener rango del Excel
+    const range = XLSX.utils.decode_range(ws['!ref']);
+
+    // Aplicar estilos a cada celda
+    for (let R = range.s.r; R <= range.e.r; R++) {
+        for (let C = range.s.c; C <= range.e.c; C++) {
+
+            const cell_address = XLSX.utils.encode_cell({ r: R, c: C });
+            const cell = ws[cell_address];
+            if (!cell) continue;
+
+            // Estilo general
+            cell.s = {
+                font: { name: "Arial", sz: 10 },
+                alignment: { horizontal: "center", vertical: "center", wrapText: true },
+                border: {
+                    top: { style: "thin", color: { rgb: "000000" } },
+                    bottom: { style: "thin", color: { rgb: "000000" } },
+                    left: { style: "thin", color: { rgb: "000000" } },
+                    right: { style: "thin", color: { rgb: "000000" } }
+                }
+            };
+
+            // Encabezados — color gris
+            if (R === 0) {
+                cell.s.fill = { fgColor: { rgb: "EAEAEA" } };
+                cell.s.font.bold = true;
+            }
+        }
+    }
+
+    // Descargar archivo
+    XLSX.writeFile(
+        wb,
+        filename ? filename + ".xlsx" : "Registro_Compras.xlsx"
+    );
 }
 </script>
+
 </body>
 </html>
