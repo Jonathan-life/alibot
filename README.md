@@ -16,3 +16,11 @@ pip install mysql-connector-python   selenium
 pip install pymupdf
 composer require phpoffice/phpspreadsheet
 
+
+Ajusta las rutas segun como la tenga en la carpeta controller en le archivo botcontroller
+
+-    // Ruta del ejecutable de Python
+        $this->python = "C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\python
+
+
+## cambiar la ruta ejecutable segun su equipo y tambien su version de python
