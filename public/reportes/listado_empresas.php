@@ -110,7 +110,8 @@ tfoot td { font-weight: bold; background-color: #eaeaea; }
 </style>
 </head>
 <body>
-<div class="container-fluid mt-3">
+<div id="capturaPDF" class="container-fluid mt-3">
+
     <div class="header-info">
         <h4><?= htmlspecialchars($empresa['razon_social']) ?></h4>
         <h5>RUC: <?= htmlspecialchars($empresa['ruc']) ?></h5>
@@ -258,45 +259,170 @@ tfoot td { font-weight: bold; background-color: #eaeaea; }
 
     </table>
 
-    <div class="text-end mt-3">
-        <button class="btn btn-success" onclick="exportTableToExcel('tablaCompras', 'Registro_Compras')">Exportar a Excel</button>
-    </div>
+<div class="text-end mt-3">
+   <button class="btn btn-success" onclick="exportPantallaExcel()">Exportar a Excel</button>
+
+
+    <button class="btn btn-danger" onclick="exportPDF()">Exportar a PDF</button>
+
 </div>
 
+</div>
+<!-- jsPDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<!-- AutoTable (aunque no se usa, lo dejamos si lo necesitas luego) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
+<!-- html2canvas -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<!-- XLSX + FileSaver -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+
 <script>
-function exportTableToExcel(tableID, filename='Registro_Compras') {
-    const table = document.getElementById(tableID);
-    const wb = XLSX.utils.table_to_book(table, { sheet: "RegistroCompras" });
-    const ws = wb.Sheets["RegistroCompras"];
-    const range = XLSX.utils.decode_range(ws['!ref']);
+/* ============================================================
+   EXPORTAR A PDF (captura completa con salto de páginas)
+============================================================ */
+function exportPDF() {
 
-    for (let R = range.s.r; R <= range.e.r; R++) {
-        for (let C = range.s.c; C <= range.e.c; C++) {
-            const cell_address = XLSX.utils.encode_cell({ r: R, c: C });
-            const cell = ws[cell_address];
-            if (!cell) continue;
+    const { jsPDF } = window.jspdf;
+    const element = document.getElementById("capturaPDF");
 
-            // Detectar encabezado (thead)
-            const isHeader = R < 3;
-            // Detectar pie de tabla (tfoot)
-            const isFooter = R === range.e.r;
+    // Ocultar elementos no imprimibles
+    const botones = document.querySelectorAll("button, .btn, .no-print");
+    botones.forEach(b => b.style.display = "none");
 
-            cell.s = {
-                font: { name: "Arial", sz: 10, bold: isHeader || isFooter },
-                alignment: { horizontal: "center", vertical: "center", wrapText: true },
-                border: {
-                    top: { style: "thin", color: { rgb: "000000" } },
-                    bottom: { style: "thin", color: { rgb: "000000" } },
-                    left: { style: "thin", color: { rgb: "000000" } },
-                    right: { style: "thin", color: { rgb: "000000" } }
-                },
-                fill: (isHeader || isFooter) ? { fgColor: { rgb: "EAEAEA" } } : { fgColor: { rgb: "FFFFFF" } }
-            };
+    document.body.style.cursor = "wait";
+
+    html2canvas(element, {
+        scale: 2,
+        useCORS: true,
+        scrollY: -window.scrollY
+    }).then(canvas => {
+
+        const imgData = canvas.toDataURL("image/png");
+        const pdf = new jsPDF("landscape", "pt", "a4");
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const pageHeight = pdf.internal.pageSize.getHeight();
+
+        const imgWidth = pageWidth - 20;
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+        let y = 0;
+
+        if (imgHeight <= pageHeight) {
+            pdf.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
+        } else {
+            while (y < canvas.height) {
+
+                let canvasPart = document.createElement("canvas");
+                let ctx = canvasPart.getContext("2d");
+
+                canvasPart.width = canvas.width;
+                canvasPart.height = pageHeight * canvas.width / pageWidth;
+
+                ctx.drawImage(
+                    canvas,
+                    0, y,
+                    canvas.width, canvasPart.height,
+                    0, 0,
+                    canvas.width, canvasPart.height
+                );
+
+                let partImg = canvasPart.toDataURL("image/png");
+                pdf.addImage(partImg, "PNG", 10, 10, imgWidth, pageHeight - 20);
+
+                y += canvasPart.height;
+
+                if (y < canvas.height) pdf.addPage();
+            }
+        }
+
+        pdf.save("Registro_Compras_81.pdf");
+        document.body.style.cursor = "default";
+
+        botones.forEach(b => b.style.display = "");
+
+    });
+}
+
+
+async function exportPantallaExcel() {
+
+    const table = document.querySelector("#tablaCompras");
+    const wb = XLSX.utils.book_new();
+
+    // Convertir tabla a hoja base
+    let ws = XLSX.utils.table_to_sheet(table);
+
+    // Aplicar fusionado del encabezado SUNAT
+    ws['!merges'] = [
+        { s: { r: 0, c: 0 }, e: { r: 2, c: 0 } }, // N° registro
+        { s: { r: 0, c: 1 }, e: { r: 2, c: 1 } },
+        { s: { r: 0, c: 2 }, e: { r: 2, c: 2 } },
+
+        // Comprobante de pago
+        { s: { r: 0, c: 3 }, e: { r: 1, c: 5 } },
+
+        // Info proveedor
+        { s: { r: 0, c: 7 }, e: { r: 1, c: 9 } },
+
+        // Adquisiciones
+        { s: { r: 0, c: 10 }, e: { r: 0, c: 11 } },
+        { s: { r: 0, c: 12 }, e: { r: 0, c: 13 } },
+        { s: { r: 0, c: 14 }, e: { r: 0, c: 15 } },
+
+        // Referencia
+        { s: { r: 0, c: 20 }, e: { r: 1, c: 23 } },
+    ];
+
+    // FORMATO VISUAL – Bordes, alineación, tamaño
+    const cellRange = XLSX.utils.decode_range(ws['!ref']);
+    for (let R = cellRange.s.r; R <= cellRange.e.r; R++) {
+        for (let C = cellRange.s.c; C <= cellRange.e.c; C++) {
+            let cell = ws[XLSX.utils.encode_cell({ r: R, c: C })];
+            if (cell) {
+                cell.s = {
+                    border: {
+                        top: { style: "thin", color: "000000" },
+                        left: { style: "thin", color: "000000" },
+                        bottom: { style: "thin", color: "000000" },
+                        right: { style: "thin", color: "000000" }
+                    },
+                    alignment: { vertical: "center", horizontal: "center", wrapText: true }
+                };
+            }
         }
     }
 
-    XLSX.writeFile(wb, filename + ".xlsx");
+    // Autoajustar columnas según contenido
+    ws['!cols'] = Array(cellRange.e.c).fill({ wch: 15 });
+
+    // Insertar encabezado y totales antes de la tabla
+    const info = [
+        ["<?= addslashes($empresa['razon_social']) ?>"],
+        ["RUC: <?= $empresa['ruc'] ?>"],
+        ["FORMATO 8.1 - REGISTRO DE COMPRAS"],
+        ["PERIODO: SETIEMBRE 2025"],
+        [""],
+        ["Total Base Imponible: <?= number_format($total_base, 2) ?>  |  Total IGV: <?= number_format($total_igv, 2) ?>   |   Total General: <?= number_format($total_importe, 2) ?>"],
+        [""]
+    ];
+
+    const headerSheet = XLSX.utils.aoa_to_sheet(info);
+
+    // Combinar hoja final
+    XLSX.utils.sheet_add_json(headerSheet, XLSX.utils.sheet_to_json(ws, { header: 1 }), {
+        skipHeader: true,
+        origin: "A8"
+    });
+
+    XLSX.utils.book_append_sheet(wb, headerSheet, "Registro Compras");
+
+    XLSX.writeFile(wb, "Registro_Compras_SUNAT_8.1.xlsx");
 }
 
 </script>

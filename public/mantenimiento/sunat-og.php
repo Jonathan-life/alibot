@@ -1,6 +1,10 @@
 <?php
 require_once __DIR__ . '/../../Controllers/BotController.php';
+
+set_time_limit(0);  // ⬅️  Evita el timeout para este archivo también
+
 $controller = new BotController();
+
 
 $response = null;
 
@@ -92,6 +96,11 @@ $empresas = $result->fetch_all(MYSQLI_ASSOC);
         <button type="submit" class="btn btn-primary btn-lg">⬇ Descargar</button>
       </div>
     </form>
+  </div>
+  <div class="text-center mt-4">
+    <a href="../index.php" class="btn btn-secondary">
+      <i class="fa fa-arrow-left"></i> Volver
+    </a>
   </div>
 </div>
 
