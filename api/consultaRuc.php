@@ -16,7 +16,7 @@ curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
     "Content-Type: application/json",
-    "Authorization: Bearer sk_9439.5ArN2KVC8PkLLNEgoYhbLTDbT2wCZN8m"
+    "Authorization: Bearer sk_11811.yyYsci6katJjLjASSLauYChZQ1NUxIyb"
 ]);
 
 // Solo para desarrollo local si hay problemas de SSL

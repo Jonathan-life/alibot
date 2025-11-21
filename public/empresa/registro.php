@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Panel Empresas</title>
-  <link rel="stylesheet" href="index.css">
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Iconos -->
@@ -636,7 +635,6 @@ button.secondary:hover {
           <li class="dropdown-submenu">
             <a class="dropdown-item dropdown-toggle" href="#">SUNAT</a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Buzón Electrónico</a></li>
               <li><a class="dropdown-item" href="../reportes/libro_contable.php">Libros Electrónicos</a></li>
 
               <!-- Submenú Compras -->
@@ -746,7 +744,7 @@ button.secondary:hover {
 <script>
 
 
-const API_BASE = '/alibot-api/api';
+const API_BASE = '/alibot/api';
 
 document.getElementById("ruc").addEventListener("blur", function() {
   let ruc = this.value.trim();
@@ -805,7 +803,7 @@ document.getElementById("empresaForm").addEventListener("submit", function(e) {
     apiClientSecret: this.apiClientSecret.value
   };
 
-  fetch("/alibot-api/api/empresa.php", {
+  fetch("/alibot/api/empresa.php", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

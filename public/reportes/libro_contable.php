@@ -10,14 +10,11 @@ $empresas = $empresaController->listarEmpresas();
 <head>
 <meta charset="UTF-8">
 <title>Seleccionar Empresa</title>
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Iconos -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="../style/index.css">
 
-  <!-- Estilos personalizados -->
-  <link rel="stylesheet" href="../style/index.css">
 </head>
 <body>
     
@@ -51,14 +48,14 @@ $empresas = $empresaController->listarEmpresas();
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="../mantenimiento/usuario.php">Usuarios</a></li>
           <li><a class="dropdown-item" href="../mantenimiento/empresa.php">Empresas</a></li>
-          <li><a class="dropdown-item" href="../mantenimiento/sunat-og">Descargar</a></li>
+          <li><a class="dropdown-item" href="../mantenimiento/sunat-og.php">Descargar</a></li>
 
           <!-- Submenú Permisos -->
           <li class="dropdown-submenu">
             <a class="dropdown-item dropdown-toggle" href="#">Permisos</a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="../permisos/usuario">Usuarios</a></li>
-              <li><a class="dropdown-item" href="../permisos/empresa">Empresas</a></li>
+              <li><a class="dropdown-item" href="../permisos/usuario.php">Usuarios</a></li>
+              <li><a class="dropdown-item" href="../permisos/empresa.php">Empresas</a></li>
             </ul>
           </li>
         </ul>
@@ -73,15 +70,14 @@ $empresas = $empresaController->listarEmpresas();
           <li class="dropdown-submenu">
             <a class="dropdown-item dropdown-toggle" href="#">SUNAT</a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Buzón Electrónico</a></li>
-              <li><a class="dropdown-item" href="../reportes/libro_contable">Libros Electrónicos</a></li>
+              <li><a class="dropdown-item" href="../reportes/libro_contable.php">Libros Electrónicos</a></li>
 
               <!-- Submenú Compras -->
               <li class="dropdown-submenu">
                 <a class="dropdown-item dropdown-toggle" href="#">Compras SIRE </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="../reportes/venta_sire">PDF</a></li>
-                  <li><a class="dropdown-item" href="../reportes/ventasxml">XML</a></li>
+                  <li><a class="dropdown-item" href="../reportes/venta_sire.php">PDF</a></li>
+                  <li><a class="dropdown-item" href="../reportes/ventasxml.php">XML</a></li>
                 </ul>
               </li>
 
@@ -94,7 +90,7 @@ $empresas = $empresaController->listarEmpresas();
                 </ul>
               </li>
 
-              <li><a class="dropdown-item" href="../reportes/admin_contable">Cuadro de cálculo</a></li>
+              <li><a class="dropdown-item" href="../reportes/admin_contable.php">Cuadro de cálculo</a></li>
             </ul>
           </li>
 
@@ -119,6 +115,10 @@ $empresas = $empresaController->listarEmpresas();
   </div>
 
 </nav>
+
+
+
+
 <div class="container mt-5">
     <h2 class="mb-4 text-center">Seleccione una Empresa</h2>
 
@@ -141,9 +141,7 @@ $empresas = $empresaController->listarEmpresas();
                         <td><?= htmlspecialchars($e['ruc']) ?></td>
                         <td><?= htmlspecialchars($e['razon_social']) ?></td>
                         <td>
-                            <!-- Botón que abre selección de tipo de registro -->
-                            <button class="btn btn-primary btn-sm" 
-                                    onclick="mostrarOpciones(<?= $e['id_empresa'] ?>)">
+                            <button class="btn btn-primary btn-sm" onclick="selectEmpresa(<?= $e['id_empresa'] ?>)">
                                 Ver Registro
                             </button>
                         </td>
@@ -154,40 +152,119 @@ $empresas = $empresaController->listarEmpresas();
     <?php endif; ?>
 </div>
 
-<!-- Modal de selección -->
-<div class="modal fade" id="modalOpciones" tabindex="-1">
+
+<!-- MODAL: Selección de tipo (Compras / Ventas) -->
+<div class="modal fade" id="modalTipo" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Seleccione tipo de registro</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <button class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body text-center">
-        <button id="btnCompras" class="btn btn-success me-2">Registro de Compras</button>
-        <button id="btnVentas" class="btn btn-info">Registro de Ventas</button>
+        <button id="btnCompras" class="btn btn-success me-3">Registro Compras</button>
+        <button id="btnVentas" class="btn btn-info">Registro Ventas</button>
       </div>
     </div>
   </div>
 </div>
 
+
+<!-- MODAL: Selección de periodo -->
+<div class="modal fade" id="modalPeriodo" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Seleccione Periodo</h5>
+        <button class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-center">
+        <select id="selectPeriodo" class="form-select mb-3"></select>
+        <button id="btnVerPeriodo" class="btn btn-primary">Ver Reporte</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
 let empresaId = null;
+let tipoRegistro = null;
 
-function mostrarOpciones(id) {
+// Paso 1 → Seleccionar empresa
+function selectEmpresa(id) {
     empresaId = id;
-    const modal = new bootstrap.Modal(document.getElementById('modalOpciones'));
-    modal.show();
+    new bootstrap.Modal(document.getElementById('modalTipo')).show();
 }
 
-// Redirigir según selección
-document.getElementById('btnCompras').addEventListener('click', () => {
-    window.location.href = `listado_empresas.php?id_empresa=${empresaId}&tipo=compras`;
-});
+// Paso 2 → Cargar periodos según tipo
+document.getElementById('btnCompras').addEventListener('click', () => cargarPeriodos('compras'));
+document.getElementById('btnVentas').addEventListener('click', () => cargarPeriodos('ventas'));
 
-document.getElementById('btnVentas').addEventListener('click', () => {
-    window.location.href = `empresas_ventas.php?id_empresa=${empresaId}&tipo=ventas`;
+function cargarPeriodos(tipo) {
+    tipoRegistro = tipo;
+
+    fetch(`../../api/get_periodos.php?empresa=${empresaId}&tipo=${tipo}`)
+        .then(res => res.json())
+        .then(periodos => {
+            let select = document.getElementById('selectPeriodo');
+            select.innerHTML = "";
+
+            if (periodos.length === 0) {
+                select.innerHTML = `<option>No hay periodos disponibles</option>`;
+            } else {
+
+                const meses = {
+                    "01": "Enero",
+                    "02": "Febrero",
+                    "03": "Marzo",
+                    "04": "Abril",
+                    "05": "Mayo",
+                    "06": "Junio",
+                    "07": "Julio",
+                    "08": "Agosto",
+                    "09": "Septiembre",
+                    "10": "Octubre",
+                    "11": "Noviembre",
+                    "12": "Diciembre"
+                };
+
+                periodos.forEach(periodo => {
+                    let anio = periodo.substring(0, 4);
+                    let mes = periodo.substring(4, 6);
+                    let nombreMes = meses[mes] ?? "Mes desconocido";
+
+                    let texto = `${anio} - ${nombreMes}`;
+
+                    select.innerHTML += `<option value="${periodo}">${texto}</option>`;
+                });
+            }
+
+            new bootstrap.Modal(document.getElementById('modalPeriodo')).show();
+        })
+        .catch(err => console.error("Error al cargar periodos:", err));
+}
+
+
+// Paso 3 → Ver reporte final
+document.getElementById('btnVerPeriodo').addEventListener('click', () => {
+    let periodo = document.getElementById('selectPeriodo').value;
+
+    if (!periodo) {
+        alert("Seleccione un periodo");
+        return;
+    }
+
+    if (tipoRegistro === "compras") {
+        window.location.href = `listado_empresas.php?id_empresa=${empresaId}&tipo=compras&periodo=${periodo}`;
+    } else {
+        window.location.href = `empresas_ventas.php?id_empresa=${empresaId}&tipo=ventas&periodo=${periodo}`;
+    }
 });
 </script>
+
 </body>
 </html>

@@ -59,7 +59,6 @@
 <li class="dropdown-submenu">
   <a class="dropdown-item" href="#">SUNAT</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#">Buzón Electrónico</a></li>
     <li><a class="dropdown-item" href="reportes/libro_contable.php">Libros Electrónicos</a></li>
 
     <!-- Submenú Compras -->

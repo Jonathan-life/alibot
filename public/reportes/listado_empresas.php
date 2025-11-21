@@ -6,6 +6,7 @@ $empresaController = new EmpresaController();
 $facturaController = new FacturaController();
 
 $id_empresa = $_GET['id_empresa'] ?? null;
+$periodo = $_GET['periodo'] ?? null; // ← PERIODO SELECCIONADO
 
 if (!$id_empresa) {
     $empresas = $empresaController->listarEmpresas();
@@ -14,10 +15,19 @@ if (!$id_empresa) {
 }
 
 $empresa = $empresaController->obtenerEmpresaPorId((int)$id_empresa);
-$facturas = $facturaController->listarFacturasPorEmpresa((int)$id_empresa);
+
+// ==============================
+// FILTRO POR PERIODO (YYYY-MM)
+// ==============================
+if ($periodo) {
+    $facturas = $facturaController->listarFacturasPorPeriodo((int)$id_empresa, $periodo);
+} else {
+    // Sin periodo → carga todo
+    $facturas = $facturaController->listarFacturasPorEmpresa((int)$id_empresa);
+}
 
 if (!$empresa || empty($facturas)) {
-    die("<div class='alert alert-danger'>No se encontró empresa o facturas.</div>");
+    die("<div class='alert alert-danger'>No se encontró empresa o facturas del periodo seleccionado.</div>");
 }
 
 // Mapeo de tipos SUNAT
@@ -27,19 +37,13 @@ $tipo_doc_sunat = [
     'NOTA DE CREDITO' => '07',
     'NOTA DE DEBITO' => '08',
 ];
-// Inicializar acumuladores (evita warnings "Undefined variable")
-$total_base = 0.0;
-$total_igv = 0.0;
-$total_importe = 0.0;
 
-// Si usas categorías separadas (opcional)
-$total_base_gravadas = 0.0;
-$total_base_exoneradas = 0.0;
-$total_base_inafectas = 0.0;
-$total_no_gravadas = 0.0;
-$total_otros_tributos = 0.0;
+// Inicializar totales generales
+$total_base = 0;
+$total_igv = 0;
+$total_importe = 0;
 
-// === TOTALES GENERALES ===
+// Totales por tipo de operación
 $total_base_gravadas = 0;
 $total_igv_gravadas = 0;
 
@@ -52,30 +56,25 @@ $total_igv_inafectas = 0;
 $total_no_gravadas = 0;
 $total_otros_tributos = 0;
 
-$total_importe_general = 0;
+$total_igv_gratuitas = 0;
+$total_igv_exportacion = 0;
 
-// RECORRER FACTURAS Y SUMAR
+
+
+// RECORRER FACTURAS
 foreach ($facturas as $f) {
 
-    // GRAVADAS
     $total_base_gravadas += (float)($f['base_gravadas'] ?? 0);
-    $total_igv_gravadas += (float)($f['igv'] ?? 0);
+    $total_igv_gravadas  += (float)($f['igv'] ?? 0);
 
-    // EXONERADAS
     $total_base_exoneradas += (float)($f['base_exoneradas'] ?? 0);
+    $total_base_inafectas  += (float)($f['base_inafectas'] ?? 0);
+    $total_no_gravadas     += (float)($f['no_gravadas'] ?? 0);
 
-    // INAFECTAS
-    $total_base_inafectas += (float)($f['base_inafectas'] ?? 0);
-
-    // NO GRAVADAS
-    $total_no_gravadas += (float)($f['no_gravadas'] ?? 0);
-
-    // OTROS TRIBUTOS
     $total_otros_tributos += (float)($f['otros_tributos'] ?? 0);
-
 }
-    
-// CÁLCULO EXACTO DE TOTALES SEGÚN SUNAT
+
+// TOTALES FINALES
 $total_base_general =
     $total_base_gravadas +
     $total_base_exoneradas +
@@ -83,10 +82,36 @@ $total_base_general =
     $total_no_gravadas;
 
 $total_igv_general = $total_igv_gravadas;
-
 $total_importe_general = $total_base_general + $total_igv_general;
 
+
+// --- Obtener parámetros de la URL ---
+$tipo = $_GET['tipo'] ?? '';
+$periodo = $_GET['periodo'] ?? ''; // Ejemplo: 202409
+
+// --- Convertir periodo a "MES AÑO" ---
+$meses = [
+    "01" => "ENERO", "02" => "FEBRERO", "03" => "MARZO", "04" => "ABRIL",
+    "05" => "MAYO", "06" => "JUNIO", "07" => "JULIO", "08" => "AGOSTO",
+    "09" => "SETIEMBRE", "10" => "OCTUBRE", "11" => "NOVIEMBRE", "12" => "DICIEMBRE"
+];
+
+// Extraer año y mes
+$anio = substr($periodo, 0, 4);
+$mes  = substr($periodo, 4, 2);
+
+$nombreMes = $meses[$mes] ?? "MES DESCONOCIDO";
+
+// --- Nombre del Formato según tipo ---
+if ($tipo === "compras") {
+    $formato = "FORMATO 8.1: REGISTRO DE COMPRAS - MONEDA NACIONAL";
+} else {
+    $formato = "FORMATO 14.1: REGISTRO DE VENTAS - MONEDA NACIONAL";
+}
 ?>
+
+
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -107,17 +132,20 @@ h4, h5, p { text-align: center; margin: 0; padding: 0; }
 .resumen-totales { background-color: #f8f9fa; padding: 8px; border: 1px solid #ccc; margin-bottom: 10px; }
 .resumen-totales strong { margin-right: 15px; }
 tfoot td { font-weight: bold; background-color: #eaeaea; }
+
 </style>
 </head>
 <body>
 <div id="capturaPDF" class="container-fluid mt-3">
 
-    <div class="header-info">
-        <h4><?= htmlspecialchars($empresa['razon_social']) ?></h4>
-        <h5>RUC: <?= htmlspecialchars($empresa['ruc']) ?></h5>
-        <p>FORMATO 8.1: REGISTRO DE COMPRAS - MONEDA NACIONAL</p>
-        <p>PERIODO: SETIEMBRE 2025</p>
-    </div>
+
+<div class="header-info">
+    <h4><?= htmlspecialchars($empresa['razon_social']) ?></h4>
+    <h5>RUC: <?= htmlspecialchars($empresa['ruc']) ?></h5>
+    <p><?= $formato ?></p>
+    <p>PERIODO: <?= $nombreMes . " " . $anio ?></p>
+</div>
+
 
     <?php
     // Calcular totales antes de mostrar
@@ -141,7 +169,7 @@ tfoot td { font-weight: bold; background-color: #eaeaea; }
         <thead>
             <tr>
                 <th rowspan="3">N° Registro</th>
-                <th rowspan="3">Fecha del Dcto</th>
+                <th rowspan="2">Fecha del Dcto</th>
                 <th rowspan="3">Fecha de Vcto o Pago</th>
                 <th colspan="3">Comprobante de Pago o Documento</th>
                 <th rowspan="3">N° del Comprobante o N° de DUA</th>
@@ -169,8 +197,8 @@ tfoot td { font-weight: bold; background-color: #eaeaea; }
                 <th rowspan="2">Base Imponible</th>
                 <th rowspan="2">IGV</th>
                 <th rowspan="2">Fecha</th>
-                <th rowspan="2">Tipo</th>
-                <th rowspan="2">Serie</th>
+                <th rowspan="3">Tipo</th>
+                <th rowspan="3">Serie</th>
                 <th rowspan="2">N° del Comprobante de pago o documento</th>
             </tr>
         </thead>
