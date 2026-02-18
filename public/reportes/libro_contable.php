@@ -81,12 +81,12 @@ $empresas = $empresaController->listarEmpresas();
                 </ul>
               </li>
 
-              <!-- Submenú Ventas -->
+            <!-- Submenú Ventas -->
               <li class="dropdown-submenu">
-                <a class="dropdown-item dropdown-toggle" href="#">Ventas SIRE </a>
+                <a class="dropdown-item" href="">Ventas SIRE ▸</a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">PDF</a></li>
-                  <li><a class="dropdown-item" href="#">XML</a></li>
+                  <li><a class="dropdown-item" href="reportes/ventasiredv.php">PDF</a></li>
+                  <li><a class="dropdown-item" href="reportes/ventaserexmlcd.php">XML</a></li>
                 </ul>
               </li>
 

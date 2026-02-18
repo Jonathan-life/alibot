@@ -30,6 +30,9 @@ try {
         $interes_moratorio = floatval($pago['interes_moratorio'] ?? 0);
         $capital_pagado = floatval($pago['capital_pagado'] ?? 0);
         $saldo_pendiente = isset($pago['saldo_pendiente']) ? floatval($pago['saldo_pendiente']) : null;
+        $interes_moratorio = floatval($pago['interes_moratorio']?? 0 );
+        $select = $select->fetch(PDO::FETCH_ASSOC);
+        
 
         // 1️⃣ Verificar que la deuda exista
         $select = $pdo->prepare("SELECT pagos, saldo_total, interes_moratorio FROM deudas WHERE id = :id");

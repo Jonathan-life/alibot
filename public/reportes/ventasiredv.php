@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../Controllers/EmpresaController.php';
+require_once __DIR__ . "/../../Controllers/EmpresaController.php";
 
 $controller = new EmpresaController();
 $empresas = $controller->listarEmpresas(); // solo empresas activas
@@ -8,8 +8,8 @@ $empresas = $controller->listarEmpresas(); // solo empresas activas
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Empresas Registradas</title>
+  <meta charset="UTF-8" />
+  <title>Empresas</title>
 
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -25,6 +25,7 @@ $empresas = $controller->listarEmpresas(); // solo empresas activas
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom px-4 py-3">
+
   <!-- Logo -->
   <div class="navbar-logo-container">
     <a class="navbar-brand fw-bold ms-4" href="#">
@@ -40,7 +41,11 @@ $empresas = $controller->listarEmpresas(); // solo empresas activas
   <!-- Menú principal -->
   <div class="collapse navbar-collapse" id="menuNav">
     <ul class="navbar-nav ms-auto">
-      <li class="nav-item"><a class="nav-link active" href="../index.php">Inicio</a></li>
+
+      <!-- Inicio -->
+      <li class="nav-item">
+        <a class="nav-link active" href="../index.php">Inicio</a>
+      </li>
 
       <!-- Mantenimiento -->
       <li class="nav-item dropdown">
@@ -48,13 +53,14 @@ $empresas = $controller->listarEmpresas(); // solo empresas activas
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="../mantenimiento/usuario.php">Usuarios</a></li>
           <li><a class="dropdown-item" href="../mantenimiento/empresa.php">Empresas</a></li>
-          <li><a class="dropdown-item" href="../mantenimiento/sunat-og.php">Descargar</a></li>
+          <li><a class="dropdown-item" href="../mantenimiento/sunat-og">Descargar</a></li>
 
+          <!-- Submenú Permisos -->
           <li class="dropdown-submenu">
             <a class="dropdown-item dropdown-toggle" href="#">Permisos</a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="../permisos/usuario.php">Usuarios</a></li>
-              <li><a class="dropdown-item" href="../permisos/empresa.php">Empresas</a></li>
+              <li><a class="dropdown-item" href="../permisos/usuario">Usuarios</a></li>
+              <li><a class="dropdown-item" href="../permisos/empresa">Empresas</a></li>
             </ul>
           </li>
         </ul>
@@ -64,83 +70,90 @@ $empresas = $controller->listarEmpresas(); // solo empresas activas
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Reportes</a>
         <ul class="dropdown-menu">
-          <!-- SUNAT -->
+
+          <!-- Submenú SUNAT -->
           <li class="dropdown-submenu">
             <a class="dropdown-item dropdown-toggle" href="#">SUNAT</a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="#">Buzón Electrónico</a></li>
-              <li><a class="dropdown-item" href="../reportes/libro_contable.php">Libros Electrónicos</a></li>
+              <li><a class="dropdown-item" href="../reportes/libro_contable">Libros Electrónicos</a></li>
 
-              <!-- Compras SIRE -->
+              <!-- Submenú Compras -->
               <li class="dropdown-submenu">
-                <a class="dropdown-item dropdown-toggle" href="#">Compras SIRE</a>
+                <a class="dropdown-item dropdown-toggle" href="#">Compras SIRE </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="../reportes/venta_sire.php">PDF</a></li>
-                  <li><a class="dropdown-item" href="../reportes/ventasxml.php">XML</a></li>
+                  <li><a class="dropdown-item" href="../reportes/venta_sire">PDF</a></li>
+                  <li><a class="dropdown-item" href="../reportes/ventasxml">XML</a></li>
                 </ul>
               </li>
 
-              <!-- Submenú Ventas -->
+                <!-- Submenú Ventas -->
                 <li class="dropdown-submenu">
-                  <a class="dropdown-item" href="">Ventas SIRE ▸</a>
-                  <ul class="dropdown-menu">
+                    <a class="dropdown-item" href="">Ventas SIRE ▸</a>
+                    <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="reportes/ventasiredv.php">PDF</a></li>
                     <li><a class="dropdown-item" href="reportes/ventaserexmlcd.php">XML</a></li>
-                  </ul>
+                    </ul>
                 </li>
 
-              <li><a class="dropdown-item" href="../reportes/admin_contable.php">Cuadro de cálculo</a></li>
+              <li><a class="dropdown-item" href="../reportes/admin_contable">Cuadro de cálculo</a></li>
             </ul>
           </li>
+
+          <!-- Submenú SUNAFIL -->
+
         </ul>
       </li>
 
-      <li class="nav-item"><a class="nav-link" href="#">Requerimientos</a></li>
-    </ul>
+      <!-- Requerimientos -->
+      <li class="nav-item">
+        <a class="nav-link" href="#">Requerimientos</a>
+      </li>
 
+    </ul>
     <div class="navbar-icons-container iconos-navbar d-flex gap-3 ms-auto">
-      <a href="#" class="icon-link" title="Cerrar sesión"><i class="fas fa-power-off"></i></a>
-      <a href="#" class="icon-link" title="Mi perfil"><i class="fas fa-user-circle"></i></a>
-    </div>
+    <a href="#" class="icon-link" title="Cerrar sesión">
+      <i class="fas fa-power-off"></i>
+    </a>
+    <a href="#" class="icon-link" title="Mi perfil">
+      <i class="fas fa-user-circle"></i>
+    </a>
   </div>
+
 </nav>
 
 <!-- Contenido principal -->
-<div class="container mt-4">
-  <h2 class="mb-4">Empresas Registradas</h2>
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Empresas Registradas</h2>
 
-  <table class="table table-hover">
-    <thead class="table-dark">
-      <tr>
-        <th>#</th>
-        <th>RUC</th>
-        <th>Razón Social</th>
-        <th>Estado</th>
-        <th>Acción</th>
-      </tr>
-    </thead>
-    <tbody>
-      <?php foreach ($empresas as $i => $empresa): ?>
-        <tr>
-          <td><?= $i + 1 ?></td>
-          <td><?= htmlspecialchars($empresa['ruc']) ?></td>
-          <td><?= htmlspecialchars($empresa['razon_social']) ?></td>
-          <td>
-            <span class="badge bg-<?= ($empresa['estado'] === 'ACTIVO') ? 'success' : 'secondary' ?>">
-              <?= htmlspecialchars($empresa['estado'] ?? 'Desconocido') ?>
-            </span>
-          </td>
-          <td>
-            <a href="dashboard.php?id=<?= urlencode($empresa['id_empresa']) ?>" class="btn btn-sm btn-primary">Ver Dashboard</a>
-          </td>
-        </tr>
-      <?php endforeach; ?>
-    </tbody>
-  </table>
+  <div class="row">
+    <?php foreach ($empresas as $empresa): ?>
+      <div class="col-md-4 mb-4">
+        <div class="card border-primary shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title"><?= htmlspecialchars($empresa['razon_social']) ?></h5>
+            <p class="card-text">
+              <strong>RUC:</strong> <?= htmlspecialchars($empresa['ruc']) ?>
+            </p>
+            <a href="facturas_empresapdf.php?id_empresa=<?= $empresa['id_empresa'] ?>" class="btn btn-sm btn-outline-primary">
+              Ver facturas 
+            </a>
+          </div>
+        </div>
+      </div>
+    <?php endforeach; ?>
+  </div>
 
-  <!-- Botón volver -->
-  <a href="../index.php" class="btn btn-secondary mt-3"><i class="fas fa-arrow-left"></i> Volver</a>
+  </div>
+
+  <!-- Botón Volver -->
+  <div class="text-center mt-4">
+    <a href="../index.php" class="btn btn-secondary">
+      <i class="fa fa-arrow-left"></i> Volver
+    </a>
+  </div>
 </div>
+
 
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

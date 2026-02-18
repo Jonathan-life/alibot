@@ -132,6 +132,51 @@ h4, h5, p { text-align: center; margin: 0; padding: 0; }
 .resumen-totales { background-color: #f8f9fa; padding: 8px; border: 1px solid #ccc; margin-bottom: 10px; }
 .resumen-totales strong { margin-right: 15px; }
 tfoot td { font-weight: bold; background-color: #eaeaea; }
+/* ================================
+   CONFIGURACIÓN PROFESIONAL IMPRESIÓN
+================================ */
+
+@media print {
+
+    @page {
+        size: A4 landscape;
+        margin: 5mm;
+    }
+
+    body {
+        font-size: 9px;
+        margin: 0;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    button, .btn, .no-print {
+        display: none !important;
+    }
+
+    #capturaPDF {
+        width: 100%;
+        margin: 0;
+    }
+
+    table {
+        page-break-inside: auto;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tfoot {
+        display: table-footer-group;
+    }
+
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto;
+    }
+
+}
 
 </style>
 </head>
@@ -159,11 +204,7 @@ tfoot td { font-weight: bold; background-color: #eaeaea; }
     }
     ?>
 
-    <div class="resumen-totales text-center">
-        <strong>Total Base Imponible:</strong> S/ <?= number_format($total_base, 2) ?>
-        <strong>Total IGV:</strong> S/ <?= number_format($total_igv, 2) ?>
-        <strong>Total General:</strong> S/ <?= number_format($total_importe, 2) ?>
-    </div>
+  
 
     <table class="table table-bordered" id="tablaCompras">
         <thead>
@@ -181,7 +222,7 @@ tfoot td { font-weight: bold; background-color: #eaeaea; }
                 <th rowspan="3">Otros Tributos y cargos</th>
                 <th rowspan="3">Importe Total</th>
                 <th rowspan="3">Tipo de Cambio</th>
-                <th colspan="4">Referencia del comprob. de pago o doc original que se modifica</th>
+
             </tr>
             <tr>
                 <th rowspan="2">Tipo</th>
@@ -196,10 +237,7 @@ tfoot td { font-weight: bold; background-color: #eaeaea; }
                 <th rowspan="2">IGV</th>
                 <th rowspan="2">Base Imponible</th>
                 <th rowspan="2">IGV</th>
-                <th rowspan="2">Fecha</th>
-                <th rowspan="3">Tipo</th>
-                <th rowspan="3">Serie</th>
-                <th rowspan="2">N° del Comprobante de pago o documento</th>
+
             </tr>
         </thead>
 
@@ -245,8 +283,7 @@ tfoot td { font-weight: bold; background-color: #eaeaea; }
                 <!-- Tipo de cambio (si moneda = USD) -->
                 <td><?= ($f['moneda'] == 'USD') ? '3.80' : '1.00' ?></td>
 
-                <!-- Referencias -->
-                <td></td><td></td><td></td><td></td>
+           
             </tr>
         <?php endforeach; ?>
         </tbody>
@@ -275,8 +312,7 @@ tfoot td { font-weight: bold; background-color: #eaeaea; }
                 <!-- Importe total -->
                 <td><?= number_format($total_importe_general, 2) ?></td>
 
-                <!-- Tipo cambio -->
-                <td></td>
+   
 
                 <!-- Referencias -->
                 <td colspan="4"></td>
@@ -288,8 +324,11 @@ tfoot td { font-weight: bold; background-color: #eaeaea; }
     </table>
 
 <div class="text-end mt-3">
-   <button class="btn btn-success" onclick="exportPantallaExcel()">Exportar a Excel</button>
+   
 
+<button class="btn btn-primary" onclick="imprimirRegistro()">
+    Imprimir
+</button>
 
     <button class="btn btn-danger" onclick="exportPDF()">Exportar a PDF</button>
 
@@ -311,6 +350,10 @@ tfoot td { font-weight: bold; background-color: #eaeaea; }
 
 
 <script>
+    function imprimirRegistro() {
+    window.print();
+}
+
 /* ============================================================
    EXPORTAR A PDF (captura completa con salto de páginas)
 ============================================================ */
